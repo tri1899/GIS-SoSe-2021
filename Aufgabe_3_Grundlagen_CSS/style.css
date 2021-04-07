@@ -1,14 +1,42 @@
-#container_body{
-    margin: auto;
-    width: 800px;
-    font-family: Arial, Helvetica, sans-serif;    
+body{
+    margin: 0 auto;
+    width:800px;
+    padding-bottom:5px;    
 }
-
-
-
-
 #portfolio-seite{
     font-size: 32px;
     font-weight: bold;
     margin: 16px;
 }
+
+nav ul{
+    list-style: none;
+    background-color: lightgray ;
+    width: 20em;
+    border: 1px solid;
+    float: right;
+    text-align: center;
+    
+}
+
+nav li{
+    margin: 1em;
+    border: 1px solid;
+    background-color: orange;
+}
+
+nav a{
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover{
+    color: white;
+}
+
+img{
+    
+    float: right;
+}
+
