@@ -1,4 +1,5 @@
 body{
+    font-family: sans-serif;
     margin: 0 auto;
     width:800px;
     padding-bottom:5px;    
@@ -8,35 +9,32 @@ body{
     font-weight: bold;
     margin: 16px;
 }
-
-nav ul{
-    list-style: none;
-    background-color: lightgray ;
-    width: 20em;
-    border: 1px solid;
+#navigation{
+    overflow: hidden;
+    background-color: lightgray;
+}
+#navigation a{
     float: right;
-    text-align: center;
-    
-}
-
-nav li{
-    margin: 1em;
-    border: 1px solid;
-    background-color: orange;
-}
-
-nav a{
     display: block;
+    color: black;
+    text-align: center;
+    padding: 14px;
     text-decoration: none;
-    font-weight: bold;
 }
 
-nav a:hover{
-    color: white;
+#portfolio-navigation{
+    background-color: yellow;
 }
 
-img{
-    
-    float: right;
+#navigation a:hover:not(#portfolio-navigation){
+background-color: #777;
+color: white;
 }
+
+#portfolio-navigation:hover:not(#portfolio-navigationn){
+background-color: #777;
+color: white;   
+
+}
+
 
