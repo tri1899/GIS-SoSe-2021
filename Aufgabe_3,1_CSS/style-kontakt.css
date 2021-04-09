@@ -6,7 +6,6 @@ body{
 }
 
 .header{
-    width: 800px;
     height: 80px;
     display: block;
     background-color: #777;
@@ -78,7 +77,37 @@ body{
     color: white;
 }
 
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.fa-snapchat-ghost {
+    background: #fffc00;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
 input{
+    height: 30px;
     background-color: lightgray;
 }
 
+#input-naricht{
+    height: 50px;
+}
+
+.datenschutzrichtlinien{
+font-size: 10px;
+}
+
+
+#button-absenden{
+    background-color: lightgray;
+}
+
+.bilder{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

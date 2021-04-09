@@ -5,8 +5,7 @@ body{
     background-image: url("hintergrund.png");   
 }
 
-.header{
-    width: 800px;
+.header{  
     height: 80px;
     display: block;
     background-color: #777;
