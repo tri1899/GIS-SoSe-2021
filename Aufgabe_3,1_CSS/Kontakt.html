@@ -45,22 +45,35 @@
     <br>
     <br>
     <a href="https://de-de.facebook.com/" target="_blank" class="fa fa-facebook"></a>
-    &nbsp;&nbsp;<a href="https://twitter.com/?lang=de" target="_blank" alt="did not work" class="fa fa-twitter"></a>
-    &nbsp;&nbsp;<a href="https://www.instagram.com/" target="_blank" alt="did not work" class="fa fa-instagram"></a>
-    &nbsp;&nbsp;<a href="https://accounts.snapchat.com/" target="_blank" alt="did not work" class="fa fa-snapchat-ghost"></a>
+    &nbsp;&nbsp;<a href="https://twitter.com/?lang=de" target="_blank" class="fa fa-twitter"></a>
+    &nbsp;&nbsp;<a href="https://www.instagram.com/" target="_blank" class="fa fa-instagram"></a>
+    &nbsp;&nbsp;<a href="https://accounts.snapchat.com/" target="_blank" class="fa fa-snapchat-ghost"></a>
     <br>
     <br>
     <div>
-    <p><input type="=text" placeholder="Vorname:" Name="Vorname" value="" size="40" maxlength="30"></p>
-    <p><input type="=text" placeholder="Nachname:" Name="Nachname" value="" size="40" maxlength="30"></p>
-    <p><input type="=text" placeholder="E-Mail:" Name="E-Mail" value="" size="40" maxlength="30"></p>
-    <p><input id="input-naricht" type="=text" placeholder="Naricht:" Name="Naricht" value="" size="100" maxlength="100"></p>
-    <div class="datenschutzrichtlinien">
-    <p>Mit Absenden der Naricht bestätigen Sie die Datenschutzrichtlinien.</p>
-    </div>
-    <button id="button-absenden" type="submit">absenden</button>
-    </div>
-    <br>
+        <form method="POST">
+            <label>Vorname:</label>
+            &nbsp; &nbsp;<input type="text" name="vorname" required><br>
+            <br>
+            <label>Nachname:</label>
+            <input type="text" name="Nachname" required><br>
+            <br>
+            <label>E-Mail:</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="email" required><br>
+            <label>Naricht:</label>
+            <textarea rows="7" name="naricht"></textarea><br>
+            <div class="datenschutzrichtlinien">
+                <p>Mit Absenden der Naricht bestätigen Sie die Datenschutzrichtlinien.</p>
+                </div>
+                <button id="button-absenden" type="submit">absenden</button>
+                </div>
+                <br>
+
+
+
+        </form>
+    
+    
 
 
 
