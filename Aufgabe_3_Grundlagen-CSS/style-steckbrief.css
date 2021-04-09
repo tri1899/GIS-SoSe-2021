@@ -54,3 +54,40 @@ body{
 #active-steckbrief{
     background-color: orange;
 }
+
+#tabelle-steckbrief{
+    margin: 0 265px;
+
+}
+
+#potrait{
+    margin: 0 265px;
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 25px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.fa:hover{
+    opacity: 0.7;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+#link-portfolio{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
