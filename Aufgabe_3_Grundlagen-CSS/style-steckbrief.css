@@ -56,13 +56,14 @@ body{
 }
 
 #tabelle-steckbrief{
-    margin-left: 300px;
+    margin-left: 220px;
     margin-right: 249px;
 
 }
 
 #potrait{
-    margin: 0 265px;
+    margin-left: 180px;
+    margin-right: 249px;
 }
 
 .fa {
@@ -91,4 +92,34 @@ body{
     text-decoration: none;
     font-weight: bold;
     color: black;
+}
+
+#link-hoffenheim{
+    text-decoration: none;
+    font-weight: bold;
+    color: black
+}
+
+tbody{
+    background-color: lightskyblue;
+}
+
+table{
+    border: 2px solid rgb(190, 190, 190);
+    border-collapse: collapse;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+td, th{
+    border: 1px solid rgb(180, 180, 180);
+    padding: 5px 10px;
+}
+
+td{
+    text-align: center;
+}
+
+h3{
+    color: red;
 }

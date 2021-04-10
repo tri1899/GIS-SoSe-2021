@@ -57,7 +57,7 @@ body{
     background-color: orange;
 }
 
-.fa {
+.fa{
     padding: 20px;
     font-size: 30px;
     width: 25px;
@@ -65,13 +65,33 @@ body{
     text-decoration: none;
 }
 
-.fa-twitter {
+.fa-twitter{
     background: #55ACEE;
     color: white;
 }
 
-.fa-instagram {
+.fa-instagram{
     background: #125688;
     color: white;
 }
 
+a{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.mittig{
+    margin-left: 180px;
+    margin-right: 249px
+}
+
+#link-steckbrief{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+h3{
+    color: red;
+}
