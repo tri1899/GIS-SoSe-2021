@@ -1,0 +1,99 @@
+body{
+    width: 1024px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    background-image: url("hintergrund.png"); 
+}
+.flexbox{
+    background: lightgray;
+}
+
+.flexelement{
+    background: orange;
+    color: white;
+    text-align: center;
+    width: 33%;
+    margin: 0 0 1% 0;
+    margin: 10px;
+    padding: 15px 0 15px 0;
+}
+
+.flexbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.socialmedia{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+.innersocialmedia{
+    text-align: center;
+}
+
+.fa-twitter{
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-instagram{
+    background: #125688;
+    color: white;
+}
+
+.fa{
+    padding: 20px;
+    font-size: 30px;
+    width: 25px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.seiteninhalt{
+    text-align: center;
+}
+
+h1{
+    text-decoration: underline;
+}
+
+div h3{
+    color: orange;
+    text-decoration: underline;
+}
+
+.behälter{
+    background: lightgray;
+    width: 80%;
+    margin: auto;
+    
+}
+
+ul{
+    list-style: none;
+}
+
+li>a{
+    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#seitenverlinkung{
+    float: right;
+}
