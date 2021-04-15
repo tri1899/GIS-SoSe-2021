@@ -1,5 +1,5 @@
 body{
-    width: 1024px;
+    width: 1280px;
     margin: 0 auto;
     font-family: sans-serif;
     background-image: url("hintergrund.png"); 
@@ -96,4 +96,29 @@ li>a{
 
 #seitenverlinkung{
     float: right;
+}
+
+table{
+    border: 2px solid rgb(190, 190, 190);
+    border-collapse: collapse;
+    letter-spacing: 1px;
+    font-size: 20px;
+    margin: 0 auto;
+}
+
+tbody *{
+    background: lightblue;
+}
+
+td, th{
+    border: 1px solid rgb(180, 180, 180);
+    padding: 5px 10px;
+}
+
+img[src="portrait.jpeg"]{
+    width: 450px;
+}
+
+#seitenverlinkung-zurueck{
+    float: left;
 }
