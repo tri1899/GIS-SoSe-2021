@@ -125,6 +125,17 @@ img[src="portrait.jpeg"]{
     float: left;
 }
 
+.impressum{
+    background: lightblue;
+    width: 80%;
+    margin: auto;
+}
+
+div ~ p{
+    color: blue;
+    text-decoration: underline;
+}
+
 .fa:hover{
     opacity: 0.7;
 }
