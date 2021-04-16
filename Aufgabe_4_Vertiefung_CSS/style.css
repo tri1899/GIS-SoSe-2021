@@ -122,6 +122,10 @@ img[src="bild-kontakt.jpg"]{
     height: 700px;
 }
 
+img[src="bild-steckbrief.jpg"]{
+    width: 100%;
+    height: 700px;
+}
 
 iframe[src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5342.722825654068!2d8.607956728434639!3d47.968071500286314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47909b93738f068f%3A0xbd3a7cd334806b96!2sUnterbaldingen%2C%2078073%20Bad%20D%C3%BCrrheim!5e0!3m2!1sde!2sde!4v1617986684599!5m2!1sde!2sde"]{
     width: 80%;
