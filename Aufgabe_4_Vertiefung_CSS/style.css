@@ -246,7 +246,7 @@ h3{
     }
 
     table{
-        width: 80%;
+        width: 50%;
         font-size: 15px;
     }
 
@@ -255,11 +255,13 @@ h3{
 
     }
 
+    #seitenverlinkung-zurueck{
+        font-size: 10px;
+    }
 
-
-
-
-
+    #seitenverlinkung{
+        font-size: 10px;
+    }
 }
 
 
