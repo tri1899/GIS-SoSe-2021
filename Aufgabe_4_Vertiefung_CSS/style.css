@@ -319,6 +319,10 @@ h3{
         width: 80%;
     }
 
+    input[type=text],textarea {
+        width: 80%;
+    }
+
 }
 
 
