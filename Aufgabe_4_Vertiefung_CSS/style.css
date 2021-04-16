@@ -1,5 +1,5 @@
 body{
-    width: 1280px;
+    width: 1024px;
     margin: 0 auto;
     font-family: sans-serif;
     background-image: url("hintergrund.png"); 
@@ -146,7 +146,7 @@ input[type=text],textarea {
 
 }
 
-  input[type=submit] {
+input[type=submit] {
     background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
@@ -154,4 +154,111 @@ input[type=text],textarea {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.element{
+    width: 10rem;
+    height: 5rem;
+    background-color: white;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 250ms ease;
+    margin: 0 auto;
+    position: relative;
+}
+
+h3{
+    animation-duration: 2s;
+    animation-name: slidein;
+}
+
+@keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+}
+
+.animation{
+    animation: textwelle 3s;
+}
+
+@keyframes textwelle {
+    0% {
+      transform: scale(0.1);
+      opacity: 0;
+    }  
+    70% {
+      transform: scale(1.25);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;	
+    }
+}
+
+@media (max-width: 1024px){
+    body{
+        width: 100%;
+    }
+
+    img[src="bild-portfolio.jpg"]{
+        height: auto;
+
+    }
+
+    img[src="bild-steckbrief.jpg"]{
+        height: auto;
+
+    }
+
+    img[src="bild-kontakt.jpg"]{
+        height: auto;
+
+    }
+}
+
+@media (max-width: 600px){
+    body{
+        width: 100%;
+    }
+
+    img[src="bild-portfolio.jpg"]{
+        height: auto;
+
+    }
+
+    img[src="bild-steckbrief.jpg"]{
+        height: auto;
+
+    }
+
+    img[src="bild-kontakt.jpg"]{
+        height: auto;
+
+    }
+
+    table{
+        font-size: 15px;
+    }
+
+    img[src="portrait.jpeg"]{
+        width: 80%;
+
+    }
+
+
+
+
+
+
+}
+
 
