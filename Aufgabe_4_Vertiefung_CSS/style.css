@@ -23,6 +23,9 @@ body{
     flex-direction: row;
     justify-content: flex-end;
     align-items: stretch;
+    position: sticky;
+    top: 0;
+    
 }
 
 a{
