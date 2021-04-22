@@ -1,35 +1,119 @@
 "use strict";
-//console.log(true + true);
-console.log(5 + 1);
-console.log(5 + "1");
-console.log("5" + 1);
-//console.log('5' - 1);
-//BONUS:
-//console.log(('b' + 'a' + + 'a' + 'a').toLowerCase());
-let five = 5;
-console.log(five * five);
-let weather = "sunny";
-console.log(weather);
-weather = "dark";
-console.log(weather);
-let lukasDebt = 1000;
-lukasDebt = lukasDebt - 50;
-console.log(lukasDebt);
-let one = 1, two = 2;
-console.log(one + two);
-let name1 = "Lukas";
-const greeting = "Hello ";
-console.log(greeting + name1);
-//prompt("Passwort eingeben");
-let x = Math.max(2, 4);
-console.log(x);
-console.log(Math.min(2, 4) + 10);
-/*let userInput: string = prompt("Pick a number");
-let userNumber: number = Number(userInput);
-console.log("The square of your number is " + userNumber * userNumber);
+// Aufgabe 1
+/*function a1(): void {
+    let x: string = "Alles";
+    console.log(x);
+    func1();
+    console.log("Alles");
+    func2();
+    console.log("Alles");
+    func3();
+}
 
-function add(_a: number, _b: number): number {
-    let result: number = _a + _b;
-    return result;
+a1();
+
+function func1(): void {
+    console.log("Gute!");
+}
+
+function func2(): void {
+    console.log("klar?");
+}
+
+function func3(): void {
+    console.log("Logo!");
+}
+
+
+//Aufgabe 2
+
+function a2(): void {
+    let i: number = 9;
+
+    do {
+        console.log(i);
+        i = i - 1;
+    } while ( i > 0);
+}
+
+a2();
+
+
+//Aufgabe 3
+
+function a3(): void {
+    let i: number = 9;
+
+    do {
+        console.log(i);
+        i = i - 1;
+    } while ( i > 0);
+}
+
+
+//Aufgabe 4
+
+let x: string = "Hallo";
+console.log(x);
+func1(x);
+console.log(x);
+func2();
+func3();
+console.log(x);
+
+function func1(y: string): void {
+    y = "Bla";
+    console.log(y);
+}
+
+function func2(): void {
+    let x: string = "Blubb";
+    console.log(x);
+}
+
+function func3(): void {
+    x = "Test";
 }*/
+//Aufgabe 5
+//a)
+let x = 5;
+let y = 2;
+multiply(x, y);
+console.log(x);
+function multiply(_a, _b) {
+    x = (_a * _b);
+    return (x);
+}
+//b)
+let maxi;
+max(12, 11);
+console.log(maxi);
+function max(_c, _d) {
+    if (_c > _d) {
+        maxi = _c;
+        return (maxi);
+    }
+    else {
+        maxi = _d;
+        return (maxi);
+    }
+}
+//c)
+function zusammen() {
+    let alleszusammen = 0;
+    let k = 1;
+    do {
+        alleszusammen = alleszusammen + k;
+        k++;
+    } while (k < 101);
+    console.log(alleszusammen);
+}
+zusammen();
+//d)
+function random(_minimum, _maximum) {
+    for (let o = 0; o < 10; o++) {
+        console.log(Math.random);
+    }
+}
+random(0, 100);
 //# sourceMappingURL=script.js.map

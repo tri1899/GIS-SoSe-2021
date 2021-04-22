@@ -28,6 +28,10 @@ body{
     
 }
 
+.flexelement:hover{
+    background-color: white;
+}
+
 a{
     text-decoration: none;
     color: black;
