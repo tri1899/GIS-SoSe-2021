@@ -119,18 +119,18 @@ function zusammen(): void {
 zusammen();
 
 //d)
-
-function random (_minimum: number, _maximum: number):  void {
-    for (let o: number = 0; o < 10; o++) {
+*/
+function random(_minimum, _maximum) {
+    for (let o = 0; o < 10; o++) {
         console.log(Math.random() * _maximum);
     }
 }
 random(0, 100);
-
+/*
 //e)
 
 let together: number = 1;
-factorial(12);
+factorial(8);
 console.log(together);
 function factorial(_number: number): number {
     let b: number = 1;
@@ -159,7 +159,7 @@ lapyears();
 
 //Aufgabe 6
 //a)
-
+/*
 function gibhashtags(): void {
     let hashtag: string = "#";
     for (let l: number = 0; l < 7; l++) {
@@ -188,47 +188,35 @@ function teilbar(): void {
 teilbar();
 
 //d)
-*/
-/*
-let schachiausgabe: String = "";
 
-for (let y: number = 0; y <= 8; y++) {
-    for ( let x: number = 0; x <= 8; x++) {
-        if ((y + x) % 2 != 0 ) {
-            schachiausgabe += "#";
-        } else {
-            schachiausgabe += "";
-        }
-    }
-    schachiausgabe = "/n";
-}
 
-console.log(schachiausgabe);
-*/
-let schachi = "";
-for (let y = 0; y < 8; y++) {
-    for (let x = 0; x < 4; x++) {
-        if (y % 2 == 0)
-            schachi += " #";
-        else
-            schachi += "# ";
+let schachi: String = "";
+for (let y: number = 0; y < 8; y++ ) {
+    for ( let x: number = 0; x < 4; x++ ) {
+        if (y % 2 == 0) schachi += " #";
+        else schachi += "# ";
+
     }
     schachi += "\n";
 }
 console.log(schachi);
+
 //e)
-function schachbrett(_groesse) {
-    let _schachi = "";
-    for (let y = 0; y < _groesse; y++) { //Höhe
-        for (let x = 0; x < (_groesse / 2); x++) { //Breite
-            if (y % 2 == 0)
-                _schachi += " #";
-            else
-                _schachi += "# ";
-        }
-        _schachi += "\n";
+
+function schachbrett(_groesse: number): String {
+let _schachi: String = "";
+for (let y: number = 0; y < _groesse; y++ ) { //Höhe
+    for ( let x: number = 0; x < (_groesse / 2); x++ ) {//Breite
+        if (y % 2 == 0) _schachi += " #";
+        else _schachi += "# ";
+
     }
-    return (_schachi);
+    _schachi += "\n";
 }
+return(_schachi);
+
+}
+
 console.log(schachbrett(10));
+*/
 //# sourceMappingURL=script.js.map
