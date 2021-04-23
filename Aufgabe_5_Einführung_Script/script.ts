@@ -189,6 +189,7 @@ teilbar();
 
 //d)
 */
+/*
 let schachiausgabe: String = "";
 
 for (let y: number = 0; y <= 8; y++) {
@@ -199,11 +200,40 @@ for (let y: number = 0; y <= 8; y++) {
             schachiausgabe += "";
         }
     }
-    schachiausgabe += "/n";
+    schachiausgabe = "/n";
 }
 
 console.log(schachiausgabe);
+*/
 
+let schachi: String = "";
+for (let y: number = 0; y < 8; y++ ) {
+    for ( let x: number = 0; x < 4; x++ ) {
+        if (y % 2 == 0) schachi += " #";
+        else schachi += "# ";
+
+    }
+    schachi += "\n";
+}
+console.log(schachi);
+
+//e)
+
+function schachbrett(_groesse: number): String {
+let _schachi: String = "";
+for (let y: number = 0; y < _groesse; y++ ) { //Höhe
+    for ( let x: number = 0; x < (_groesse / 2); x++ ) {//Breite
+        if (y % 2 == 0) _schachi += " #";
+        else _schachi += "# ";
+
+    }
+    _schachi += "\n";
+}
+return(_schachi);
+
+}
+
+console.log(schachbrett(10));
      
 
 
