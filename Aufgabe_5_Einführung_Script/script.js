@@ -110,10 +110,64 @@ function zusammen() {
 }
 zusammen();
 //d)
-function random(_minimum, _maximum) {
-    for (let o = 0; o < 10; o++) {
-        console.log(Math.random);
+/*
+function random (_minimum: number, _maximum: number):  void {
+    for (let o: number = 0; o < 10; o++) {
+        console.log(Math.random() * _maximum);
     }
 }
 random(0, 100);
+*/
+//e)
+/*
+function factorial(_number: number): void {
+    if (_number >= 1) {
+        for (let s: number = _number; s > 0; s++)
+        console.log("hallo");
+    } else {
+        console.log(1);
+    }
+}
+let reingeben: number = 0;
+factorial(reingeben);
+console.log(reingeben);
+*/
+//f)
+/*
+function lapyears(): void {
+    for (let v: number = 1900; v < 2021; v++) {
+        if (v % 4 == 0 && v % 100 != 0) {
+            console.log(v + " ist ein Schaltjahr.");
+        } else if (v % 400 == 0) {
+            console.log(v + " ist ein Schaltjahr.");
+        }
+    }
+}
+lapyears();
+*/
+//Aufgabe 6
+//a)
+function gibhashtags() {
+    let hashtag = "#";
+    for (let l = 0; l < 7; l++) {
+        console.log(hashtag);
+        hashtag += "#";
+    }
+}
+gibhashtags();
+//b)
+function teilbar() {
+    for (let w = 0; w < 101; w++) {
+        if (w % 3 == 0) {
+            console.log("Fizz");
+        }
+        else if (w % 5 == 0 && w % 3 != 0) {
+            console.log("Buzz");
+        }
+        else {
+            console.log(w);
+        }
+    }
+}
+teilbar();
 //# sourceMappingURL=script.js.map
