@@ -73,22 +73,28 @@ function func2(): void {
 
 function func3(): void {
     x = "Test";
-}*/
+}
+
+
 //Aufgabe 5
 //a)
-let x = 5;
-let y = 2;
+let x: number = 5;
+let y: number = 2;
 multiply(x, y);
 console.log(x);
-function multiply(_a, _b) {
+
+function multiply(_a: number, _b: number): number {
     x = (_a * _b);
     return (x);
 }
+
 //b)
-let maxi;
+let maxi: number;
 max(12, 11);
 console.log(maxi);
-function max(_c, _d) {
+
+
+function max(_c: number, _d: number): number {
     if (_c > _d) {
         maxi = _c;
         return (maxi);
@@ -98,10 +104,12 @@ function max(_c, _d) {
         return (maxi);
     }
 }
+
 //c)
-function zusammen() {
-    let alleszusammen = 0;
-    let k = 1;
+
+function zusammen(): void {
+    let alleszusammen: number = 0;
+    let k: number = 1;
     do {
         alleszusammen = alleszusammen + k;
         k++;
@@ -109,8 +117,9 @@ function zusammen() {
     console.log(alleszusammen);
 }
 zusammen();
+
 //d)
-/*
+
 function random (_minimum: number, _maximum: number):  void {
     for (let o: number = 0; o < 10; o++) {
         console.log(Math.random() * _maximum);
@@ -119,21 +128,12 @@ function random (_minimum: number, _maximum: number):  void {
 random(0, 100);
 */
 //e)
-/*
-function factorial(_number: number): void {
-    if (_number >= 1) {
-        for (let s: number = _number; s > 0; s++)
-        console.log("hallo");
-    } else {
-        console.log(1);
-    }
+function factorial(_number) {
+    return (_number);
 }
-let reingeben: number = 0;
-factorial(reingeben);
-console.log(reingeben);
-*/
 //f)
 /*
+
 function lapyears(): void {
     for (let v: number = 1900; v < 2021; v++) {
         if (v % 4 == 0 && v % 100 != 0) {
@@ -144,30 +144,39 @@ function lapyears(): void {
     }
 }
 lapyears();
-*/
+
+
+
 //Aufgabe 6
 //a)
-function gibhashtags() {
-    let hashtag = "#";
-    for (let l = 0; l < 7; l++) {
+
+function gibhashtags(): void {
+    let hashtag: string = "#";
+    for (let l: number = 0; l < 7; l++) {
         console.log(hashtag);
         hashtag += "#";
     }
 }
 gibhashtags();
-//b)
-function teilbar() {
-    for (let w = 0; w < 101; w++) {
-        if (w % 3 == 0) {
+
+//b) c)
+
+function teilbar(): void {
+    for (let w: number = 0; w < 101; w++) {
+        if (w % 3 == 0 && w % 5 == 0) {
+            console.log("FizzBuzz");
+        } else if (w % 3 == 0) {
             console.log("Fizz");
-        }
-        else if (w % 5 == 0 && w % 3 != 0) {
+        } else if (w % 5 == 0 && w % 3 != 0) {
             console.log("Buzz");
-        }
-        else {
+        } else {
             console.log(w);
         }
     }
 }
+
 teilbar();
+
+//d)
+*/ 
 //# sourceMappingURL=script.js.map

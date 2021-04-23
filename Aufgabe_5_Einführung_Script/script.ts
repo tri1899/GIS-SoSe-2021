@@ -73,7 +73,7 @@ function func2(): void {
 
 function func3(): void {
     x = "Test";
-}*/
+}
 
 
 //Aufgabe 5
@@ -119,7 +119,7 @@ function zusammen(): void {
 zusammen();
 
 //d)
-/*
+
 function random (_minimum: number, _maximum: number):  void {
     for (let o: number = 0; o < 10; o++) {
         console.log(Math.random() * _maximum); 
@@ -128,22 +128,14 @@ function random (_minimum: number, _maximum: number):  void {
 random(0, 100);
 */
 //e)
-
-/*
-function factorial(_number: number): void {
-    if (_number >= 1) {
-        for (let s: number = _number; s > 0; s++)
-        console.log("hallo");
-    } else {
-        console.log(1);
-    }
+function factorial(_number: number): number {
+    return(_number) ;
 }
-let reingeben: number = 0;
-factorial(reingeben);
-console.log(reingeben);
-*/
+
+
 //f)
 /*
+
 function lapyears(): void {
     for (let v: number = 1900; v < 2021; v++) {
         if (v % 4 == 0 && v % 100 != 0) {
@@ -154,7 +146,7 @@ function lapyears(): void {
     }
 }
 lapyears();
-*/
+
 
 
 //Aufgabe 6
@@ -162,20 +154,22 @@ lapyears();
 
 function gibhashtags(): void {
     let hashtag: string = "#";
-    for (let l: number = 0; l < 7; l++ ) {
+    for (let l: number = 0; l < 7; l++) {
         console.log(hashtag);
         hashtag += "#";
     }
 }
 gibhashtags();
 
-//b)
+//b) c)
 
 function teilbar(): void {
     for (let w: number = 0; w < 101; w++) {
-        if (w % 3 == 0) {
+        if (w % 3 == 0 && w % 5 == 0) {
+            console.log("FizzBuzz");
+        } else if (w % 3 == 0) {
             console.log("Fizz");
-        } else if (w % 5 == 0 && w % 3 != 0 ) {
+        } else if (w % 5 == 0 && w % 3 != 0) {
             console.log("Buzz");
         } else {
             console.log(w);
@@ -184,3 +178,6 @@ function teilbar(): void {
 }
 
 teilbar();
+
+//d)
+*/
