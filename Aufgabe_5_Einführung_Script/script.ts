@@ -126,15 +126,23 @@ function random (_minimum: number, _maximum: number):  void {
     }
 }
 random(0, 100);
-*/
+
 //e)
+
+let together: number = 1;
+factorial(12);
+console.log(together);
 function factorial(_number: number): number {
-    return(_number) ;
+    let b: number = 1;
+    do {
+        together = together * b;
+        b++;
+    } while (b <= _number);
+    return(together);
 }
 
 
 //f)
-/*
 
 function lapyears(): void {
     for (let v: number = 1900; v < 2021; v++) {
@@ -181,3 +189,21 @@ teilbar();
 
 //d)
 */
+let schachiausgabe: String = "";
+
+for (let y: number = 0; y <= 8; y++) {
+    for ( let x: number = 0; x <= 8; x++) {
+        if ((y + x) % 2 != 0 ) {
+            schachiausgabe += "#";
+        } else {
+            schachiausgabe += "";
+        }
+    }
+    schachiausgabe += "/n";
+}
+
+console.log(schachiausgabe);
+
+     
+
+
