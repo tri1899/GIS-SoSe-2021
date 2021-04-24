@@ -1,100 +1,89 @@
 "use strict";
 // Aufgabe 1
-/*function a1(): void {
-    let x: string = "Alles";
+//a) Ausgabe: Alles klar? Logo!
+function a1() {
+    let x = "Alles";
     console.log(x);
-    func1();
-    console.log("Alles");
-    func2();
-    console.log("Alles");
-    func3();
+    function1();
+    console.log(x);
+    function2();
+    console.log(x);
+    function3();
 }
-
 a1();
-
-function func1(): void {
+function function1() {
     console.log("Gute!");
 }
-
-function func2(): void {
+function function2() {
     console.log("klar?");
 }
-
-function func3(): void {
+function function3() {
     console.log("Logo!");
 }
-
-
 //Aufgabe 2
-
-function a2(): void {
-    let i: number = 9;
-
+//Was wird ausgegeben?
+//9 8 7 6 5 4 3 2 1
+function a2() {
+    let i = 9;
     do {
         console.log(i);
         i = i - 1;
-    } while ( i > 0);
+    } while (i > 0);
 }
-
 a2();
-
-
+/*
 //Aufgabe 3
-
+//Fehler einbauen
 function a3(): void {
     let i: number = 9;
 
     do {
         console.log(i);
-        i = i - 1;
+        i = i + 1;
     } while ( i > 0);
 }
-
-
+a3();
+*/
 //Aufgabe 4
-
-let x: string = "Hallo";
-console.log(x);
-func1(x);
-console.log(x);
+//Ausgabe: Hallo Bla Hallo Blubb Test
+//Annhame bestätigt
+//Unterschied zwischen lokale und globale Variablen: Globale Variable: wird im Hauptprogramm eingeführt, lokale: wird nur innenhalb einer Funktionsdefinition benutzt. (stribt nach ende der Funktion)
+//Übergabeparameter: man kann einen Wert an eine Funktion oder Methode übergeben und Änderungen, die die Methode an diesem Wert vornimmt weiterverarbeiten
+//Variablen sind einfache Container für digitale Daten. Sie speichern Daten von Programmen in der Programmiereung.
+//Funktionen geben deinem Programm Übersicht. Sie können überall ausgerufen werden.
+let s = "Hallo";
+console.log(s);
+func1(s);
+console.log(s);
 func2();
 func3();
-console.log(x);
-
-function func1(y: string): void {
+console.log(s);
+function func1(y) {
     y = "Bla";
     console.log(y);
 }
-
-function func2(): void {
-    let x: string = "Blubb";
+function func2() {
+    let x = "Blubb";
     console.log(x);
 }
-
-function func3(): void {
-    x = "Test";
+function func3() {
+    s = "Test";
 }
-
-
 //Aufgabe 5
 //a)
-let x: number = 5;
-let y: number = 2;
+let x = 6;
+let y = 2;
 multiply(x, y);
 console.log(x);
-
-function multiply(_a: number, _b: number): number {
+function multiply(_a, _b) {
     x = (_a * _b);
     return (x);
 }
-
 //b)
-let maxi: number;
-max(12, 11);
+let maxi;
+max(18, 20);
 console.log(maxi);
-
-
-function max(_c: number, _d: number): number {
+function max(_c, _d) {
     if (_c > _d) {
         maxi = _c;
         return (maxi);
@@ -104,12 +93,10 @@ function max(_c: number, _d: number): number {
         return (maxi);
     }
 }
-
 //c)
-
-function zusammen(): void {
-    let alleszusammen: number = 0;
-    let k: number = 1;
+function zusammen() {
+    let alleszusammen = 0;
+    let k = 1;
     do {
         alleszusammen = alleszusammen + k;
         k++;
@@ -117,106 +104,90 @@ function zusammen(): void {
     console.log(alleszusammen);
 }
 zusammen();
-
 //d)
-*/
 function random(_minimum, _maximum) {
     for (let o = 0; o < 10; o++) {
         console.log(Math.random() * _maximum);
     }
 }
 random(0, 100);
-/*
 //e)
-
-let together: number = 1;
-factorial(8);
+let together = 1;
+factorial(5);
 console.log(together);
-function factorial(_number: number): number {
-    let b: number = 1;
+function factorial(_number) {
+    let b = 1;
     do {
         together = together * b;
         b++;
     } while (b <= _number);
-    return(together);
+    return (together);
 }
-
-
 //f)
-
-function lapyears(): void {
-    for (let v: number = 1900; v < 2021; v++) {
+function lapyears() {
+    for (let v = 1900; v < 2021; v++) {
         if (v % 4 == 0 && v % 100 != 0) {
             console.log(v + " ist ein Schaltjahr.");
-        } else if (v % 400 == 0) {
+        }
+        else if (v % 400 == 0) {
             console.log(v + " ist ein Schaltjahr.");
         }
     }
 }
 lapyears();
-
-
-
 //Aufgabe 6
 //a)
-/*
-function gibhashtags(): void {
-    let hashtag: string = "#";
-    for (let l: number = 0; l < 7; l++) {
+function gibhashtags() {
+    let hashtag = "#";
+    for (let l = 0; l < 7; l++) {
         console.log(hashtag);
         hashtag += "#";
     }
 }
 gibhashtags();
-
 //b) c)
-
-function teilbar(): void {
-    for (let w: number = 0; w < 101; w++) {
+function teilbar() {
+    for (let w = 1; w < 101; w++) {
         if (w % 3 == 0 && w % 5 == 0) {
             console.log("FizzBuzz");
-        } else if (w % 3 == 0) {
+        }
+        else if (w % 3 == 0) {
             console.log("Fizz");
-        } else if (w % 5 == 0 && w % 3 != 0) {
+        }
+        else if (w % 5 == 0 && w % 3 != 0) {
             console.log("Buzz");
-        } else {
+        }
+        else {
             console.log(w);
         }
     }
 }
-
 teilbar();
-
 //d)
-
-
-let schachi: String = "";
-for (let y: number = 0; y < 8; y++ ) {
-    for ( let x: number = 0; x < 4; x++ ) {
-        if (y % 2 == 0) schachi += " #";
-        else schachi += "# ";
-
+let schachi = "";
+for (let y = 0; y < 8; y++) { //Höhe
+    for (let x = 0; x < 4; x++) { //Breite
+        if (y % 2 == 0)
+            schachi += " #";
+        else
+            schachi += "# ";
     }
     schachi += "\n";
 }
 console.log(schachi);
-
 //e)
-
-function schachbrett(_groesse: number): String {
-let _schachi: String = "";
-for (let y: number = 0; y < _groesse; y++ ) { //Höhe
-    for ( let x: number = 0; x < (_groesse / 2); x++ ) {//Breite
-        if (y % 2 == 0) _schachi += " #";
-        else _schachi += "# ";
-
+function schachbrett(_groesse) {
+    let _schachi = "";
+    for (let y = 0; y < _groesse; y++) { //Höhe
+        for (let x = 0; x < (_groesse / 2); x++) { //Breite
+            if (y % 2 == 0)
+                _schachi += " #";
+            else
+                _schachi += "# ";
+        }
+        _schachi += "\n";
     }
-    _schachi += "\n";
+    return (_schachi);
 }
-return(_schachi);
-
-}
-
 console.log(schachbrett(10));
-*/
 //# sourceMappingURL=script.js.map

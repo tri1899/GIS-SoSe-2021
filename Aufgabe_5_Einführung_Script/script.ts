@@ -1,31 +1,34 @@
 // Aufgabe 1
+//a) Ausgabe: Alles klar? Logo!
 
-/*function a1(): void {
+function a1(): void {
     let x: string = "Alles";
     console.log(x);
-    func1();
-    console.log("Alles");
-    func2();
-    console.log("Alles");
-    func3();
+    function1();
+    console.log(x);
+    function2();
+    console.log(x);
+    function3();
 }
 
 a1();
 
-function func1(): void {
+function function1(): void {
     console.log("Gute!");
 }
 
-function func2(): void {
+function function2(): void {
     console.log("klar?");
 }
 
-function func3(): void {
+function function3(): void {
     console.log("Logo!");
 }
 
 
 //Aufgabe 2
+//Was wird ausgegeben?
+//9 8 7 6 5 4 3 2 1
 
 function a2(): void {
     let i: number = 9;
@@ -38,28 +41,34 @@ function a2(): void {
 
 a2();
 
-
+/*
 //Aufgabe 3 
-
+//Fehler einbauen
 function a3(): void {
     let i: number = 9;
 
     do {
         console.log(i);
-        i = i - 1;
+        i = i + 1;
     } while ( i > 0);
 }
-
+a3();
+*/
 
 //Aufgabe 4
-
-let x: string = "Hallo";
-console.log(x);
-func1(x);
-console.log(x);
+//Ausgabe: Hallo Bla Hallo Blubb Test
+//Annhame bestätigt
+//Unterschied zwischen lokale und globale Variablen: Globale Variable: wird im Hauptprogramm eingeführt, lokale: wird nur innenhalb einer Funktionsdefinition benutzt. (stribt nach ende der Funktion)
+//Übergabeparameter: man kann einen Wert an eine Funktion oder Methode übergeben und Änderungen, die die Methode an diesem Wert vornimmt weiterverarbeiten
+//Variablen sind einfache Container für digitale Daten. Sie speichern Daten von Programmen in der Programmiereung.
+//Funktionen geben deinem Programm Übersicht. Sie können überall ausgerufen werden.
+let s: string = "Hallo";
+console.log(s);
+func1(s);
+console.log(s);
 func2();
 func3();
-console.log(x);
+console.log(s);
 
 function func1(y: string): void {
     y = "Bla";
@@ -72,13 +81,13 @@ function func2(): void {
 }
 
 function func3(): void {
-    x = "Test";
+    s = "Test";
 }
 
 
 //Aufgabe 5
 //a)
-let x: number = 5;
+let x: number = 6;
 let y: number = 2;
 multiply(x, y);
 console.log(x);
@@ -90,7 +99,7 @@ function multiply(_a: number, _b: number): number {
 
 //b)
 let maxi: number;
-max(12, 11);
+max(18, 20);
 console.log(maxi);
 
 
@@ -119,18 +128,18 @@ function zusammen(): void {
 zusammen();
 
 //d)
-*/
+
 function random (_minimum: number, _maximum: number):  void {
     for (let o: number = 0; o < 10; o++) {
         console.log(Math.random() * _maximum); 
     }
 }
 random(0, 100);
-/*
+
 //e)
 
 let together: number = 1;
-factorial(8);
+factorial(5);
 console.log(together);
 function factorial(_number: number): number {
     let b: number = 1;
@@ -156,10 +165,9 @@ function lapyears(): void {
 lapyears();
 
 
-
 //Aufgabe 6
 //a)
-/*
+
 function gibhashtags(): void {
     let hashtag: string = "#";
     for (let l: number = 0; l < 7; l++) {
@@ -169,10 +177,11 @@ function gibhashtags(): void {
 }
 gibhashtags();
 
+
 //b) c)
 
 function teilbar(): void {
-    for (let w: number = 0; w < 101; w++) {
+    for (let w: number = 1; w < 101; w++) {
         if (w % 3 == 0 && w % 5 == 0) {
             console.log("FizzBuzz");
         } else if (w % 3 == 0) {
@@ -191,8 +200,8 @@ teilbar();
 
 
 let schachi: String = "";
-for (let y: number = 0; y < 8; y++ ) {
-    for ( let x: number = 0; x < 4; x++ ) {
+for (let y: number = 0; y < 8; y++ ) { //Höhe
+    for ( let x: number = 0; x < 4; x++ ) { //Breite
         if (y % 2 == 0) schachi += " #";
         else schachi += "# ";
 
@@ -217,7 +226,4 @@ return(_schachi);
 
 }
 
-console.log(schachbrett(10));
-*/   
-
-
+console.log(schachbrett(10));  
