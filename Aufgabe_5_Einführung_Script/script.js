@@ -1,6 +1,9 @@
 "use strict";
 // Aufgabe 1
 //a) Ausgabe: Alles klar? Logo!
+//Alle Variablennamen sind zulässig, (müssen aber Strings sein) int geht logischerweise nicht.
+//b) Funktion wird aufgerufen, String x wird angelegt und danach ausgegeben ("Alles"), anschließend wird die function 1 aufgerufen und deren Wert ausgegeben ("Klar?"), danach springt das Programm wieder hoch und gibt "Logo" aus.
+//c)
 function a1() {
     let x = "Alles";
     console.log(x);
@@ -23,6 +26,7 @@ function function3() {
 //Aufgabe 2
 //Was wird ausgegeben?
 //9 8 7 6 5 4 3 2 1
+//durch do wird die 9 zuerst ausgegeben, danach zieht es von i immer 1 ab und solang die while schleife true ist wird die Zahl ausgegeben.
 function a2() {
     let i = 9;
     do {
@@ -47,6 +51,7 @@ a3();
 //Aufgabe 4
 //Ausgabe: Hallo Bla Hallo Blubb Test
 //Annhame bestätigt
+//Hallo wird ausgegeben, Bla ist eine lokale Variable wird ausgegeben stribt dann aber danach, s bleibt immer noch Hallo,
 //Unterschied zwischen lokale und globale Variablen: Globale Variable: wird im Hauptprogramm eingeführt, lokale: wird nur innenhalb einer Funktionsdefinition benutzt. (stribt nach ende der Funktion)
 //Übergabeparameter: man kann einen Wert an eine Funktion oder Methode übergeben und Änderungen, die die Methode an diesem Wert vornimmt weiterverarbeiten
 //Variablen sind einfache Container für digitale Daten. Sie speichern Daten von Programmen in der Programmiereung.
