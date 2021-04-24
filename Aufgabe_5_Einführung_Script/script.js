@@ -55,7 +55,7 @@ a3();
 //Unterschied zwischen lokale und globale Variablen: Globale Variable: wird im Hauptprogramm eingeführt, lokale: wird nur innenhalb einer Funktionsdefinition benutzt. (stribt nach ende der Funktion)
 //Übergabeparameter: man kann einen Wert an eine Funktion oder Methode übergeben und Änderungen, die die Methode an diesem Wert vornimmt weiterverarbeiten
 //Variablen sind einfache Container für digitale Daten. Sie speichern Daten von Programmen in der Programmiereung.
-//Funktionen geben deinem Programm Übersicht. Sie können überall ausgerufen werden.
+//Funktionen geben deinem Programm Übersicht. Sie können überall aufgerufen werden.
 let s = "Hallo";
 console.log(s);
 func1(s);
