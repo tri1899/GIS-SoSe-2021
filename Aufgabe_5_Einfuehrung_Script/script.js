@@ -181,10 +181,10 @@ for (let y = 0; y < 8; y++) { //Höhe
 }
 console.log(schachi);
 //e)
-function schachbrett(_groesse) {
+function schachbrett(_hoehe, _breite) {
     let _schachi = "";
-    for (let y = 0; y < _groesse; y++) { //Höhe
-        for (let x = 0; x < (_groesse / 2); x++) { //Breite
+    for (let y = 0; y < _hoehe; y++) { //Höhe
+        for (let x = 0; x < (_breite / 2); x++) { //Breite
             if (y % 2 == 0)
                 _schachi += " #";
             else
@@ -194,5 +194,5 @@ function schachbrett(_groesse) {
     }
     return (_schachi);
 }
-console.log(schachbrett(10));
+console.log(schachbrett(10, 7));
 //# sourceMappingURL=script.js.map

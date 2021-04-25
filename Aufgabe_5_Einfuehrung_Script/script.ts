@@ -216,10 +216,10 @@ console.log(schachi);
 
 //e)
 
-function schachbrett(_groesse: number): String {
+function schachbrett(_hoehe: number, _breite: number ): String {
 let _schachi: String = "";
-for (let y: number = 0; y < _groesse; y++ ) { //Höhe
-    for ( let x: number = 0; x < (_groesse / 2); x++ ) {//Breite
+for (let y: number = 0; y < _hoehe; y++ ) { //Höhe
+    for ( let x: number = 0; x < (_breite / 2); x++ ) {//Breite
         if (y % 2 == 0) _schachi += " #";
         else _schachi += "# ";
 
@@ -230,4 +230,4 @@ return(_schachi);
 
 }
 
-console.log(schachbrett(10));  
+console.log(schachbrett(10, 7));  
