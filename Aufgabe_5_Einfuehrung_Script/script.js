@@ -194,5 +194,5 @@ function schachbrett(_hoehe, _breite) {
     }
     return (_schachi);
 }
-console.log(schachbrett(10, 7));
+console.log(schachbrett(8, 8));
 //# sourceMappingURL=script.js.map

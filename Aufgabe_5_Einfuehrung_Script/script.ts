@@ -230,4 +230,4 @@ return(_schachi);
 
 }
 
-console.log(schachbrett(10, 7));  
+console.log(schachbrett(8, 8));  
