@@ -112,23 +112,24 @@ namespace Aufgabe2 {
 
     //Nr 2 a)
 
+
     let arr: number[] = [5, 42, 17, 2018, -10, 60, -10010];
     //let arrBack: number[] = backwards(arr);
 
-    function backwards(_arrayback: number[]): number[] {
+    function backwards(_uebergabearray: number[]): number[] {
+        let arrayback: number[] = new Array;
 
-        for (let i: number = 0; i < _arrayback.length; i++) {
-            console.log((_arrayback[_arrayback.length - i - 1]));
+        for (let y: number = _uebergabearray.length - 1; y >= 0; y--) {
+            arrayback.push(_uebergabearray[y]);
         }
-        return (_arrayback);
+        return (arrayback);
     }
 
-    backwards(arr);
-
-
+    console.log(backwards(arr));
 
 
     // b)
+
 
     function join(_erstesarray: number[], _zweitesarray: number[]): number[] {
         for (let i: number = 0; i < _zweitesarray.length; i++) {
@@ -136,36 +137,57 @@ namespace Aufgabe2 {
         }
         return (_erstesarray);
     }
-    console.log(join(arr, [15, 9001, -440]));
+    let arr4: number[] = [5, 7, 15, 12];
+    console.log(join(arr4, [15, 9001, -440]));
 
 
 
-    //Bonus (geht nicht.)
-    /*
-    function join(_erstesarray: number[], ...nums: number[]): void {
-        for (let i: number = 0; i < nums.length; i++) {
-            _erstesarray.push(nums[i]);
 
+    //Bonus!!!!!!!!!!!!
+
+
+    function join2(_erstesarray: number[], ...nums: Array<number[]>): void {
+        for (let x: number = 0; x < nums.length; x++) {
+            let safenums: number[] = nums[x];
+            for (let i: number = 0; i < safenums.length; i++) {
+                _erstesarray.push(safenums[i]);
+
+            }
         }
-    }
+        console.log(_erstesarray);
 
-    console.log(join([123, 666, -911], (12, 22, 9, 87, 16, 63, 89, 7, 12)));
-    */
+    }
+    let array9: number[] = [2, 87, 96, 45];
+    join2([5, 2, 1, 7], [2, 2, 187], [5, 12, 187, 99, 12], [12, 85, 96, 78], array9, [12, 0, 78, 79]);
+
+
+
+
+
 
     //c)
 
     /*
-    function split(array: number[], left: number, right: number): number[] {
-        let copy: number[] = [];
-        for (let i: number = left; i <= right; i++) {
-            copy.push(array[i]);
+
+    
+    function split(array: number[], von: number, bis: number): number[] {
+        let hanspeter: number[] = [];
+        if (von >= 0 && bis < array.length) {
+        for (let i: number = von; i <= bis; i++) {
+            hanspeter.push(array[i]);
         }
-        console.log(copy);
-        return copy;
+        return hanspeter;
+        } else {
+        console.log("Ungültige Eingabe");
+        return (array);
+    }
+        
     }
     
-    split(arr, 0, 3);
-    */
+    let array2: number[] = [0, 2 , 8, 12, 6, 8, 7, 10, 12];
+    console.log(split(array2, 1, 4));
+    
+    
 
 
 
@@ -325,6 +347,8 @@ namespace Aufgabe2 {
     let rectangles: Array<Rechteck> = new Array();
     rectangles = [r4, r5, r6];
     rectangles.forEach(rec => rec.drawRandom());
+    */
+
 
 
 }

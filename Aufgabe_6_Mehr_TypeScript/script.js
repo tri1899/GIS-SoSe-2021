@@ -112,13 +112,14 @@ var Aufgabe2;
     //Nr 2 a)
     let arr = [5, 42, 17, 2018, -10, 60, -10010];
     //let arrBack: number[] = backwards(arr);
-    function backwards(_arrayback) {
-        for (let i = 0; i < _arrayback.length; i++) {
-            console.log((_arrayback[_arrayback.length - i - 1]));
+    function backwards(_uebergabearray) {
+        let arrayback = new Array;
+        for (let y = _uebergabearray.length - 1; y >= 0; y--) {
+            arrayback.push(_uebergabearray[y]);
         }
-        return (_arrayback);
+        return (arrayback);
     }
-    backwards(arr);
+    console.log(backwards(arr));
     // b)
     function join(_erstesarray, _zweitesarray) {
         for (let i = 0; i < _zweitesarray.length; i++) {
@@ -126,63 +127,96 @@ var Aufgabe2;
         }
         return (_erstesarray);
     }
-    console.log(join(arr, [15, 9001, -440]));
-    //Bonus (geht nicht.)
-    /*
-    function join(_erstesarray: number[], ...nums: number[]): void {
-        for (let i: number = 0; i < nums.length; i++) {
-            _erstesarray.push(nums[i]);
-
+    let arr4 = [5, 7, 15, 12];
+    console.log(join(arr4, [15, 9001, -440]));
+    //Bonus!!!!!!!!!!!!
+    function join2(_erstesarray, ...nums) {
+        for (let x = 0; x < nums.length; x++) {
+            let safenums = nums[x];
+            for (let i = 0; i < safenums.length; i++) {
+                _erstesarray.push(safenums[i]);
+            }
         }
+        console.log(_erstesarray);
     }
-
-    console.log(join([123, 666, -911], (12, 22, 9, 87, 16, 63, 89, 7, 12)));
-    */
+    let array9 = [2, 87, 96, 45];
+    join2([5, 2, 1, 7], [2, 2, 187], [5, 12, 187, 99, 12], [12, 85, 96, 78], array9, [12, 0, 78, 79]);
     //c)
     /*
-    function split(array: number[], left: number, right: number): number[] {
-        let copy: number[] = [];
-        for (let i: number = left; i <= right; i++) {
-            copy.push(array[i]);
+
+    
+    function split(array: number[], von: number, bis: number): number[] {
+        let hanspeter: number[] = [];
+        if (von >= 0 && bis < array.length) {
+        for (let i: number = von; i <= bis; i++) {
+            hanspeter.push(array[i]);
         }
-        console.log(copy);
-        return copy;
+        return hanspeter;
+        } else {
+        console.log("Ungültige Eingabe");
+        return (array);
+    }
+        
     }
     
-    split(arr, 0, 3);
-    */
+    let array2: number[] = [0, 2 , 8, 12, 6, 8, 7, 10, 12];
+    console.log(split(array2, 1, 4));
+    
+    
+
+
+
+
+
     // Aufgabe 3
-    let ABC;
-    (function (ABC) {
-        let canvas = document.getElementById("myFirstCanvas");
-        let context = canvas.getContext("2d");
+
+
+    namespace ABC {
+        let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("myFirstCanvas");
+        let context: CanvasRenderingContext2D = canvas.getContext("2d");
+
+
+
         context.fillStyle = "green";
         context.fillRect(0, 0, 500, 400);
+
         context.fillStyle = "lightblue";
         context.fillRect(0, 0, 500, 220);
-        context.beginPath(); //Sonne
+
+        context.beginPath();    //Sonne
         context.fillStyle = "yellow";
         context.arc(500, 10, 40, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Wolke
+
+        context.beginPath();    //Wolke
         context.fillStyle = "white";
         context.arc(350, 75, 40, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Wolke
+
+
+        context.beginPath();    //Wolke
         context.fillStyle = "white";
         context.arc(370, 30, 30, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Wolke 
+
+
+        context.beginPath();    //Wolke
         context.fillStyle = "white";
         context.arc(400, 60, 40, 0, Math.PI * 2);
         context.fill();
+
+
         context.beginPath();
         context.fillStyle = "brown"; //Hausuntergeschoss
         context.fillRect(100, 140, 150, 110);
+
+
         context.beginPath();
         context.fillStyle = "black"; //Türe
         context.fillRect(140, 190, 40, 60);
-        context.beginPath(); //Dach
+
+
+        context.beginPath();    //Dach
         context.fillStyle = "black";
         context.moveTo(100, 140);
         context.lineTo(175, 70);
@@ -190,69 +224,104 @@ var Aufgabe2;
         context.closePath();
         context.fill();
         context.stroke();
+
         context.beginPath();
         context.fillStyle = "brown"; //Baumstamm
         context.fillRect(385, 200, 40, 120);
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(410, 200, 30, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(370, 200, 20, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(380, 170, 20, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(400, 165, 20, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(425, 170, 20, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(435, 200, 20, 0, Math.PI * 2);
         context.fill();
-    })(ABC || (ABC = {}));
-    let canvas = document.getElementById("zweiteCanvas");
-    let context = canvas.getContext("2d");
+    }
+
+
+
+
+
+    let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("zweiteCanvas");
+    let context: CanvasRenderingContext2D = canvas.getContext("2d");
+
     // Aufgabe 3 b)
     class Rechteck {
+        breite: number;
+        hoehe: number;
+
         constructor() {
             this.breite = Math.floor(Math.random() * 100);
             this.hoehe = Math.floor(Math.random() * 100);
+
+
         }
-        erstelleRechteck(erstenummer, zweitenummer) {
+
+        erstelleRechteck(erstenummer: number, zweitenummer: number): void {
             context.beginPath();
             context.fillStyle = "red";
             context.fillRect(erstenummer, zweitenummer, this.breite, this.hoehe);
+
         }
-        drawRandom() {
-            let x = Math.floor(Math.random() * 500);
-            let y = Math.floor(Math.random() * 400);
+
+        drawRandom(): void {
+            let x: number = Math.floor(Math.random() * 500);
+            let y: number = Math.floor(Math.random() * 400);
             context.beginPath();
             context.rect(x, y, this.breite, this.hoehe);
             context.fillStyle = "red";
             context.fill();
             context.stroke();
         }
+
+
+
     }
-    let erstesRechteck = new Rechteck();
+
+    let erstesRechteck: Rechteck = new Rechteck();
     erstesRechteck.erstelleRechteck(300, 200);
-    let zweitesRechteck = new Rechteck();
+
+    let zweitesRechteck: Rechteck = new Rechteck();
     zweitesRechteck.erstelleRechteck(100, 500);
-    const r4 = new Rechteck();
+
+    const r4: Rechteck = new Rechteck();
     r4.erstelleRechteck(120, 50);
-    const r5 = new Rechteck();
+    const r5: Rechteck = new Rechteck();
     r5.erstelleRechteck(100, 250);
-    const r6 = new Rechteck();
+    const r6: Rechteck = new Rechteck();
     r6.erstelleRechteck(180, 390);
-    let rectangles = new Array();
+
+    let rectangles: Array<Rechteck> = new Array();
     rectangles = [r4, r5, r6];
     rectangles.forEach(rec => rec.drawRandom());
+    */
 })(Aufgabe2 || (Aufgabe2 = {}));
 //# sourceMappingURL=script.js.map
