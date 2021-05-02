@@ -114,7 +114,7 @@ var Aufgabe2;
     }
     let array9 = [2, 87, 96, 45];
     join2([5, 2, 1, 7], [2, 2, 187], [5, 12, 187, 99, 12], [12, 85, 96, 78], array9, [12, 0, 78, 79], [16, 87, 98, 15]);
-    //c)
+    //c) mit Bonus
     function split(array, von, bis) {
         let hanspeter = [];
         if (von >= 0 && bis < array.length) {
