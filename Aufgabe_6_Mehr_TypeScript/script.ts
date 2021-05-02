@@ -1,6 +1,6 @@
 namespace Aufgabe2 {
     // a)
-    /*
+
 
     function min(...nums: number[]): void {
         let safemin: number = nums[0];
@@ -11,7 +11,7 @@ namespace Aufgabe2 {
 
         console.log(safemin);
     }
-    min(12, 22, 9, 87, 16, 63, 89, 7, 12);
+    min(12, 22, 9, 87, 16, 63, 89, 7, 12, 63, 2);
 
 
 
@@ -23,20 +23,20 @@ namespace Aufgabe2 {
         while (endlos) {
             if (safezahl == 0) {
                 console.log(0);
-                return(true);
+                return (true);
                 break;
-                
+
             } else if (safezahl == 1) {
                 console.log(1);
                 return (false);
                 break;
-                
+
             } else {
                 safezahl = safezahl - 2;
             }
-            
+
         }
-        return(null);
+        return (null);
 
     }
 
@@ -46,12 +46,13 @@ namespace Aufgabe2 {
 
     //Bei -1 würde ich mich in einer Endlosschleife befinden, die beiden If Statments werden nie true werden.
     // Wir bräuchten einen anderen Datentype, der auch negative Zahlen zurück geben könnte.
-    
 
 
-    
+
+
 
     // c)
+    /*
     
     interface Student {
         vorname: string;
@@ -76,17 +77,17 @@ namespace Aufgabe2 {
     }
 
     showInfo(studentenverzeichnis);
+    */
 
-    
 
     class Student {
-        
+
         vorname: string;
         nachname: string;
         alter: number;
         wohnort: string;
         martrikelnummer: number;
- 
+
         constructor(_vorname: string, _nachname: string, _alter: number, _wohnort: string, _martrikelnummer: number) {
             this.vorname = _vorname;
             this.nachname = _nachname;
@@ -94,19 +95,20 @@ namespace Aufgabe2 {
             this.wohnort = _wohnort;
             this.martrikelnummer = _martrikelnummer;
         }
- 
-        showInfo (): void {
-            console.log("Name: " + this.vorname, this.nachname, ", Alter: " + this.alter);    
-        }        
-    }
-    let thomas: Student = new Student ("Thomas", "Müller", 31, "München", 187187);
-    let bastian: Student = new Student ("Bastian", "Schweinsteiger", 35, "München", 361361);
-    let oliver: Student = new Student ("Oliver", "Kahn", 51, "München", 111222);
-    thomas.showInfo();
-    bastian.showInfo();
-    oliver.showInfo();
 
-    */
+        showInfo2(): void {
+            console.log("Name: " + this.vorname, this.nachname, ", Alter: " + this.alter);
+        }
+    }
+    let thomasmue: Student = new Student("Thomas", "Müller", 31, "München", 187187);
+    let bastiansch: Student = new Student("Bastian", "Schweinsteiger", 35, "München", 361361);
+    let oliverkah: Student = new Student("Oliver", "Kahn", 51, "München", 111222);
+    thomasmue.showInfo2();
+    bastiansch.showInfo2();
+    oliverkah.showInfo2();
+
+
+
 
 
 
@@ -143,7 +145,7 @@ namespace Aufgabe2 {
 
 
 
-    //Bonus!!!!!!!!!!!!
+    //Bonus
 
 
     function join2(_erstesarray: number[], ...nums: Array<number[]>): void {
@@ -158,7 +160,7 @@ namespace Aufgabe2 {
 
     }
     let array9: number[] = [2, 87, 96, 45];
-    join2([5, 2, 1, 7], [2, 2, 187], [5, 12, 187, 99, 12], [12, 85, 96, 78], array9, [12, 0, 78, 79]);
+    join2([5, 2, 1, 7], [2, 2, 187], [5, 12, 187, 99, 12], [12, 85, 96, 78], array9, [12, 0, 78, 79], [16, 87, 98, 15]);
 
 
 
@@ -167,27 +169,27 @@ namespace Aufgabe2 {
 
     //c)
 
-    /*
 
-    
+
+
     function split(array: number[], von: number, bis: number): number[] {
         let hanspeter: number[] = [];
         if (von >= 0 && bis < array.length) {
-        for (let i: number = von; i <= bis; i++) {
-            hanspeter.push(array[i]);
-        }
-        return hanspeter;
+            for (let i: number = von; i <= bis; i++) {
+                hanspeter.push(array[i]);
+            }
+            return hanspeter;
         } else {
-        console.log("Ungültige Eingabe");
-        return (array);
+            console.log("Ungültige Eingabe");
+            return (array);
+        }
+
     }
-        
-    }
-    
-    let array2: number[] = [0, 2 , 8, 12, 6, 8, 7, 10, 12];
+
+    let array2: number[] = [0, 2, 8, 12, 6, 8, 7, 10, 12];
     console.log(split(array2, 1, 4));
-    
-    
+
+
 
 
 
@@ -196,7 +198,7 @@ namespace Aufgabe2 {
     // Aufgabe 3
 
 
-    namespace ABC {
+    namespace Landschaft {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("myFirstCanvas");
         let context: CanvasRenderingContext2D = canvas.getContext("2d");
 
@@ -310,45 +312,34 @@ namespace Aufgabe2 {
 
         }
 
-        erstelleRechteck(erstenummer: number, zweitenummer: number): void {
+        erstelleRechteck(_erstenummer: number, _zweitenummer: number): void {
+            let o: number = _erstenummer;
+            let p: number = _zweitenummer;
+            o = Math.floor(Math.random() * 500);
+            p = Math.floor(Math.random() * 400);
             context.beginPath();
             context.fillStyle = "red";
-            context.fillRect(erstenummer, zweitenummer, this.breite, this.hoehe);
+            context.fillRect(o, p, this.breite, this.hoehe);
 
         }
-
-        drawRandom(): void {
-            let x: number = Math.floor(Math.random() * 500);
-            let y: number = Math.floor(Math.random() * 400);
-            context.beginPath();
-            context.rect(x, y, this.breite, this.hoehe);
-            context.fillStyle = "red";
-            context.fill();
-            context.stroke();
-        }
-
-
-
     }
 
     let erstesRechteck: Rechteck = new Rechteck();
-    erstesRechteck.erstelleRechteck(300, 200);
-
     let zweitesRechteck: Rechteck = new Rechteck();
-    zweitesRechteck.erstelleRechteck(100, 500);
+    let drittesRechteck: Rechteck = new Rechteck();
+    let viertesRechteck: Rechteck = new Rechteck();
+    let fuenftesRechteck: Rechteck = new Rechteck();
+    let sechstesRechteck: Rechteck = new Rechteck();
 
-    const r4: Rechteck = new Rechteck();
-    r4.erstelleRechteck(120, 50);
-    const r5: Rechteck = new Rechteck();
-    r5.erstelleRechteck(100, 250);
-    const r6: Rechteck = new Rechteck();
-    r6.erstelleRechteck(180, 390);
-
-    let rectangles: Array<Rechteck> = new Array();
-    rectangles = [r4, r5, r6];
-    rectangles.forEach(rec => rec.drawRandom());
-    */
-
-
+    let rechtecke: Array<Rechteck> = new Array();
+    rechtecke = [erstesRechteck, zweitesRechteck, drittesRechteck, viertesRechteck, fuenftesRechteck, sechstesRechteck];
+    rechtecke[0].erstelleRechteck(150, 250);
+    rechtecke[1].erstelleRechteck(450, 100);
+    rechtecke[2].erstelleRechteck(400, 50);
+    rechtecke[3].erstelleRechteck(10, 20);
+    rechtecke[4].erstelleRechteck(78, 99);
+    rechtecke[1].erstelleRechteck(187, 361);
 
 }
+
+
