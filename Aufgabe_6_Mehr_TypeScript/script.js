@@ -119,7 +119,7 @@ var Aufgabe2;
     function split(array, von, bis) {
         let hanspeter = [];
         if (von >= 0 && bis < array.length) {
-            for (let i = von; i <= bis; i++) {
+            for (let i = von; i < bis; i++) {
                 hanspeter.push(array[i]);
             }
             return hanspeter;

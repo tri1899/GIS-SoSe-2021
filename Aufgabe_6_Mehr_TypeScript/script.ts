@@ -111,9 +111,6 @@ namespace Aufgabe2 {
 
 
 
-
-
-
     //Nr 2 a)
 
 
@@ -177,7 +174,7 @@ namespace Aufgabe2 {
     function split(array: number[], von: number, bis: number): number[] {
         let hanspeter: number[] = [];
         if (von >= 0 && bis < array.length) {
-            for (let i: number = von; i <= bis; i++) {
+            for (let i: number = von; i < bis; i++) {
                 hanspeter.push(array[i]);
             }
             return hanspeter;
