@@ -24,12 +24,10 @@ namespace Aufgabe2 {
             if (safezahl == 0) {
                 console.log(0);
                 return (true);
-                break;
 
             } else if (safezahl == 1) {
                 console.log(1);
                 return (false);
-                break;
 
             } else {
                 safezahl = safezahl - 2;
@@ -40,7 +38,7 @@ namespace Aufgabe2 {
 
     }
 
-    console.log(isEven(50));
+    console.log(isEven(75));
     //Bei 50: Ausgabe 0 und true, 50 ist eine gerade Zahl
     //bei 75: Ausgabe: 1 und false, 75 ist eine ungerade Zahl
 
@@ -103,9 +101,13 @@ namespace Aufgabe2 {
     let thomasmue: Student = new Student("Thomas", "Müller", 31, "München", 187187);
     let bastiansch: Student = new Student("Bastian", "Schweinsteiger", 35, "München", 361361);
     let oliverkah: Student = new Student("Oliver", "Kahn", 51, "München", 111222);
+    let studentenregister: Student [] = [thomasmue, bastiansch, oliverkah];
+    studentenregister.push(new Student("Markus", "Schleicher", 19, "Donaueschingen", 78083));
     thomasmue.showInfo2();
     bastiansch.showInfo2();
     oliverkah.showInfo2();
+    studentenregister[3].showInfo2();
+
 
 
 

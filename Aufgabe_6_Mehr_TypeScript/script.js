@@ -19,12 +19,10 @@ var Aufgabe2;
             if (safezahl == 0) {
                 console.log(0);
                 return (true);
-                break;
             }
             else if (safezahl == 1) {
                 console.log(1);
                 return (false);
-                break;
             }
             else {
                 safezahl = safezahl - 2;
@@ -32,7 +30,7 @@ var Aufgabe2;
         }
         return (null);
     }
-    console.log(isEven(50));
+    console.log(isEven(75));
     //Bei 50: Ausgabe 0 und true, 50 ist eine gerade Zahl
     //bei 75: Ausgabe: 1 und false, 75 ist eine ungerade Zahl
     //Bei -1 würde ich mich in einer Endlosschleife befinden, die beiden If Statments werden nie true werden.
@@ -79,9 +77,12 @@ var Aufgabe2;
     let thomasmue = new Student("Thomas", "Müller", 31, "München", 187187);
     let bastiansch = new Student("Bastian", "Schweinsteiger", 35, "München", 361361);
     let oliverkah = new Student("Oliver", "Kahn", 51, "München", 111222);
+    let studentenregister = [thomasmue, bastiansch, oliverkah];
+    studentenregister.push(new Student("Markus", "Schleicher", 19, "Donaueschingen", 78083));
     thomasmue.showInfo2();
     bastiansch.showInfo2();
     oliverkah.showInfo2();
+    studentenregister[3].showInfo2();
     //Nr 2 a)
     let arr = [5, 42, 17, 2018, -10, 60, -10010];
     //let arrBack: number[] = backwards(arr);
