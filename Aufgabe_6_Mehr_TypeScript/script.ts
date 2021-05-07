@@ -197,7 +197,7 @@ namespace Aufgabe2 {
     // Aufgabe 3
 
 
-    namespace Landschaft {
+    /*namespace Landschaft {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("myFirstCanvas");
         let context: CanvasRenderingContext2D = canvas.getContext("2d");
 
@@ -290,7 +290,7 @@ namespace Aufgabe2 {
         context.fillStyle = "green";
         context.arc(435, 200, 20, 0, Math.PI * 2);
         context.fill();
-    }
+    }*/
 
 
 

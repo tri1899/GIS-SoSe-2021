@@ -1,0 +1,37 @@
+body{
+    width: 1024px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    background-image: url("hintergrund.png"); 
+}
+
+.flexbox{
+    background: lightgray;
+}
+
+.flexbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    position: sticky;
+    top: 0;    
+}
+
+.flexelement{
+    background: orange;
+    color: black;
+    text-align: center;
+    width: 33%;
+    margin: 0 0 1% 0;
+    margin: 10px;
+    padding: 15px 0 15px 0;
+}
+
+.flexelement:hover {
+    opacity: 0.5;
+}
+
+.seiteninhalt {
+    text-align: center;
+}

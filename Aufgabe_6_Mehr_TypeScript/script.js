@@ -132,37 +132,52 @@ var Aufgabe2;
     let array2 = [0, 2, 8, 12, 6, 8, 7, 10, 12];
     console.log(split(array2, 1, 4));
     // Aufgabe 3
-    let Landschaft;
-    (function (Landschaft) {
-        let canvas = document.getElementById("myFirstCanvas");
-        let context = canvas.getContext("2d");
+    /*namespace Landschaft {
+        let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("myFirstCanvas");
+        let context: CanvasRenderingContext2D = canvas.getContext("2d");
+
+
+
         context.fillStyle = "green";
         context.fillRect(0, 0, 500, 400);
+
         context.fillStyle = "lightblue";
         context.fillRect(0, 0, 500, 220);
-        context.beginPath(); //Sonne
+
+        context.beginPath();    //Sonne
         context.fillStyle = "yellow";
         context.arc(500, 10, 40, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Wolke
+
+        context.beginPath();    //Wolke
         context.fillStyle = "white";
         context.arc(350, 75, 40, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Wolke
+
+
+        context.beginPath();    //Wolke
         context.fillStyle = "white";
         context.arc(370, 30, 30, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Wolke 
+
+
+        context.beginPath();    //Wolke
         context.fillStyle = "white";
         context.arc(400, 60, 40, 0, Math.PI * 2);
         context.fill();
+
+
         context.beginPath();
         context.fillStyle = "brown"; //Hausuntergeschoss
         context.fillRect(100, 140, 150, 110);
+
+
         context.beginPath();
         context.fillStyle = "black"; //Türe
         context.fillRect(140, 190, 40, 60);
-        context.beginPath(); //Dach
+
+
+        context.beginPath();    //Dach
         context.fillStyle = "black";
         context.moveTo(100, 140);
         context.lineTo(175, 70);
@@ -170,34 +185,47 @@ var Aufgabe2;
         context.closePath();
         context.fill();
         context.stroke();
+
         context.beginPath();
         context.fillStyle = "brown"; //Baumstamm
         context.fillRect(385, 200, 40, 120);
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(410, 200, 30, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(370, 200, 20, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(380, 170, 20, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(400, 165, 20, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(425, 170, 20, 0, Math.PI * 2);
         context.fill();
-        context.beginPath(); //Blätter 
+
+
+        context.beginPath();    //Blätter
         context.fillStyle = "green";
         context.arc(435, 200, 20, 0, Math.PI * 2);
         context.fill();
-    })(Landschaft || (Landschaft = {}));
+    }*/
     let canvas = document.getElementById("zweiteCanvas");
     let context = canvas.getContext("2d");
     // Aufgabe 3 b)
