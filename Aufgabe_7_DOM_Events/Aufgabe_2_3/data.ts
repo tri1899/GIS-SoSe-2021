@@ -1,32 +1,42 @@
 namespace Aufgabe2 {
 // Trikotwahl
+    export let trikotwahl: Trikot [];
+    
+    let erstestrikot: Trikot = {marke: "nike", farbe: "schwarz", bild: trikotbilder[0]};
+    
+    let zweitestrikot: Trikot = {marke: "adidas", farbe: "blau", bild: trikotbilder[1]};
+    
+    let drittestrikot: Trikot = {marke: "puma", farbe: "weiss", bild: trikotbilder[2]};
+    
+    trikotwahl = [erstestrikot, zweitestrikot, drittestrikot];
 
-    let erstestrikot: Trikot = new Trikot ("nike", "schwarz", "");
-    trikotwahl.push(erstestrikot);
 
-    let zweitestrikot: Trikot = new Trikot ("adidas", "blau", "");
-    trikotwahl.push(zweitestrikot);
+    export let hosenwahl: Hose [] = [];
 
-    let drittestrikot: Trikot = new Trikot ("puma", "weiß", "");
-    trikotwahl.push(drittestrikot);
+    let erstehose: Hose = {marke: "nike", farbe: "weiss", bild: ""};
+    
+    
+    let zweitehose: Hose = {marke: "adidas", farbe: "schwarz", bild: ""};
+    
 
-    let erstehose: Hose = new Hose ("nike", "weiß", "");
-    hosenwahl.push(erstehose);
+    let drittehose: Hose = {marke: "punma", farbe: "blau", bild: ""};
 
-    let zweitehose: Hose = new Hose ("adidas", "schhwarz", "");
-    hosenwahl.push(zweitehose);
+    hosenwahl = [erstehose, zweitehose, drittehose];
 
-    let drittehose: Hose = new Hose ("puma", "schwarz", "");
-    hosenwahl.push(drittehose);
 
-    let ersterstutzen: Stutzen = new Stutzen ("nike", "rot", "");
-    stutzenwahl.push(ersterstutzen);
+    export let stutzenwahl: Stutzen [] = [];
 
-    let zweiterstutzen: Stutzen = new Stutzen ("adidas", "gelb", "");
-    stutzenwahl.push(zweiterstutzen);
+    let ersterstutzen: Stutzen = {marke: "nike", farbe: "rot", bild: ""};
+    
 
-    let dritterstutzen: Stutzen = new Stutzen ("puma", "weiß", "");
-    stutzenwahl.push(dritterstutzen);
+    let zweiterstutzen: Stutzen = {marke: "adidas", farbe: "gruen", bild: ""};
+    
 
+    let dritterstutzen: Stutzen = {marke: "punma", farbe: "weiß", bild: ""};
+    
+    stutzenwahl = [ersterstutzen, zweiterstutzen, dritterstutzen];
+
+    console.log(trikotwahl[2]);
+    
     
 }

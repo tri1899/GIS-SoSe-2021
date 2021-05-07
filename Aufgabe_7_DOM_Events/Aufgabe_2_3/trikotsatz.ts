@@ -3,49 +3,38 @@
 
 namespace Aufgabe2 {
 
-    export class Klamotten {
+    let behaelter: HTMLElement = document.getElementById("behaelter");
+
+    export interface Trikotsatz {
+        trikot: Trikot;
+        hose: Hose;
+        stutzen: Stutzen;
+    }
+
+    export interface Trikot {
         marke: string;
         farbe: string;
-
-        constructor(_marke: string, _farbe: string) {
-            this.marke = _marke;
-            this.farbe = _farbe;
-        }
+        bild: string;
+    }
+    
+    export interface Hose {
+        marke: string;
+        farbe: string;
+        bild: string;
     }
 
-    export class Trikot extends Klamotten {
-        bildtrikot: string;
-        
-        constructor(_marke: string, _farbe: string, _bildtrikot: string) {
-            super(_marke, _farbe);
-            this.bildtrikot = _bildtrikot;
-        }
+    export interface Stutzen {
+        marke: string;
+        farbe: string;
+        bild: string;
     }
 
-    export class Hose extends Klamotten {
-        bildhose: string;
-
-        constructor(_marke: string, _farbe: string, _bildhose: string) {
-            super(_marke, _farbe);
-            this.bildhose = _bildhose;
-        }
-    }
-
-    export class Stutzen extends Klamotten {
-        bildstutzen: string;
-
-        constructor(_marke: string, _farbe: string, _bildstutzen: string) {
-            super(_marke, _farbe);
-            this.bildstutzen = _bildstutzen;
-        }
-
-    }
-
-
-    export let trikotwahl: Trikot [] = [];
-    export let hosenwahl: Hose [] = [];
-    export let stutzenwahl: Stutzen [] = [];
-
+    export let trikotbilder: string[] = ["bilder/trikot_nike_black_webp", "trikot_adidas_blau.webp", "trikot_puma_weiss.webp"];
+    for (let i: number = 0; i < trikotbilder.length; i++) {
+        let bild: HTMLImageElement = document.createElement("img");
+        bild.src = trikotbilder[i];
+        behaelter.appendChild(bild);
+    }  
 }
 
 
