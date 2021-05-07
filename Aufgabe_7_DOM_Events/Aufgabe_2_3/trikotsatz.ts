@@ -45,7 +45,7 @@ namespace Aufgabe2 {
     export let trikotwahl: Trikot [] = [];
     export let hosenwahl: Hose [] = [];
     export let stutzenwahl: Stutzen [] = [];
-    console.log(trikotwahl);
+
 }
 
 

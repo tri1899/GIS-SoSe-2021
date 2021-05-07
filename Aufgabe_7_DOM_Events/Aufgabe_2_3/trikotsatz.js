@@ -34,6 +34,5 @@ var Aufgabe2;
     Aufgabe2.trikotwahl = [];
     Aufgabe2.hosenwahl = [];
     Aufgabe2.stutzenwahl = [];
-    console.log(Aufgabe2.trikotwahl);
 })(Aufgabe2 || (Aufgabe2 = {}));
 //# sourceMappingURL=trikotsatz.js.map
