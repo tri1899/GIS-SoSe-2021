@@ -45,26 +45,7 @@ namespace Aufgabe3 {
     seitezuruecksetzen.addEventListener("click", seiterefreshen);
     
 
-
-// Aufgabe 2
-
-//Gedanke: Nutzer können ihr Fußballspieler nach Ihrer Wahl zusammenstellen. 4 große Kategorien: Trikot, Hose, Stutzen, Fußballschuhe, mit jeweils Auswahlmöglichkeiten
-
-    class Fußballspieler {
-        trikot: string;
-        hose: string;
-        stutzen: string;
-        fußballschuhe: string;
-
-        constructor(_trikot: string, _hose: string, _stutzen: string, _fußballschuhe: string) {
-            this.trikot = _trikot;
-            this.hose = _hose;
-            this.stutzen = _stutzen;
-            this.fußballschuhe = _fußballschuhe;
-        }
-    }
-
-    let basi: Fußballspieler = new Fußballspieler("blau", "rot", "gelb", "adidas");
-    console.log(basi);
-    
 }
+
+
+

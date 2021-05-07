@@ -32,17 +32,5 @@ var Aufgabe3;
     }
     rechteckdazugeben.addEventListener("click", rechteckhinzufuegen);
     seitezuruecksetzen.addEventListener("click", seiterefreshen);
-    // Aufgabe 2
-    //Gedanke: Nutzer können ihr Fußballspieler nach Ihrer Wahl zusammenstellen. 4 große Kategorien: Trikot, Hose, Stutzen, Fußballschuhe, mit jeweils Auswahlmöglichkeiten
-    class Fußballspieler {
-        constructor(_trikot, _hose, _stutzen, _fußballschuhe) {
-            this.trikot = _trikot;
-            this.hose = _hose;
-            this.stutzen = _stutzen;
-            this.fußballschuhe = _fußballschuhe;
-        }
-    }
-    let basi = new Fußballspieler("blau", "rot", "gelb", "adidas");
-    console.log(basi);
 })(Aufgabe3 || (Aufgabe3 = {}));
 //# sourceMappingURL=script.js.map
