@@ -10,10 +10,10 @@ namespace Aufgabe2 {
         //button für Auswahl
         let button: HTMLButtonElement = document.createElement("button");
         button.addEventListener("click", aufrufenDaten);
-        button.dataset.marke = _trikot.marke.toString();
-        button.innerText = "Marke: " + _trikot.marke;
+        button.dataset.marke = _trikot.marke;
+        button.innerText = "bestätigen";
         button.style.float = "right";
-        
+        button.classList.add("buttontrikot");
         div.appendChild(button);
         //bilder von den Trikots
         let bild: HTMLImageElement = document.createElement("img");
@@ -32,14 +32,13 @@ namespace Aufgabe2 {
         behaelter.appendChild(x);
     }
 
-    // Obejkt in der Console anzeigen
+    // Obejekt in der Console anzeigen
     function aufrufenDaten(_event: MouseEvent): void {
         let ziel: HTMLElement = <HTMLElement>_event.target;
         for (let i: number = 0; i < trikotwahl.length; i++) {
-            if (trikotwahl[i].marke.toString() == ziel.dataset.marke) {
+            if (trikotwahl[i].marke == ziel.dataset.marke) {
             console.log(trikotwahl[i]);
-            }
-            
+            }   
         }
     }
 }
