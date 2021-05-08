@@ -1,0 +1,18 @@
+body {
+    width: 1024px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    background-image: url("bilder/hintergrund.png"); 
+}
+
+h2 {
+   text-align: center;
+}
+
+.bildertrikot {
+    width: 1000px;
+}
+
+img {
+    margin: 0 auto;
+}

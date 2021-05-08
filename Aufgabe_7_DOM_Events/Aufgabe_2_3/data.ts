@@ -1,16 +1,15 @@
 namespace Aufgabe2 {
 // Trikotwahl
-    export let trikotwahl: Trikot [];
+    export let trikotwahl: Trikot [] = [];
     
-    let erstestrikot: Trikot = {marke: "nike", farbe: "schwarz", bild: trikotbilder[0]};
+    let erstestrikot: Trikot = {marke: "nike", farbe: "schwarz", bild: "bilder/trikot_nike_black.webp"};
+    trikotwahl.push(erstestrikot);
+    let zweitestrikot: Trikot = {marke: "adidas", farbe: "blau", bild: "bilder/trikot_adidas_blau.webp"};
+    trikotwahl.push(zweitestrikot);
+    let drittestrikot: Trikot = {marke: "puma", farbe: "weiss", bild: "bilder/trikot_puma_weiss.webp"};
+    trikotwahl.push(drittestrikot);
     
-    let zweitestrikot: Trikot = {marke: "adidas", farbe: "blau", bild: trikotbilder[1]};
-    
-    let drittestrikot: Trikot = {marke: "puma", farbe: "weiss", bild: trikotbilder[2]};
-    
-    trikotwahl = [erstestrikot, zweitestrikot, drittestrikot];
-
-
+    /*
     export let hosenwahl: Hose [] = [];
 
     let erstehose: Hose = {marke: "nike", farbe: "weiss", bild: ""};
@@ -37,6 +36,6 @@ namespace Aufgabe2 {
     stutzenwahl = [ersterstutzen, zweiterstutzen, dritterstutzen];
 
     console.log(trikotwahl[2]);
-    
+    */
     
 }
