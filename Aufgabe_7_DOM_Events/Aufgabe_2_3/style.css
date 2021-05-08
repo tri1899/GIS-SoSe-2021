@@ -6,13 +6,29 @@ body {
 }
 
 h2 {
-   text-align: center;
+    color: #111; 
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 30px; font-weight: 300; line-height: 32px; 
+    margin: 0 0 72px; 
+    text-align: center; 
 }
 
 .bildertrikot {
-    width: 1000px;
+    width: 500px;
 }
 
-img {
-    margin: 0 auto;
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
+
+button:hover {
+    opacity: 0.7;
+}
+
