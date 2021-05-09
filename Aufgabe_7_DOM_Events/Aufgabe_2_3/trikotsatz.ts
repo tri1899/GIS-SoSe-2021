@@ -34,9 +34,9 @@ namespace Aufgabe2 {
 
     // Obejekt in der Console anzeigen
     function aufrufenDaten(_event: MouseEvent): void {
-        let ziel: HTMLElement = <HTMLElement>_event.target;
+        let target: HTMLElement = <HTMLElement>_event.target;
         for (let i: number = 0; i < trikotwahl.length; i++) {
-            if (trikotwahl[i].marke == ziel.dataset.marke) {
+            if (trikotwahl[i].marke == target.dataset.marke) {
             console.log(trikotwahl[i]);
             }   
         }

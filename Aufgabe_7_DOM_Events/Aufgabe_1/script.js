@@ -2,7 +2,7 @@
 var Aufgabe3;
 (function (Aufgabe3) {
     //Aufgabe 1
-    let rechteckebehaelter = document.querySelector(".rechteckebehaelter");
+    let rechteckebehaelter = document.getElementById("rechteckebehaelter");
     let rechteckdazugeben = document.getElementById("neuesrechteck");
     let seitezuruecksetzen = document.getElementById("refresh");
     class Rechteck {

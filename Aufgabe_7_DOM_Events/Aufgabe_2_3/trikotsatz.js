@@ -31,9 +31,9 @@ var Aufgabe2;
     }
     // Obejekt in der Console anzeigen
     function aufrufenDaten(_event) {
-        let ziel = _event.target;
+        let target = _event.target;
         for (let i = 0; i < Aufgabe2.trikotwahl.length; i++) {
-            if (Aufgabe2.trikotwahl[i].marke == ziel.dataset.marke) {
+            if (Aufgabe2.trikotwahl[i].marke == target.dataset.marke) {
                 console.log(Aufgabe2.trikotwahl[i]);
             }
         }

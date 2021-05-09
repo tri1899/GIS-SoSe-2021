@@ -2,7 +2,7 @@ namespace Aufgabe3 {
 
     //Aufgabe 1
 
-    let rechteckebehaelter: HTMLElement = document.querySelector(".rechteckebehaelter");
+    let rechteckebehaelter: HTMLElement = document.getElementById("rechteckebehaelter");
     let rechteckdazugeben: HTMLElement = document.getElementById("neuesrechteck");
     let seitezuruecksetzen: HTMLElement = document.getElementById("refresh");
 
@@ -44,7 +44,7 @@ namespace Aufgabe3 {
     rechteckdazugeben.addEventListener("click", rechteckhinzufuegen);
     seitezuruecksetzen.addEventListener("click", seiterefreshen);
     
-
+    
 }
 
 
