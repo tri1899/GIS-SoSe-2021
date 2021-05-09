@@ -9,7 +9,7 @@ var Aufgabe2;
     Aufgabe2.trikotwahl.push(zweitestrikot);
     let drittestrikot = { marke: "puma", farbe: "weiss", bild: "bilder/trikot_puma_weiss.webp" };
     Aufgabe2.trikotwahl.push(drittestrikot);
-    /*
+    /* Für nächste Woche
     export let hosenwahl: Hose [] = [];
 
     let erstehose: Hose = {marke: "nike", farbe: "weiss", bild: ""};

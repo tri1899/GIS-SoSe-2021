@@ -9,7 +9,7 @@ namespace Aufgabe2 {
     let drittestrikot: Trikot = {marke: "puma", farbe: "weiss", bild: "bilder/trikot_puma_weiss.webp"};
     trikotwahl.push(drittestrikot);
     
-    /*
+    /* Für nächste Woche
     export let hosenwahl: Hose [] = [];
 
     let erstehose: Hose = {marke: "nike", farbe: "weiss", bild: ""};
