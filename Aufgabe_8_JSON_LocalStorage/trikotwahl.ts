@@ -16,7 +16,7 @@ namespace Aufgabe2_4 {
         //bilder von den Trikots
         let bild: HTMLImageElement = document.createElement("img");
         bild.src = _trikotsatz.bild;
-        bild.classList.add("bildertrikot");
+        bild.classList.add("bilder");
         div.appendChild(bild);
         let hr: HTMLHRElement = document.createElement("hr");
         div.appendChild(hr);
@@ -24,8 +24,8 @@ namespace Aufgabe2_4 {
 
         //Obejekt in der Console anzeigen
         function aufrufenDaten(_event: MouseEvent): void {
-            sessionStorage.setItem("bild", _trikotsatz.bild); //Bild wird gespeichert
             if (document.querySelector("title").getAttribute("id") == "Schritt1") {
+                sessionStorage.setItem("bildtrikot", _trikotsatz.bild); //Bild wird gespeichert
                 location.href = "hosenwahl.html"; //weiterleitung auf Hosenwahl
             } else if (document.querySelector("title").getAttribute("id") == "Schritt2") {
                 location.href = "stutzenwahl.html";
@@ -60,7 +60,36 @@ namespace Aufgabe2_4 {
 
     anzeigen(auswahlmöglichkeiten);
 
+    let hose: HTMLElement = document.getElementById("hose");
+    //let stutzen: HTMLElement = document.getElementById("stutzen");
 
+    if (document.querySelector("title").getAttribute("id") == "Praesentation") {
+        //Trikot
+        let divtrikot: HTMLDivElement = document.createElement("div");
+        divtrikot.style.textAlign = "center";
+        let bildtrikot: HTMLImageElement = document.createElement("img");
+        bildtrikot.src = sessionStorage.getItem("bildtrikot");
+        bildtrikot.classList.add("bilder");
+        divtrikot.appendChild(bildtrikot);
+        behaelter.appendChild(divtrikot);
+        //Hose
+        let divhose: HTMLDivElement = document.createElement("div");
+        divhose.style.textAlign = "center";
+        let bildhose: HTMLImageElement = document.createElement("img");
+        bildtrikot.src = sessionStorage.getItem("bildhose");
+        bildtrikot.classList.add("bilder");
+        divtrikot.appendChild(bildhose);
+        hose.appendChild(divhose);
+        //Stutzen
+        /*
+        let divstutzen: HTMLDivElement = document.createElement("div");
+        divtrikot.style.textAlign = "center";
+        let bildstutzen: HTMLImageElement = document.createElement("img");
+        bildtrikot.src = sessionStorage.getItem("bildstutzen");
+        bildtrikot.classList.add("bilder");
+        divtrikot.appendChild(bildstutzen);
+        stutzen.appendChild(divstutzen);*/
+    }
 }
 
 
