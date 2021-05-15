@@ -53,3 +53,9 @@ button:hover {
 .seiteninhalt {
     text-align: center;
 }
+
+.auswahl {
+    text-align: left;
+    margin: 5px;
+    width: 250px
+}

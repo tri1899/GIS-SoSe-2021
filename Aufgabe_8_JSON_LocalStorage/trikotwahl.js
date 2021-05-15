@@ -29,9 +29,11 @@ var Aufgabe2_4;
                 location.href = "hosenwahl.html"; //weiterleitung auf Hosenwahl
             }
             else if (document.querySelector("title").getAttribute("id") == "Schritt2") {
+                sessionStorage.setItem("bildhose", _trikotsatz.bild);
                 location.href = "stutzenwahl.html";
             }
             else if (document.querySelector("title").getAttribute("id") == "Schritt3") {
+                sessionStorage.setItem("bildstutzen", _trikotsatz.bild);
                 location.href = "endseite.html";
             }
         }
@@ -60,34 +62,45 @@ var Aufgabe2_4;
         return JSON.parse(Aufgabe2_4.trikotsatzJSON);
     }
     anzeigen(auswahlmöglichkeiten);
-    let hose = document.getElementById("hose");
-    //let stutzen: HTMLElement = document.getElementById("stutzen");
-    if (document.querySelector("title").getAttribute("id") == "Praesentation") {
-        //Trikot
+    let bisherigeauswahl = document.getElementById("bisherigeauswahl");
+    if (document.querySelector("title").getAttribute("id") == "Schritt2") {
         let divtrikot = document.createElement("div");
         divtrikot.style.textAlign = "center";
         let bildtrikot = document.createElement("img");
         bildtrikot.src = sessionStorage.getItem("bildtrikot");
-        bildtrikot.classList.add("bilder");
+        bildtrikot.classList.add("auswahl");
         divtrikot.appendChild(bildtrikot);
-        behaelter.appendChild(divtrikot);
-        //Hose
-        let divhose = document.createElement("div");
-        divhose.style.textAlign = "center";
+        bisherigeauswahl.appendChild(divtrikot);
+    }
+    else if (document.querySelector("title").getAttribute("id") == "Schritt3") {
+        let divtrikothose = document.createElement("div");
+        divtrikothose.style.textAlign = "center";
+        let bildtrikot2 = document.createElement("img");
+        bildtrikot2.src = sessionStorage.getItem("bildtrikot");
+        bildtrikot2.classList.add("auswahl");
         let bildhose = document.createElement("img");
-        bildtrikot.src = sessionStorage.getItem("bildhose");
-        bildtrikot.classList.add("bilder");
-        divtrikot.appendChild(bildhose);
-        hose.appendChild(divhose);
-        //Stutzen
-        /*
-        let divstutzen: HTMLDivElement = document.createElement("div");
-        divtrikot.style.textAlign = "center";
-        let bildstutzen: HTMLImageElement = document.createElement("img");
-        bildtrikot.src = sessionStorage.getItem("bildstutzen");
-        bildtrikot.classList.add("bilder");
-        divtrikot.appendChild(bildstutzen);
-        stutzen.appendChild(divstutzen);*/
+        bildhose.src = sessionStorage.getItem("bildhose");
+        bildhose.classList.add("auswahl");
+        divtrikothose.appendChild(bildtrikot2);
+        divtrikothose.appendChild(bildhose);
+        bisherigeauswahl.appendChild(divtrikothose);
+    }
+    else if (document.querySelector("title").getAttribute("id") == "Praesentation") {
+        let divtrikothosestutzen = document.createElement("div");
+        divtrikothosestutzen.style.textAlign = "center";
+        let bildtrikot3 = document.createElement("img");
+        bildtrikot3.src = sessionStorage.getItem("bildtrikot");
+        bildtrikot3.classList.add("bilder");
+        let bildhose2 = document.createElement("img");
+        bildhose2.src = sessionStorage.getItem("bildhose");
+        bildhose2.classList.add("bilder");
+        let stutzen = document.createElement("img");
+        stutzen.src = sessionStorage.getItem("bildstutzen");
+        stutzen.classList.add("bilder");
+        divtrikothosestutzen.appendChild(bildtrikot3);
+        divtrikothosestutzen.appendChild(bildhose2);
+        divtrikothosestutzen.appendChild(stutzen);
+        behaelter.appendChild(divtrikothosestutzen);
     }
 })(Aufgabe2_4 || (Aufgabe2_4 = {}));
 //# sourceMappingURL=trikotwahl.js.map
