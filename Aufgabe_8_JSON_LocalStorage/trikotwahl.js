@@ -25,14 +25,20 @@ var Aufgabe2_4;
         //Obejekt in der Console anzeigen
         function aufrufenDaten(_event) {
             if (document.querySelector("title").getAttribute("id") == "Schritt1") {
+                sessionStorage.setItem("trikotmarke", _trikotsatz.marke);
+                sessionStorage.setItem("trikotfarbe", _trikotsatz.farbe);
                 sessionStorage.setItem("bildtrikot", _trikotsatz.bild); //Bild wird gespeichert
                 location.href = "hosenwahl.html"; //weiterleitung auf Hosenwahl
             }
             else if (document.querySelector("title").getAttribute("id") == "Schritt2") {
+                sessionStorage.setItem("hosenmarke", _trikotsatz.marke);
+                sessionStorage.setItem("hosenfarbe", _trikotsatz.farbe);
                 sessionStorage.setItem("bildhose", _trikotsatz.bild);
                 location.href = "stutzenwahl.html";
             }
             else if (document.querySelector("title").getAttribute("id") == "Schritt3") {
+                sessionStorage.setItem("stutzenmarke", _trikotsatz.marke);
+                sessionStorage.setItem("stutzenfarbe", _trikotsatz.farbe);
                 sessionStorage.setItem("bildstutzen", _trikotsatz.bild);
                 location.href = "endseite.html";
             }
@@ -63,22 +69,31 @@ var Aufgabe2_4;
     }
     anzeigen(auswahlmöglichkeiten);
     let bisherigeauswahl = document.getElementById("bisherigeauswahl");
+    let endauswahl = document.getElementById("endauswahl");
     if (document.querySelector("title").getAttribute("id") == "Schritt2") {
+        //Bildtrikot
         let divtrikot = document.createElement("div");
         divtrikot.style.textAlign = "center";
         let bildtrikot = document.createElement("img");
+        console.log("Deine Auswahl:");
+        console.log("Trikot: " + "Marke: " + sessionStorage.getItem("trikotmarke") + " & " + "Farbe: " + sessionStorage.getItem("trikotfarbe"));
         bildtrikot.src = sessionStorage.getItem("bildtrikot");
         bildtrikot.classList.add("auswahl");
         divtrikot.appendChild(bildtrikot);
         bisherigeauswahl.appendChild(divtrikot);
     }
     else if (document.querySelector("title").getAttribute("id") == "Schritt3") {
+        //Bildtrikot
         let divtrikothose = document.createElement("div");
         divtrikothose.style.textAlign = "center";
         let bildtrikot2 = document.createElement("img");
+        console.log("Deine Auswahl:");
+        console.log("Trikot: " + "Marke: " + sessionStorage.getItem("trikotmarke") + " & " + "Farbe: " + sessionStorage.getItem("trikotfarbe"));
         bildtrikot2.src = sessionStorage.getItem("bildtrikot");
         bildtrikot2.classList.add("auswahl");
+        //Bildhose
         let bildhose = document.createElement("img");
+        console.log("Hose: " + "Marke: " + sessionStorage.getItem("hosenmarke") + " & " + "Farbe: " + sessionStorage.getItem("hosenfarbe"));
         bildhose.src = sessionStorage.getItem("bildhose");
         bildhose.classList.add("auswahl");
         divtrikothose.appendChild(bildtrikot2);
@@ -86,21 +101,28 @@ var Aufgabe2_4;
         bisherigeauswahl.appendChild(divtrikothose);
     }
     else if (document.querySelector("title").getAttribute("id") == "Praesentation") {
+        //Bildtrikot
         let divtrikothosestutzen = document.createElement("div");
         divtrikothosestutzen.style.textAlign = "center";
         let bildtrikot3 = document.createElement("img");
+        console.log("Deine Auswahl:");
+        console.log("Trikot: " + "Marke: " + sessionStorage.getItem("trikotmarke") + " & " + "Farbe: " + sessionStorage.getItem("trikotfarbe"));
         bildtrikot3.src = sessionStorage.getItem("bildtrikot");
-        bildtrikot3.classList.add("bilder");
+        bildtrikot3.classList.add("praesentation");
+        //Bildhose
         let bildhose2 = document.createElement("img");
+        console.log("Hose: " + "Marke: " + sessionStorage.getItem("hosenmarke") + " & " + "Farbe: " + sessionStorage.getItem("hosenfarbe"));
         bildhose2.src = sessionStorage.getItem("bildhose");
-        bildhose2.classList.add("bilder");
+        bildhose2.classList.add("praesentation");
+        //Bildhose
         let stutzen = document.createElement("img");
+        console.log("Stutzen: " + "Marke: " + sessionStorage.getItem("stutzenmarke") + " & " + "Farbe: " + sessionStorage.getItem("stutzenfarbe"));
         stutzen.src = sessionStorage.getItem("bildstutzen");
-        stutzen.classList.add("bilder");
+        stutzen.classList.add("praesentation");
         divtrikothosestutzen.appendChild(bildtrikot3);
         divtrikothosestutzen.appendChild(bildhose2);
         divtrikothosestutzen.appendChild(stutzen);
-        behaelter.appendChild(divtrikothosestutzen);
+        endauswahl.appendChild(divtrikothosestutzen);
     }
 })(Aufgabe2_4 || (Aufgabe2_4 = {}));
 //# sourceMappingURL=trikotwahl.js.map

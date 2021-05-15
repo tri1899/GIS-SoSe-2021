@@ -55,7 +55,11 @@ button:hover {
 }
 
 .auswahl {
-    text-align: left;
-    margin: 5px;
+    margin: 3%;
     width: 250px
+}
+
+.praesentation {
+    width: 250px;
+    margin: 1% 38%;
 }
