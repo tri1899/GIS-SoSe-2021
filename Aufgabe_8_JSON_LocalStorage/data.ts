@@ -15,8 +15,8 @@ namespace Aufgabe2_4 {
                 "bild": "bilder/trikot_adidas_blau.webp" 
             },
             {
-                "marke": "adidas",
-                "farbe": "blau",
+                "marke": "puma",
+                "farbe": "weiss",
                 "bild": "bilder/trikot_puma_weiss.webp"
             }
         ],
