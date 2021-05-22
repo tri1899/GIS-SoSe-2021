@@ -8,7 +8,7 @@ namespace Aufgabe2_5 {
         anzeigen(jsondaten);
     }
 
-    datenuebertragen("data.json");
+    datenuebertragen("https://tri1899.github.io/GIS-SoSe-2021/Aufgabe_9_Kommunikation/data.json");
 
     function Trikotsatz(_trikotsatz: Trikotsatzpart): HTMLElement {
         let div: HTMLDivElement = document.createElement("div");
