@@ -8,7 +8,7 @@ var Aufgabe2_5;
         let jsondaten = await antwort.json();
         anzeigen(jsondaten);
     }
-    datenuebertragen("https://github.com/tri1899/GIS-SoSe-2021/blob/main/Aufgabe_9_Kommunikation/data.json");
+    datenuebertragen("data.json");
     function Trikotsatz(_trikotsatz) {
         let div = document.createElement("div");
         div.style.textAlign = "center";
