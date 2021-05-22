@@ -2,12 +2,13 @@
 var Aufgabe2_5;
 (function (Aufgabe2_5) {
     let behaelter = document.getElementById("behaelter");
-    async function Daten(_url) {
+    async function datenuebertragen(_url) {
         let antwort = await fetch(_url);
-        console.log("Response", antwort);
-        let alledaten = await antwort.json();
-        anzeigen(alledaten);
+        console.log("Antwort", antwort);
+        let jsondaten = await antwort.json();
+        anzeigen(jsondaten);
     }
+    datenuebertragen("https://tri1899.github.io/GIS-SoSe-2021/Aufgabe_9_Kommunikation/data.json");
     function Trikotsatz(_trikotsatz) {
         let div = document.createElement("div");
         div.style.textAlign = "center";
