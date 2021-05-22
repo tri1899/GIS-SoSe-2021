@@ -63,3 +63,15 @@ button:hover {
     width: 250px;
     margin: 1% 38%;
 }
+
+.message {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}

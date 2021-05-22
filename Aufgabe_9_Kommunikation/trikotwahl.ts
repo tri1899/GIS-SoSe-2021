@@ -8,7 +8,7 @@ namespace Aufgabe2_5 {
         anzeigen(jsondaten);
     }
 
-    datenuebertragen("https://tri1899.github.io/GIS-SoSe-2021/Aufgabe_9_Kommunikation/data.json");
+    datenuebertragen("https://tri1899.github.io/GIS-SoSe-2021/Aufgabe_9_Kommunikation/data.json"); //Kann dauern :)
 
     function Trikotsatz(_trikotsatz: Trikotsatzpart): HTMLElement {
         let div: HTMLDivElement = document.createElement("div");
@@ -148,6 +148,22 @@ namespace Aufgabe2_5 {
         divtrikothosestutzen.appendChild(stutzen);
         endauswahl.appendChild(divtrikothosestutzen);
     }
+
+    async function serverausgabe (_url: RequestInfo): Promise<void> {
+        let query: URLSearchParams = new URLSearchParams(sessionStorage);
+        _url = _url + "?" + query.toString();
+        let antwort: Response = await fetch(_url);
+        let auslesen: string = await antwort.text();
+        let anheften: HTMLParagraphElement = <HTMLParagraphElement> document.getElementById("serverausgabe");
+        anheften.innerText = auslesen;
+
+        if (auslesen.match("message")) {
+            anheften.classList.add("message");
+        } else {
+            anheften.classList.add("error");
+        }
+    }
+    serverausgabe("https://gis-communication.herokuapp.com");
 }
 
 
