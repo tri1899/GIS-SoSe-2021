@@ -125,21 +125,23 @@ var Aufgabe2_5;
         divtrikothosestutzen.appendChild(bildhose2);
         divtrikothosestutzen.appendChild(stutzen);
         endauswahl.appendChild(divtrikothosestutzen);
-    }
-    async function serverausgabe(_url) {
-        let query = new URLSearchParams(sessionStorage);
-        _url = _url + "?" + query.toString();
-        let antwort = await fetch(_url);
-        let auslesen = await antwort.text();
-        let anheften = document.getElementById("serverausgabe");
-        anheften.innerText = auslesen;
-        if (auslesen.match("message")) {
-            anheften.classList.add("message");
+        async function serverausgabe(_url) {
+            let query = new URLSearchParams(sessionStorage);
+            _url = _url + "?" + query.toString();
+            let antwort = await fetch(_url);
+            let ausgabe = await antwort.json();
+            if (ausgabe.message != null) {
+                let ausgabeAnzeigen = document.getElementById("serverausgabe");
+                ausgabeAnzeigen.textContent = ausgabe.message;
+                ausgabeAnzeigen.classList.add("message");
+            }
+            else {
+                let ausgabeAnzeigen = document.getElementById("serverausgabe");
+                ausgabeAnzeigen.textContent = ausgabe.error;
+                ausgabeAnzeigen.classList.add("error");
+            }
         }
-        else {
-            anheften.classList.add("error");
-        }
+        serverausgabe("https://gis-communication.herokuapp.com");
     }
-    serverausgabe("https://gis-communication.herokuapp.com");
 })(Aufgabe2_5 || (Aufgabe2_5 = {}));
 //# sourceMappingURL=trikotwahl.js.map

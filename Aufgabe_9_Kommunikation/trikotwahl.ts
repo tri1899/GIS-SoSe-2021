@@ -147,24 +147,30 @@ namespace Aufgabe2_5 {
         divtrikothosestutzen.appendChild(bildhose2);
         divtrikothosestutzen.appendChild(stutzen);
         endauswahl.appendChild(divtrikothosestutzen);
-    }
 
-    async function serverausgabe (_url: RequestInfo): Promise<void> {
-        let query: URLSearchParams = new URLSearchParams(sessionStorage);
-        _url = _url + "?" + query.toString();
-        let antwort: Response = await fetch(_url);
-        let auslesen: string = await antwort.text();
-        let anheften: HTMLParagraphElement = <HTMLParagraphElement> document.getElementById("serverausgabe");
-        anheften.innerText = auslesen;
 
-        if (auslesen.match("message")) {
-            anheften.classList.add("message");
-        } else {
-            anheften.classList.add("error");
+        async function serverausgabe(_url: RequestInfo): Promise<void> {
+            let query: URLSearchParams = new URLSearchParams(sessionStorage);
+            _url = _url + "?" + query.toString();
+            let antwort: Response = await fetch(_url);
+
+            let ausgabe: any = await antwort.json();
+            if (ausgabe.message != null) {
+                let ausgabeAnzeigen: HTMLParagraphElement = <HTMLDivElement>document.getElementById("serverausgabe");
+                ausgabeAnzeigen.textContent = ausgabe.message;
+                ausgabeAnzeigen.classList.add("message");
+            }
+            else {
+                let ausgabeAnzeigen: HTMLParagraphElement = <HTMLDivElement>document.getElementById("serverausgabe");
+                ausgabeAnzeigen.textContent = ausgabe.error;
+                ausgabeAnzeigen.classList.add("error");
+            }
+
         }
+        serverausgabe("https://gis-communication.herokuapp.com");
     }
-    serverausgabe("https://gis-communication.herokuapp.com");
 }
+
 
 
 
