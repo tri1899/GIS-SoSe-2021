@@ -156,14 +156,14 @@ namespace Aufgabe2_5 {
 
             let ausgabe: any = await antwort.json();
             if (ausgabe.message != null) {
-                let ausgabeAnzeigen: HTMLParagraphElement = <HTMLDivElement>document.getElementById("serverausgabe");
-                ausgabeAnzeigen.textContent = ausgabe.message;
-                ausgabeAnzeigen.classList.add("message");
+                let messageanzeigen: HTMLParagraphElement = <HTMLDivElement>document.getElementById("serverausgabe");
+                messageanzeigen.textContent = ausgabe.message;
+                messageanzeigen.classList.add("message");
             }
             else {
-                let ausgabeAnzeigen: HTMLParagraphElement = <HTMLDivElement>document.getElementById("serverausgabe");
-                ausgabeAnzeigen.textContent = ausgabe.error;
-                ausgabeAnzeigen.classList.add("error");
+                let erroranzeigen: HTMLParagraphElement = <HTMLDivElement>document.getElementById("serverausgabe");
+                erroranzeigen.textContent = ausgabe.error;
+                erroranzeigen.classList.add("error");
             }
 
         }

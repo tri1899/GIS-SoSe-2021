@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@types/node": "^15.6.1"
+  },
+  "name": "gis-sose-2021",
+  "description": "Hallo mein Name ist Tristan Schwörer. 2.Semester OMB SoSe",
+  "version": "0.0.1",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tri1899/GIS-SoSe-2021.git"
+  },
+  "author": "Tristan Schwörer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tri1899/GIS-SoSe-2021/issues"
+  },
+  "homepage": "https://github.com/tri1899/GIS-SoSe-2021#readme"
+}

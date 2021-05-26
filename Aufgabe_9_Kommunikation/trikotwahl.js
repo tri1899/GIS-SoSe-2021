@@ -131,14 +131,14 @@ var Aufgabe2_5;
             let antwort = await fetch(_url);
             let ausgabe = await antwort.json();
             if (ausgabe.message != null) {
-                let ausgabeAnzeigen = document.getElementById("serverausgabe");
-                ausgabeAnzeigen.textContent = ausgabe.message;
-                ausgabeAnzeigen.classList.add("message");
+                let messageanzeigen = document.getElementById("serverausgabe");
+                messageanzeigen.textContent = ausgabe.message;
+                messageanzeigen.classList.add("message");
             }
             else {
-                let ausgabeAnzeigen = document.getElementById("serverausgabe");
-                ausgabeAnzeigen.textContent = ausgabe.error;
-                ausgabeAnzeigen.classList.add("error");
+                let erroranzeigen = document.getElementById("serverausgabe");
+                erroranzeigen.textContent = ausgabe.error;
+                erroranzeigen.classList.add("error");
             }
         }
         serverausgabe("https://gis-communication.herokuapp.com");
