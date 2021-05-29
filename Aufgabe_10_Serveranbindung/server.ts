@@ -24,6 +24,5 @@ export namespace P_3_1Server {
         _response.end();
 
         console.log(_request.url);
-        
     }
 }
