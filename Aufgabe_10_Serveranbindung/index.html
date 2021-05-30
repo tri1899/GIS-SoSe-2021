@@ -12,9 +12,9 @@
 
 <body>
     <form method="POST">
-        <!--POST statt GET um die Daten nicht als Klartext in der URL zu haben-->
-
-        <h1>Kontaktdaten</h1>
+        <!-- Ich benutze POST, da ich nicht will das der Text in der URL erscheint-->
+        
+        <h1>Kontaktfeld</h1>
 
         <label for="vname">Vorname:</label> <br>
         <input type="text" name="vname" id="vname"><br>
@@ -25,10 +25,10 @@
         <label for="telefon">Telefon:</label> <br>
         <input type="text" name="telefon" id="Telefon"><br>
 
-        <label for="adresse">Adresse:</label> <br>
-        <input type="text" name="adresse" id="adresse"><br>
+        <label for="subject">Nachricht</label>
+        <textarea id="subject" name="subject" placeholder="schreibe etwas..." style="height:200px"></textarea>       
 
-        <button type="button" id="button">Absenden</button>
+        <button type="button" id="button">abschicken</button>
 
     </form>
 
