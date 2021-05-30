@@ -6,23 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
-    <script src="script.js" defer></script>
-    <title>Kontaktformular</title>
+    <script src="index.js" defer></script>
+    <title>Kontaktdaten</title>
 </head>
 
 <body>
-    <h3>Kontaktfeld:</h3>
-    <form action="https://gis-example.herokuapp.com" method="GET">
-        <label for="fname">Vorname</label>
-        <input type="text" id="fname" name="firstname" placeholder="Dein Vorname...">
-        <label for="lname">Nachname</label>
-        <input type="text" id="lname" name="lastname" placeholder="Dein Nachname...">
-        <label for="subject">Nachricht</label>
-        <textarea id="subject" name="subject" placeholder="schreibe etwas..." style="height:200px"></textarea>
-        <button id="button">abschicken</button>
+    <form method="POST">
+        <!--POST statt GET um die Daten nicht als Klartext in der URL zu haben-->
+
+        <h1>Kontaktdaten</h1>
+
+        <label for="vname">Vorname:</label> <br>
+        <input type="text" name="vname" id="vname"><br>
+
+        <label for="nname">Nachname:</label> <br>
+        <input type="text" name="nname" id="nname"><br>
+
+        <label for="telefon">Telefon:</label> <br>
+        <input type="text" name="telefon" id="Telefon"><br>
+
+        <label for="adresse">Adresse:</label> <br>
+        <input type="text" name="adresse" id="adresse"><br>
+
+        <button type="submit" id="button">Absenden</button>
+
     </form>
-    <br>
-    <br>
+
 </body>
 
 </html>
