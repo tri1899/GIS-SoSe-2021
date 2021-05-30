@@ -6,9 +6,8 @@ var P_3_1Server;
         let formData = new FormData(document.forms[0]);
         console.log(":" + formData.get("name")); //Konsolenausgabe
         for (let entry of formData) {
-            console.log(entry);
             console.log("name: " + entry[0]); ///Konsolenausgabe Eingang Stelle 0
-            console.log("name: " + entry[1]); //Konsolenausgabe
+            console.log("value: " + entry[1]); //Konsolenausgabe
         }
         let query = new URLSearchParams(formData);
         let _url = "https://tri1899gissose2021.herokuapp.com/"; //Verknüpfung mit der herokuapp
