@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.P_3_1Server = void 0;
+exports.P_3_1 = void 0;
 const Http = require("http");
-var P_3_1Server;
-(function (P_3_1Server) {
+var P_3_1;
+(function (P_3_1) {
     console.log("Starting server");
     let port = Number(process.env.PORT);
     if (!port)
@@ -23,5 +23,5 @@ var P_3_1Server;
         _response.end();
         console.log(_request.url);
     }
-})(P_3_1Server = exports.P_3_1Server || (exports.P_3_1Server = {}));
+})(P_3_1 = exports.P_3_1 || (exports.P_3_1 = {}));
 //# sourceMappingURL=server.js.map

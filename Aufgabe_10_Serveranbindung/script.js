@@ -1,9 +1,9 @@
 "use strict";
-var P_3_1Server;
-(function (P_3_1Server) {
+var P_3_1;
+(function (P_3_1) {
     //Teilaufgabe 2
     async function sendData() {
-        let formData = new FormData(document.forms[0]);
+        let formData = new FormData(document.forms[0]); //das erste Formular des Dokuments wird ausgewertet
         console.log(":" + formData.get("name")); //Konsolenausgabe
         for (let entry of formData) {
             console.log("name: " + entry[0]); ///Konsolenausgabe Eingang Stelle 0
@@ -21,5 +21,5 @@ var P_3_1Server;
     }
     let button = document.getElementById("button");
     button.addEventListener("click", sendData); //Button um Funktion aufzurufen
-})(P_3_1Server || (P_3_1Server = {})); //Ende namespace
+})(P_3_1 || (P_3_1 = {})); //Ende namespace
 //# sourceMappingURL=script.js.map

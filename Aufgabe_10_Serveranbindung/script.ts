@@ -1,7 +1,8 @@
-namespace P_3_1Server {
+namespace P_3_1 {
     //Teilaufgabe 2
-    async function sendData(): Promise<void> { //async Funktion
-        let formData: FormData = new FormData (document.forms[0]);
+    async function sendData(): Promise<void> { 
+        let formData: FormData = new FormData (document.forms[0]); //das erste Formular des Dokuments wird ausgewertet
+
         console.log(":" + formData.get ("name")); //Konsolenausgabe
         for (let entry of formData) {
             console.log("name: " + entry[0]); ///Konsolenausgabe Eingang Stelle 0
