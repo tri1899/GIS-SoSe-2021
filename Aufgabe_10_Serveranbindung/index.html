@@ -1,6 +1,6 @@
+  
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,28 +9,27 @@
     <script src="script.js" defer></script>
     <title>Kontaktdaten</title>
 </head>
-
 <body>
-    <form method="POST">
-        <!-- Ich benutze POST, da ich nicht will das der Text in der URL erscheint-->
-        <h1>Kontaktfeld</h1>
+    <form>  
+        
+        <h1>Kontaktdaten</h1>
+        <h2>Teilaufgabe 1</h2>
 
-        <label for="vname">Vorname:</label> <br>
-        <input type="text" name="vname" id="vname"><br>
+        <label for="vorname">Vorname:</label> <br>
+        <input type="text" name="vorname" id="vorname"><br>
 
-        <label for="nname">Nachname:</label> <br>
-        <input type="text" name="nname" id="nname"><br>
+        <label for="nachname">Nachname:</label> <br>
+        <input type="text" name="nachname" id="nachname"><br>
 
-        <label for="telefon">Telefon:</label> <br>
-        <input type="text" name="telefon" id="Telefon"><br>
+        <label for="adresse">Adresse:</label> <br>
+        <input type="text" name="adresse" id="adresse"><br>
 
-        <label for="subject">Nachricht</label>
-        <textarea id="subject" name="subject" placeholder="schreibe etwas..." style="height:200px"></textarea>       
+        <button type="button" id="button">Absenden</button>
 
-        <button type="submit" id="button">abschicken</button>
+        <p> Ihre Eingaben</p>
+        <p id="serverausgabe"></p>
 
     </form>
-
+    
 </body>
-
 </html>
