@@ -1,43 +1,45 @@
 import * as Http from "http";
 import * as Url from "url";
 
-export namespace P_3_2 {
+export namespace Aufgabe3_2 {
     
-    console.log("Starting server"); //Konsolenausgabe
-    let port: number = Number(process.env.PORT);  //Port Variable wird angelegt, Port = Hafen/Ladeklappe, Güter werden empfangen und gesendet
-    if (!port) //Wenn Port noch keinen Wert hat
-        port = 8100; //Wert 8100
+    console.log("Starting server");
+    let port: number = Number(process.env.PORT);
+    if (!port)
+        port = 8100;
 
-    let server: Http.Server = Http.createServer(); //ein HTTP Server wird erschaffen und in eine Variable abgespeichert
-    server.addListener("request", handleRequest); //Event wird angelegt Bei einer Anfrgae wird Funktion handleRequest() aufgerufen
-    server.addListener("listening", handleListen); //Event wird angelegt: Warten auf ein Evemt --> Funktion handle listen() aufgerufen
-    server.listen(port); //Server regiert und hört auf Port (er wird gestartet)
+    let server: Http.Server = Http.createServer();
+    server.addListener("request", handleRequest);
+    server.addListener("listening", handleListen);
+    server.listen(port);
 
-    function handleListen(): void { //Funktion Listening + Konsolenausgabe
+    function handleListen(): void {
         console.log("Listening");
     }
 
+    function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
+        console.log("I hear voices!");
 
-    function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void { //Funktion Anfrage mit 2 Parametern 
-        console.log("I hear voices!"); //Konsolenausgabe
-        _response.setHeader("content-type", "text/html; charset=utf-8"); //Enthält HTML Elemente
-        _response.setHeader("Access-Control-Allow-Origin", "*"); //Zugriffserlaubnis
-        _response.write(_request.url); //URl von der Anfrage, wird auf der Seite angezeigt
+        _response.setHeader("content-type", "text/html; charset=utf-8");
+        _response.setHeader("Access-Control-Allow-Origin", "*");
+
 
         if (_request.url) {
-            let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //Die in der Request erhaltenen URL wird in einassoziatives Array geparsed/umformartiert.
+            let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);     //Die in der Request enthaltene URL wird in ein assoziatives Array geparsed/umformatiert
             if (url.pathname == "/html") {
                 for (let key in url.query) {
-                    _response.write(key + ":" + url.query[key]);
+                    _response.write(key + ":" + url.query[key] + "<br>");
                 }
             }
-             else if (url.pathname == "/json") {
-                let jsonobjekt: string = JSON.stringify(url.query);
-                console.log(jsonobjekt);
-                _response.write(jsonobjekt);
-                
+            else if (url.pathname == "/json") {
+                let jsonString: string = JSON.stringify(url.query);
+                console.log(jsonString);
+                _response.write(jsonString);
             }
         }
-        _response.end(); //Antwort geschrieben & schick es weg!
+
+        //_response.write(_request.url);
+        _response.end();
     }
+
 }
