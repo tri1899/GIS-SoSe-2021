@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="script.js" defer></script>
+    <title>Kontaktdaten</title>
+</head>
+
+<body>
+    <form>
+        <h1>Kontaktieren Sie uns:</h1>
+
+        <label for="vorname">Vorname:</label> <br>
+        <input type="text" name="vorname" id="vorname"><br>
+
+        <label for="nachname">Nachname:</label> <br>
+        <input type="text" name="nachname" id="nachname"><br>
+
+        <label for="adresse">Adresse:</label> <br>
+        <input type="text" name="adresse" id="adresse"><br>
+
+        <label for="subject">Nachricht</label>
+        <textarea id="subject" name="subject" placeholder="schreibe etwas..." style="height:200px"></textarea>
+
+        <button type="button" id="button">Absenden</button>
+
+        <p id="serverausgabe"></p>
+
+    </form>
+
+</body>
+
+</html>
