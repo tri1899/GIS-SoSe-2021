@@ -28,7 +28,7 @@ export namespace P_3_2 {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //Die in der Request erhaltenen URL wird in einassoziatives Array geparsed/umformartiert.
             if (url.pathname == "/html") {
                 for (let key in url.query) {
-                    _response.write(key + ":" + url.query[key] + "<br>");
+                    _response.write(key + ":" + url.query[key] + "<br/>");
                 }
             }
              else if (url.pathname == "/json") {
