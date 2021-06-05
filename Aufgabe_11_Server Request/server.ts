@@ -1,6 +1,8 @@
 import * as Http from "http";
+import * as Url from "url";
 
 export namespace P_3_2 {
+    
     console.log("Starting server"); //Konsolenausgabe
     let port: number = Number(process.env.PORT);  //Port Variable wird angelegt, Port = Hafen/Ladeklappe, Güter werden empfangen und gesendet
     if (!port) //Wenn Port noch keinen Wert hat
@@ -21,8 +23,22 @@ export namespace P_3_2 {
         _response.setHeader("content-type", "text/html; charset=utf-8"); //Enthält HTML Elemente
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Zugriffserlaubnis
         _response.write(_request.url); //URl von der Anfrage, wird auf der Seite angezeigt
-        _response.end(); //Antwort geschrieben & schick es weg!
 
+        if (_request.url) {
+            let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //Die in der Request erhaltenen URL wird in einassoziatives Array geparsed/umformartiert.
+            if (url.pathname == "/html") {
+                for (let key in url.query) {
+                    _response.write(key + ":" + url.query[key] + "<br/>");
+                }
+            }
+             else if (url.pathname == "/json") {
+                let jsonobjekt: string = JSON.stringify(url.query);
+                console.log(jsonobjekt);
+                _response.write(jsonobjekt);
+                
+            }
+        }
+        _response.end(); //Antwort geschrieben & schick es weg!
         console.log(_request.url); //Konsolenausgabe
     }
 }
