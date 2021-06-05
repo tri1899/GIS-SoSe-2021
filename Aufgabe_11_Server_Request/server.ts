@@ -39,6 +39,5 @@ export namespace P_3_2 {
             }
         }
         _response.end(); //Antwort geschrieben & schick es weg!
-        console.log(_request.url); //Konsolenausgabe
     }
 }
