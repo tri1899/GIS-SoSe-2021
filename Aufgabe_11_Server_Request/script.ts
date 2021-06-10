@@ -17,7 +17,7 @@ namespace Aufgabe3_2 {
 
         let formData: FormData = new FormData(document.forms[0]); //das erste Formular des Dokuments wird ausgewertet
 
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/html";
+        let url: string = "https://tri1899gissose2021.herokuapp.com/html";
 
         let query: URLSearchParams = new URLSearchParams(<any>formData); //Daten liegen vor (von dem Formular) ich kann den String nun aus einem Form Data Objekt generieren
         url = url + "?" + query.toString(); //ich wandele meine formDaten in ein String und hänge diese an die URL
