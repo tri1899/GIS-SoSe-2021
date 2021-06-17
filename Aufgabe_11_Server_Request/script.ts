@@ -43,5 +43,4 @@ namespace Aufgabe3_2 {
         console.log(antwort);
         
     }   
-
 }
