@@ -22,15 +22,17 @@ export namespace Aufgabe3_4 {
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
 
         await mongoClient.connect();
+        retrieveStudents();
 
-        let students: Mongo.Collection = mongoClient.db("Database").collection("Studentslist");
-        let s: Student = { name: "Benz", alter: 73, Schule: "HH" };
-        students.insertOne(s);
-        let cursor: Mongo.Cursor = students.find();
 
-        let result: Student[] = await cursor.toArray();
-        console.log(result);
-        
+        async function retrieveStudents(): Promise<void> {
+            let students: Mongo.Collection = mongoClient.db("Database").collection("Studentslist");
+
+            let cursor: Mongo.Cursor = students.find();
+
+            let result: Student[] = await cursor.toArray();
+            console.log(result);
+        }
     }
 
     interface Student {
@@ -52,22 +54,14 @@ export namespace Aufgabe3_4 {
         _response.setHeader("Access-Control-Allow-Origin", "*");
 
 
-        /*if (_request.url) {
+        if (_request.url) {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);     //Die in der Request enthaltene URL wird in ein assoziatives Array geparsed/umformatiert
-            if (url.pathname == "/html") {
-                for (let key in url.query) {
-                    _response.write(key + ":" + url.query[key] + "<br>");
-                }
-            }
-            else if (url.pathname == "/json") {
-                let jsonString: string = JSON.stringify(url.query);
-                console.log(jsonString);
-                _response.write(jsonString);
-            }
-        }*/
-
+            let jsonString: string = JSON.stringify(url.query);
+            console.log(jsonString);
+            _response.write(jsonString);
+        }
         //_response.write(_request.url);
         _response.end();
     }
-
 }
+
