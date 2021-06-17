@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Aufgabe3_4 = void 0;
 var Aufgabe3_4;
 (function (Aufgabe3_4) {
     let buttonabschicken = document.getElementById("buttonabschicken");
@@ -17,5 +15,5 @@ var Aufgabe3_4;
         let antwort = await response.json(); //auf die Antwort warten
         serverausgabe.innerHTML = JSON.stringify(antwort);
     }
-})(Aufgabe3_4 = exports.Aufgabe3_4 || (exports.Aufgabe3_4 = {}));
+})(Aufgabe3_4 || (Aufgabe3_4 = {}));
 //# sourceMappingURL=script.js.map

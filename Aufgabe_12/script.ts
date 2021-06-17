@@ -1,4 +1,4 @@
-export namespace Aufgabe3_4 {
+namespace Aufgabe3_4 {
 
     let buttonabschicken: HTMLButtonElement = <HTMLButtonElement>document.getElementById("buttonabschicken");
     buttonabschicken.addEventListener("click", Datenabschicken); //Button um Funktion aufzurufen
