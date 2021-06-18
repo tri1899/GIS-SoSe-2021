@@ -47,6 +47,7 @@ export namespace Aufgabe3_4 {
         _response.end(); 
     }
 
+    // Daten in die Datenbank schreiben
     async function datenspeichern(_url: string, _student: Student): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
@@ -58,7 +59,7 @@ export namespace Aufgabe3_4 {
         return antwort;
     }
 
-
+    // Meine Studiliste anzeigen lassen
     async function studilisteauslesen(_url: string): Promise<Student[]> { 
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);

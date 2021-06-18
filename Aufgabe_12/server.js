@@ -38,6 +38,7 @@ var Aufgabe3_4;
         }
         _response.end();
     }
+    // Daten in die Datenbank schreiben
     async function datenspeichern(_url, _student) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
@@ -47,6 +48,7 @@ var Aufgabe3_4;
         let antwort = "Student wurde gespeichert!";
         return antwort;
     }
+    // Meine Studiliste anzeigen lassen
     async function studilisteauslesen(_url) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
