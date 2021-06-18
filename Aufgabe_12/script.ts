@@ -40,7 +40,7 @@ namespace Aufgabe3_4 {
 
         let ausgabe: string = await antwort.text();
 
-        rueckgabe.innerHTML = ausgabe; 
+        rueckgabe.innerHTML = ausgabe;
     }
 }
 
