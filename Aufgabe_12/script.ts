@@ -6,14 +6,17 @@ namespace Aufgabe3_4 {
     //Daten abschicken um in MongoDB zu speichern
     async function datenAbschicken(): Promise<void> { //async Funktion um Daten anzuschicken
         let formData: FormData = new FormData (document.forms[0]); //generiert FormData Ohjekt aus <form> in das Dokument
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com";
-        url += "/datenVerschicken"; // Anhängen mit einem / daher oben keiner notwenig
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenVerschicken";
 
         let  query: URLSearchParams = new URLSearchParams(<any> formData);
-        url = url + "?" + query.toString(); //Url in String umwandeln
+
+        url = url + "?" + query.toString(); 
+
         let antwort: Response = await fetch (url);
+
         let ausgabe: string = await antwort.text();
-        console.log(ausgabe); //string in Konsole ausgeben
+        
+        console.log(ausgabe); 
           
     }
 
@@ -25,9 +28,7 @@ namespace Aufgabe3_4 {
     //Funktion um Daten auf der Seite anzuzeigen
     async function datenAnzeigen(): Promise <void> { 
         let formData: FormData = new FormData (document.forms[0]);
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com"; 
-
-        url += "/datenAusgabe"; 
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenAusgabe"; 
 
         let  query: URLSearchParams = new URLSearchParams(<any> formData);
         url = url + "?" + query.toString(); //Url in String umwandeln

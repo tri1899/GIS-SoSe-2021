@@ -6,13 +6,12 @@ var Aufgabe3_4;
     //Daten abschicken um in MongoDB zu speichern
     async function datenAbschicken() {
         let formData = new FormData(document.forms[0]); //generiert FormData Ohjekt aus <form> in das Dokument
-        let url = "https://tri1899gissose2021.herokuapp.com";
-        url += "/datenVerschicken"; // Anhängen mit einem / daher oben keiner notwenig
+        let url = "https://tri1899gissose2021.herokuapp.com/datenVerschicken";
         let query = new URLSearchParams(formData);
-        url = url + "?" + query.toString(); //Url in String umwandeln
+        url = url + "?" + query.toString();
         let antwort = await fetch(url);
         let ausgabe = await antwort.text();
-        console.log(ausgabe); //string in Konsole ausgeben
+        console.log(ausgabe);
     }
     let buttonAusgabe = document.getElementById("buttonanzeigen");
     buttonAusgabe.addEventListener("click", datenAnzeigen);
@@ -20,8 +19,7 @@ var Aufgabe3_4;
     //Funktion um Daten auf der Seite anzuzeigen
     async function datenAnzeigen() {
         let formData = new FormData(document.forms[0]);
-        let url = "https://tri1899gissose2021.herokuapp.com";
-        url += "/datenAusgabe";
+        let url = "https://tri1899gissose2021.herokuapp.com/datenAusgabe";
         let query = new URLSearchParams(formData);
         url = url + "?" + query.toString(); //Url in String umwandeln
         let antwort = await fetch(url);

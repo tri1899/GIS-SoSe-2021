@@ -4,70 +4,72 @@ import * as Mongo from "mongodb";
 
 export namespace Aufgabe3_4 {
 
+    let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-    let urlDB: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
+    //1. Server starten
     let port: number = Number(process.env.PORT);
     if (!port)
         port = 8100;
 
-    startServer(port);
+    Serverstarten(port);
 
 
-    function startServer(_port: number | string): void {
-        let server: Http.Server = Http.createServer(); //erstellt Server
-        console.log("Server gestartet");
+    function Serverstarten(_port: number | string): void {
+        let server: Http.Server = Http.createServer(); 
+        console.log("Starting Server!");
         server.listen(_port);
         server.addListener("request", handleRequest);
-
     }
 
+
+    //2. handle Request
     async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
-        console.log("Daten angekommen"); //Überprüfung ob Daten angekommen sind
-        _response.setHeader("content-type", "text/html; charset=utf-8"); //Eigenschaften von HTML
-        _response.setHeader("Access-Control-Allow-Origin", "*"); //Zugriffserlaubnis: * alle dürfen darauf zugreifen
+        _response.setHeader("content-type", "text/html; charset=utf-8"); 
+        _response.setHeader("Access-Control-Allow-Origin", "*"); 
 
         if (_request.url) {
-            let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //umwandlung query in assoziatives Array
-            let pathname: string = <string>url.pathname; //pathname in string speichern
-            let eingabe: Eingabe = { vorname: url.query.vorname + "", nachname: url.query.nachname + "", adresse: url.query.feedback + "" };
-
-            if (pathname == "/datenVerschicken") { //wenn ein man Daten verschicken möchte
-                let daten: string = await abspeichern(urlDB, eingabe); //Funktion abspeichern aufrufen
-                _response.write(daten); //Antwort zurückgeben
+            let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //Die in der Request enthaltene URL wird in ein assoziatives Array geparsed/umformatiert
+            let jsonstring: string = JSON.stringify(url.query);
+            console.log(jsonstring);
+            
+            if (url.pathname == "/datenVerschicken") { 
+                let student: Student = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await abspeichern(mongoUrl, student); 
+                _response.write(antwortdatenbank); //Antwort zurückgeben
             }
 
-            else if (pathname == "/datenAusgabe") {
-                let antwort: Eingabe[] = await dbAuslesen(urlDB);
-                _response.write(JSON.stringify(antwort)); //wenn Daten abgeschickt sind und in DB speichern
+            else if (url.pathname == "/datenAusgabe") {
+                let antwort: Student[] = await dbAuslesen(mongoUrl);
+                _response.write(JSON.stringify(antwort)); 
             }
         }
-        _response.end(); //Antwort fertig und zurückgeschickt -->beendet
-    } //Ende Funktion handleRequest
+        _response.end(); 
+    }
 
-    async function abspeichern(_url: string, _eingabe: Eingabe): Promise<string> {
+    async function abspeichern(_url: string, _student: Student): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let infos: Mongo.Collection = mongoClient.db("Database").collection("Studentslist"); //eigene neue Collection aufrufen
-        infos.insertOne(_eingabe); //eingegebene Daten in DB spreichern
-        let antwort: string = "Eingespreichert";
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Database").collection("Studentslist");
+        meinedatenbank.insertOne(_student);
+        let antwort: string = "Student wurde gespeichert!";
         return antwort;
     }
 
-    async function dbAuslesen(_url: string): Promise<Eingabe[]> { //bekommt Interface Array zurück
+    async function dbAuslesen(_url: string): Promise<Student[]> { //bekommt Interface Array zurück
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let infos: Mongo.Collection = mongoClient.db("Database").collection("Studentslist"); //eigene neue Collection aufrufen
-        let cursor: Mongo.Cursor = infos.find(); //Suche der gesamten DB aber spezielle ist auch möglich mit .find({name: "..."})
-        let result: Eingabe[] = await cursor.toArray(); //auslesen der kompletten DB
+        let infos: Mongo.Collection = mongoClient.db("Database").collection("Studentslist");
+        let cursor: Mongo.Cursor = infos.find();
+        let result: Student[] = await cursor.toArray();
         return result;
 
     }
-    interface Eingabe {
+    interface Student {
         vorname: string;
         nachname: string;
         adresse: string;
