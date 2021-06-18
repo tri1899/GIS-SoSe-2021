@@ -12,7 +12,6 @@ namespace Aufgabe3_4 {
         vorname: string;
         nachname: string;
         adresse: string;
-        matrikelnummer: number;
     }
 
     async function Studentenanzeigen (): Promise<void> {
