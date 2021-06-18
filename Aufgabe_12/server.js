@@ -31,7 +31,7 @@ var Aufgabe3_4;
                 let antwortdatenbank = await abspeichern(mongoUrl, student);
                 _response.write(antwortdatenbank);
             }
-            else if (url.pathname == "/datenAusgabe") {
+            else if (url.pathname == "/datenauslesen") {
                 let antwort = await dbAuslesen(mongoUrl);
                 _response.write(JSON.stringify(antwort));
             }

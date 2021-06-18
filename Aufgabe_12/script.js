@@ -18,7 +18,7 @@ var Aufgabe3_4;
     //Funktion um Daten auf der Seite anzuzeigen
     async function datenAnzeigen() {
         let formData = new FormData(document.forms[0]);
-        let url = "https://tri1899gissose2021.herokuapp.com/datenAusgabe";
+        let url = "https://tri1899gissose2021.herokuapp.com/datenauslesen";
         let query = new URLSearchParams(formData);
         url = url + "?" + query.toString(); //Url in String umwandeln
         let antwort = await fetch(url);

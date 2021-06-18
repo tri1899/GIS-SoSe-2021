@@ -29,7 +29,7 @@ namespace Aufgabe3_4 {
     //Funktion um Daten auf der Seite anzuzeigen
     async function datenAnzeigen(): Promise <void> { 
         let formData: FormData = new FormData (document.forms[0]);
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenAusgabe"; 
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenauslesen"; 
 
         let  query: URLSearchParams = new URLSearchParams(<any> formData);
         url = url + "?" + query.toString(); //Url in String umwandeln
