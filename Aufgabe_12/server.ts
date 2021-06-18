@@ -30,24 +30,24 @@ export namespace Aufgabe3_4 {
 
         if (_request.url) {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //Die in der Request enthaltene URL wird in ein assoziatives Array geparsed/umformatiert
-            let jsonstring: string = JSON.stringify(url.query);
+            let jsonstring: string = JSON.stringify(url.query); //Zum Feedback geben
             console.log(jsonstring);
             
             if (url.pathname == "/datenspeichern") { 
-                let student: Student = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await abspeichern(mongoUrl, student); 
-                _response.write(antwortdatenbank);
+                let student: Student = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
+                let antwortdatenbank: string = await datenspeichern(mongoUrl, student); 
+                _response.write(antwortdatenbank); //an Client schicken
             }
 
             else if (url.pathname == "/datenauslesen") {
-                let antwort: Student[] = await dbAuslesen(mongoUrl);
-                _response.write(JSON.stringify(antwort)); 
+                let studentenliste: Student[] = await studilisteauslesen(mongoUrl);
+                _response.write(JSON.stringify(studentenliste)); 
             }
         }
         _response.end(); 
     }
 
-    async function abspeichern(_url: string, _student: Student): Promise<string> {
+    async function datenspeichern(_url: string, _student: Student): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
@@ -59,24 +59,25 @@ export namespace Aufgabe3_4 {
     }
 
 
-    async function dbAuslesen(_url: string): Promise<Student[]> { 
+    async function studilisteauslesen(_url: string): Promise<Student[]> { 
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let infos: Mongo.Collection = mongoClient.db("Database").collection("Studentslist");
-        let cursor: Mongo.Cursor = infos.find();
-        let result: Student[] = await cursor.toArray();
-        return result;
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Database").collection("Studentslist");
+        let cursor: Mongo.Cursor = meinedatenbank.find();
+        let antwort: Student[] = await cursor.toArray();
+        return antwort;
 
     }
+
     interface Student {
         vorname: string;
         nachname: string;
         adresse: string;
 
     }
-} //Ende namespace
+}
 
 
 

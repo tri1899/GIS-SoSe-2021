@@ -24,21 +24,21 @@ var Aufgabe3_4;
         _response.setHeader("Access-Control-Allow-Origin", "*");
         if (_request.url) {
             let url = Url.parse(_request.url, true); //Die in der Request enthaltene URL wird in ein assoziatives Array geparsed/umformatiert
-            let jsonstring = JSON.stringify(url.query);
+            let jsonstring = JSON.stringify(url.query); //Zum Feedback geben
             console.log(jsonstring);
             if (url.pathname == "/datenspeichern") {
-                let student = JSON.parse(jsonstring);
-                let antwortdatenbank = await abspeichern(mongoUrl, student);
-                _response.write(antwortdatenbank);
+                let student = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
+                let antwortdatenbank = await datenspeichern(mongoUrl, student);
+                _response.write(antwortdatenbank); //an Client schicken
             }
             else if (url.pathname == "/datenauslesen") {
-                let antwort = await dbAuslesen(mongoUrl);
-                _response.write(JSON.stringify(antwort));
+                let studentenliste = await studilisteauslesen(mongoUrl);
+                _response.write(JSON.stringify(studentenliste));
             }
         }
         _response.end();
     }
-    async function abspeichern(_url, _student) {
+    async function datenspeichern(_url, _student) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
@@ -47,14 +47,14 @@ var Aufgabe3_4;
         let antwort = "Student wurde gespeichert!";
         return antwort;
     }
-    async function dbAuslesen(_url) {
+    async function studilisteauslesen(_url) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        let infos = mongoClient.db("Database").collection("Studentslist");
-        let cursor = infos.find();
-        let result = await cursor.toArray();
-        return result;
+        let meinedatenbank = mongoClient.db("Database").collection("Studentslist");
+        let cursor = meinedatenbank.find();
+        let antwort = await cursor.toArray();
+        return antwort;
     }
-})(Aufgabe3_4 = exports.Aufgabe3_4 || (exports.Aufgabe3_4 = {})); //Ende namespace
+})(Aufgabe3_4 = exports.Aufgabe3_4 || (exports.Aufgabe3_4 = {}));
 //# sourceMappingURL=server.js.map
