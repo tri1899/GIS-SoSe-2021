@@ -1,40 +1,44 @@
 namespace Aufgabe3_4 {
 
-    let buttonabschicken: HTMLButtonElement = <HTMLButtonElement>document.getElementById("buttonabschicken");
-    buttonabschicken.addEventListener("click", Datenabschicken); //Button um Funktion aufzurufen
+    let buttonVerschicken: HTMLButtonElement = <HTMLButtonElement> document.getElementById("buttonabschicken"); 
+    buttonVerschicken.addEventListener("click", datenAbschicken); 
 
-    let buttonanzeigen: HTMLButtonElement = <HTMLButtonElement>document.getElementById("buttonanzeigen");
-    buttonanzeigen.addEventListener("click", Studentenanzeigen); //Button um Funktion aufzurufen
+    //Daten abschicken um in MongoDB zu speichern
+    async function datenAbschicken(): Promise<void> { //async Funktion um Daten anzuschicken
+        let formData: FormData = new FormData (document.forms[0]); //generiert FormData Ohjekt aus <form> in das Dokument
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com";
+        url += "/datenVerschicken"; // Anhängen mit einem / daher oben keiner notwenig
 
-    let serverausgabe: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwort");
-    
-    interface Studenten {
-        vorname: string;
-        nachname: string;
-        adresse: string;
+        let  query: URLSearchParams = new URLSearchParams(<any> formData);
+        url = url + "?" + query.toString(); //Url in String umwandeln
+        let antwort: Response = await fetch (url);
+        let ausgabe: string = await antwort.text();
+        console.log(ausgabe); //string in Konsole ausgeben
+          
     }
 
-    async function Studentenanzeigen (): Promise<void> {
-        let formData: FormData = new FormData(document.forms[0]); //das erste Formular des Dokuments wird ausgewertet
-        let url: string = "https://tri1899gissose2021.herokuapp.com";
-        let query: URLSearchParams = new URLSearchParams(<any>formData); //Daten liegen vor (von dem Formular) ich kann den String nun aus einem Form Data Objekt generieren
-        url = url + "?" + query.toString(); //ich wandele meine formDaten in ein String und hänge diese an die URL
-        await fetch(url);
-        
-    }
+    let buttonAusgabe: HTMLButtonElement = <HTMLButtonElement> document.getElementById("buttonanzeigen"); 
+    buttonAusgabe.addEventListener("click", datenAnzeigen);
 
+    let rueckgabe: HTMLDivElement = <HTMLDivElement> document.getElementById("serverantwort"); //anheften an die Seite
 
-    async function Datenabschicken(): Promise<void> {
-        let formData: FormData = new FormData(document.forms[0]); //das erste Formular des Dokuments wird ausgewertet
+    //Funktion um Daten auf der Seite anzuzeigen
+    async function datenAnzeigen(): Promise <void> { 
+        let formData: FormData = new FormData (document.forms[0]);
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com"; 
 
-        let url: string = "https://tri1899gissose2021.herokuapp.com";
+        url += "/datenAusgabe"; 
 
-        let query: URLSearchParams = new URLSearchParams(<any>formData); //Daten liegen vor (von dem Formular) ich kann den String nun aus einem Form Data Objekt generieren
-        url = url + "?" + query.toString(); //ich wandele meine formDaten in ein String und hänge diese an die URL
-
-        let response: Response = await fetch(url); // URL warten und abschicken
-        let antwort: Studenten = await response.json(); //auf die Antwort warten
-        serverausgabe.innerHTML = JSON.stringify(antwort);
-
+        let  query: URLSearchParams = new URLSearchParams(<any> formData);
+        url = url + "?" + query.toString(); //Url in String umwandeln
+        let antwort: Response = await fetch (url);
+        let ausgabe: string = await antwort.text();
+        rueckgabe.innerHTML = ausgabe;  //Ausgabe auf der HTML Seite 
     }
 }
+
+
+
+
+
+
