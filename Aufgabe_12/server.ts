@@ -33,10 +33,10 @@ export namespace Aufgabe3_4 {
             let jsonstring: string = JSON.stringify(url.query);
             console.log(jsonstring);
             
-            if (url.pathname == "/datenVerschicken") { 
+            if (url.pathname == "/datenspeichern") { 
                 let student: Student = JSON.parse(jsonstring);
                 let antwortdatenbank: string = await abspeichern(mongoUrl, student); 
-                _response.write(antwortdatenbank); //Antwort zurückgeben
+                _response.write(antwortdatenbank);
             }
 
             else if (url.pathname == "/datenAusgabe") {
@@ -57,6 +57,7 @@ export namespace Aufgabe3_4 {
         let antwort: string = "Student wurde gespeichert!";
         return antwort;
     }
+    
 
     async function dbAuslesen(_url: string): Promise<Student[]> { //bekommt Interface Array zurück
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };

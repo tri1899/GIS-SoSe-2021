@@ -1,12 +1,13 @@
 namespace Aufgabe3_4 {
 
     let buttonVerschicken: HTMLButtonElement = <HTMLButtonElement> document.getElementById("buttonabschicken"); 
-    buttonVerschicken.addEventListener("click", datenAbschicken); 
+    buttonVerschicken.addEventListener("click", datenspeichern); 
 
-    //Daten abschicken um in MongoDB zu speichern
-    async function datenAbschicken(): Promise<void> { //async Funktion um Daten anzuschicken
-        let formData: FormData = new FormData (document.forms[0]); //generiert FormData Ohjekt aus <form> in das Dokument
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenVerschicken";
+    
+    async function datenspeichern(): Promise<void> { 
+        let formData: FormData = new FormData (document.forms[0]);
+
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenspeichern";
 
         let  query: URLSearchParams = new URLSearchParams(<any> formData);
 
@@ -15,7 +16,7 @@ namespace Aufgabe3_4 {
         let antwort: Response = await fetch (url);
 
         let ausgabe: string = await antwort.text();
-        
+
         console.log(ausgabe); 
           
     }

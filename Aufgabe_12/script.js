@@ -2,11 +2,10 @@
 var Aufgabe3_4;
 (function (Aufgabe3_4) {
     let buttonVerschicken = document.getElementById("buttonabschicken");
-    buttonVerschicken.addEventListener("click", datenAbschicken);
-    //Daten abschicken um in MongoDB zu speichern
-    async function datenAbschicken() {
-        let formData = new FormData(document.forms[0]); //generiert FormData Ohjekt aus <form> in das Dokument
-        let url = "https://tri1899gissose2021.herokuapp.com/datenVerschicken";
+    buttonVerschicken.addEventListener("click", datenspeichern);
+    async function datenspeichern() {
+        let formData = new FormData(document.forms[0]);
+        let url = "https://tri1899gissose2021.herokuapp.com/datenspeichern";
         let query = new URLSearchParams(formData);
         url = url + "?" + query.toString();
         let antwort = await fetch(url);

@@ -26,10 +26,10 @@ var Aufgabe3_4;
             let url = Url.parse(_request.url, true); //Die in der Request enthaltene URL wird in ein assoziatives Array geparsed/umformatiert
             let jsonstring = JSON.stringify(url.query);
             console.log(jsonstring);
-            if (url.pathname == "/datenVerschicken") {
+            if (url.pathname == "/datenspeichern") {
                 let student = JSON.parse(jsonstring);
                 let antwortdatenbank = await abspeichern(mongoUrl, student);
-                _response.write(antwortdatenbank); //Antwort zurückgeben
+                _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/datenAusgabe") {
                 let antwort = await dbAuslesen(mongoUrl);
