@@ -55,10 +55,10 @@ export namespace Endabgabe {
         if (_student.nutzername != "") {
             let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
             meinedatenbank.insertOne(_student);
-            let antwort: string = "Student wurde gespeichert!Test";
+            let antwort: string = "Student wurde gespeichert";
             return antwort;
         } else {
-            let antwort: string = "Füllen Sie die Felder aus";
+            let antwort: string = "Füllen Sie die bitte Felder aus";
             return antwort;
         }
     }
