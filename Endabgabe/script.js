@@ -11,7 +11,7 @@ var Endabgabe;
         url = url + "?" + query.toString();
         let antwort = await fetch(url);
         let ausgabe = await antwort.text();
-        if (ausgabe == "Student wurde gespeichert") {
+        if (ausgabe == "User wurde gespeichert") {
             location.href = "alle_rezepte.html";
         }
         else {

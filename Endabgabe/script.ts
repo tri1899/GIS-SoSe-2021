@@ -18,7 +18,7 @@ namespace Endabgabe {
 
         let ausgabe: string = await antwort.text();
 
-        if (ausgabe == "Student wurde gespeichert") {
+        if (ausgabe == "User wurde gespeichert") {
             location.href = "alle_rezepte.html";
         } else {
             rueckgabe.innerHTML = "Bitte füllen Sie die Felder aus.";

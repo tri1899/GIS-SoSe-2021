@@ -46,11 +46,11 @@ var Endabgabe;
         if (_student.nutzername != "") {
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
             meinedatenbank.insertOne(_student);
-            let antwort = "Student wurde gespeichert";
+            let antwort = "User wurde gespeichert";
             return antwort;
         }
         else {
-            let antwort = "Füllen Sie die bitte Felder aus";
+            let antwort = "Füllen Sie die Felder bitte aus";
             return antwort;
         }
     }
