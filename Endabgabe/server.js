@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Aufgabe3_4 = void 0;
+exports.Endabgabe = void 0;
 const Http = require("http");
 const Url = require("url");
 const Mongo = require("mongodb");
-var Aufgabe3_4;
-(function (Aufgabe3_4) {
+var Endabgabe;
+(function (Endabgabe) {
     let mongoUrl = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
     //1. Server starten
     let port = Number(process.env.PORT);
@@ -43,10 +43,16 @@ var Aufgabe3_4;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        meinedatenbank.insertOne(_student);
-        let antwort = "Student wurde gespeichert!";
-        return antwort;
+        if (_student.nutzername != "") {
+            let meinedatenbank = mongoClient.db("User").collection("Userlist");
+            meinedatenbank.insertOne(_student);
+            let antwort = "Student wurde gespeichert!Test";
+            return antwort;
+        }
+        else {
+            let antwort = "Füllen Sie die Felder aus";
+            return antwort;
+        }
     }
     // Meine Studiliste anzeigen lassen
     async function studilisteauslesen(_url) {
@@ -58,5 +64,5 @@ var Aufgabe3_4;
         let antwort = await cursor.toArray();
         return antwort;
     }
-})(Aufgabe3_4 = exports.Aufgabe3_4 || (exports.Aufgabe3_4 = {}));
+})(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
 //# sourceMappingURL=server.js.map

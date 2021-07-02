@@ -2,7 +2,7 @@ import * as Http from "http";
 import * as Url from "url";
 import * as Mongo from "mongodb";
 
-export namespace Aufgabe3_4 {
+export namespace Endabgabe {
 
     let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
@@ -16,7 +16,7 @@ export namespace Aufgabe3_4 {
 
 
     function Serverstarten(_port: number | string): void {
-        let server: Http.Server = Http.createServer(); 
+        let server: Http.Server = Http.createServer();
         console.log("Starting Server!");
         server.listen(_port);
         server.addListener("request", handleRequest);
@@ -25,26 +25,26 @@ export namespace Aufgabe3_4 {
 
     //2. handle Request
     async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
-        _response.setHeader("content-type", "text/html; charset=utf-8"); 
-        _response.setHeader("Access-Control-Allow-Origin", "*"); 
+        _response.setHeader("content-type", "text/html; charset=utf-8");
+        _response.setHeader("Access-Control-Allow-Origin", "*");
 
         if (_request.url) {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //Die in der Request enthaltene URL wird in ein assoziatives Array geparsed/umformatiert
             let jsonstring: string = JSON.stringify(url.query); //Zum Feedback geben
             console.log(jsonstring);
-            
-            if (url.pathname == "/datenspeichern") { 
+
+            if (url.pathname == "/datenspeichern") {
                 let student: User = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
-                let antwortdatenbank: string = await datenspeichern(mongoUrl, student); 
+                let antwortdatenbank: string = await datenspeichern(mongoUrl, student);
                 _response.write(antwortdatenbank); //an Client schicken
             }
 
             else if (url.pathname == "/datenauslesen") {
                 let studentenliste: User[] = await studilisteauslesen(mongoUrl);
-                _response.write(JSON.stringify(studentenliste)); 
+                _response.write(JSON.stringify(studentenliste));
             }
         }
-        _response.end(); 
+        _response.end();
     }
 
     // Daten in die Datenbank schreiben
@@ -52,15 +52,19 @@ export namespace Aufgabe3_4 {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-        meinedatenbank.insertOne(_student);
-        let antwort: string = "Student wurde gespeichert!";
-        return antwort;
+        if (_student.nutzername != "") {
+            let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
+            meinedatenbank.insertOne(_student);
+            let antwort: string = "Student wurde gespeichert!Test";
+            return antwort;
+        } else {
+            let antwort: string = "Füllen Sie die Felder aus";
+            return antwort;
+        }
     }
 
     // Meine Studiliste anzeigen lassen
-    async function studilisteauslesen(_url: string): Promise<User[]> { 
+    async function studilisteauslesen(_url: string): Promise<User[]> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
