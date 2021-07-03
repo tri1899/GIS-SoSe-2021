@@ -26,7 +26,7 @@ var Endabgabe;
             let url = Url.parse(_request.url, true); //Die in der Request enthaltene URL wird in ein assoziatives Array geparsed/umformatiert
             let jsonstring = JSON.stringify(url.query); //Zum Feedback geben
             console.log(jsonstring);
-            if (url.pathname == "/datenspeichern") {
+            if (url.pathname == "/regestrieren") {
                 let user = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
                 let antwortdatenbank = await Registrierung(mongoUrl, user);
                 _response.write(antwortdatenbank); //an Client schicken

@@ -33,7 +33,7 @@ export namespace Endabgabe {
             let jsonstring: string = JSON.stringify(url.query); //Zum Feedback geben
             console.log(jsonstring);
 
-            if (url.pathname == "/datenspeichern") {
+            if (url.pathname == "/regestrieren") {
                 let user: User = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
                 let antwortdatenbank: string = await Registrierung(mongoUrl, user);
                 _response.write(antwortdatenbank); //an Client schicken
