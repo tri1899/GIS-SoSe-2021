@@ -19,7 +19,8 @@ namespace Endabgabe {
         let ausgabe: string = await antwort.text();
 
         if (ausgabe == "User wurde gefunden") {
-            location.href = "alle_rezepte.html";
+            rueckgabelogin.innerHTML = ausgabe;
+            //location.href = "alle_rezepte.html";
         } else {
             rueckgabelogin.innerHTML = ausgabe;
         }
