@@ -40,13 +40,13 @@ var Endabgabe;
         _response.end();
     }
     // Daten in die Datenbank schreiben
-    async function Registrierung(_url, _student) {
+    async function Registrierung(_url, _user) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        if (_student.nutzername && _student.passwort != "") {
+        if (_user.nutzername && _user.passwort != "") {
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
-            meinedatenbank.insertOne(_student);
+            meinedatenbank.insertOne(_user);
             let antwort = "User wurde gespeichert";
             return antwort;
         }
@@ -55,19 +55,25 @@ var Endabgabe;
             return antwort;
         }
     }
-    async function Login(_url, _student) {
+    async function Login(_url, _user) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        if (meinedatenbank.findOne({ nutzername: _student.nutzername }) != null) {
-            let antwort = "User wurde gefunden";
-            return antwort;
+        let cursor = meinedatenbank.find();
+        let alleuser = await cursor.toArray();
+        for (let i = 0; i < alleuser.length; i++) {
+            if (alleuser[i] == _user) {
+                let antwort = "User wurde gefunden";
+                return antwort;
+            }
+            else {
+                let antwort = "User wurde nicht gefunden.";
+                return antwort;
+            }
         }
-        else {
-            let antwort = "User wurde nicht gefunden";
-            return antwort;
-        }
+        let antwort = "User wurde nicht gefunden";
+        return antwort;
     }
 })(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
 //# sourceMappingURL=server.js.map

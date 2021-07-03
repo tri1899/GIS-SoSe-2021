@@ -41,22 +41,22 @@ export namespace Endabgabe {
 
             else if (url.pathname == "/login") {
                 let user: User = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await  Login (mongoUrl, user);
+                let antwortdatenbank: string = await Login(mongoUrl, user);
                 _response.write(antwortdatenbank);
-                
+
             }
         }
         _response.end();
     }
 
     // Daten in die Datenbank schreiben
-    async function Registrierung(_url: string, _student: User): Promise<string> {
+    async function Registrierung(_url: string, _user: User): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        if (_student.nutzername && _student.passwort != "") {
+        if (_user.nutzername && _user.passwort != "") {
             let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-            meinedatenbank.insertOne(_student);
+            meinedatenbank.insertOne(_user);
             let antwort: string = "User wurde gespeichert";
             return antwort;
         } else {
@@ -65,20 +65,27 @@ export namespace Endabgabe {
         }
     }
 
-    async function Login(_url: string, _student: User): Promise<string> {
+    async function Login(_url: string, _user: User): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
 
-        if (meinedatenbank.findOne({nutzername: _student.nutzername}) != null) {
-            let antwort: string = "User wurde gefunden";
-            return antwort;
-        } else {
-            let antwort: string = "User wurde nicht gefunden";
-            return antwort;
-        }   
+        let cursor: Mongo.Cursor = meinedatenbank.find();
+        let alleuser: User[] = await cursor.toArray();
+
+        for (let i: number = 0; i < alleuser.length; i++) {
+            if (alleuser[i] == _user) {
+                let antwort: string = "User wurde gefunden";
+                return antwort;
+            } else {
+                let antwort: string = "User wurde nicht gefunden.";
+                return antwort;
+            }
+        } 
+        let antwort: string = "User wurde nicht gefunden";
+        return antwort;
     }
 
     interface User {
