@@ -62,7 +62,7 @@ var Endabgabe;
         let meinedatenbank = mongoClient.db("User").collection("Userlist");
         let cursor = meinedatenbank.find();
         let alleuser = await cursor.toArray();
-        for (let i = 0; i < alleuser.length; i++) {
+        for (let i = 0; i < 6; i++) {
             if (alleuser[i].nutzername == _user.nutzername) {
                 let antwort = "User wurde gefunden";
                 return antwort;
