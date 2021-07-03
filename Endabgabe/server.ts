@@ -34,25 +34,27 @@ export namespace Endabgabe {
             console.log(jsonstring);
 
             if (url.pathname == "/datenspeichern") {
-                let student: User = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
-                let antwortdatenbank: string = await datenspeichern(mongoUrl, student);
+                let user: User = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
+                let antwortdatenbank: string = await Registrierung(mongoUrl, user);
                 _response.write(antwortdatenbank); //an Client schicken
             }
 
-            else if (url.pathname == "/datenauslesen") {
-                let studentenliste: User[] = await studilisteauslesen(mongoUrl);
-                _response.write(JSON.stringify(studentenliste));
+            else if (url.pathname == "/login") {
+                let user: User = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await  Login (mongoUrl, user);
+                _response.write(antwortdatenbank);
+                
             }
         }
         _response.end();
     }
 
     // Daten in die Datenbank schreiben
-    async function datenspeichern(_url: string, _student: User): Promise<string> {
+    async function Registrierung(_url: string, _student: User): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        if (_student.nutzername != "") {
+        if (_student.nutzername && _student.passwort != "") {
             let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
             meinedatenbank.insertOne(_student);
             let antwort: string = "User wurde gespeichert";
@@ -63,17 +65,19 @@ export namespace Endabgabe {
         }
     }
 
-    // Meine Studiliste anzeigen lassen
-    async function studilisteauslesen(_url: string): Promise<User[]> {
+    async function Login(_url: string, _student: User): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-        let cursor: Mongo.Cursor = meinedatenbank.find();
-        let antwort: User[] = await cursor.toArray();
-        return antwort;
-
+        if (meinedatenbank.findOne(_student)) {
+            let antwort: string = "User wurde gefunden";
+            return antwort;
+        } else {
+            let antwort: string = "User wurde nicht gefunden";
+            return antwort;
+        }   
     }
 
     interface User {

@@ -27,23 +27,24 @@ var Endabgabe;
             let jsonstring = JSON.stringify(url.query); //Zum Feedback geben
             console.log(jsonstring);
             if (url.pathname == "/datenspeichern") {
-                let student = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
-                let antwortdatenbank = await datenspeichern(mongoUrl, student);
+                let user = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
+                let antwortdatenbank = await Registrierung(mongoUrl, user);
                 _response.write(antwortdatenbank); //an Client schicken
             }
-            else if (url.pathname == "/datenauslesen") {
-                let studentenliste = await studilisteauslesen(mongoUrl);
-                _response.write(JSON.stringify(studentenliste));
+            else if (url.pathname == "/login") {
+                let user = JSON.parse(jsonstring);
+                let antwortdatenbank = await Login(mongoUrl, user);
+                _response.write(antwortdatenbank);
             }
         }
         _response.end();
     }
     // Daten in die Datenbank schreiben
-    async function datenspeichern(_url, _student) {
+    async function Registrierung(_url, _student) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        if (_student.nutzername != "") {
+        if (_student.nutzername && _student.passwort != "") {
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
             meinedatenbank.insertOne(_student);
             let antwort = "User wurde gespeichert";
@@ -54,15 +55,19 @@ var Endabgabe;
             return antwort;
         }
     }
-    // Meine Studiliste anzeigen lassen
-    async function studilisteauslesen(_url) {
+    async function Login(_url, _student) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        let cursor = meinedatenbank.find();
-        let antwort = await cursor.toArray();
-        return antwort;
+        if (meinedatenbank.findOne(_student)) {
+            let antwort = "User wurde gefunden";
+            return antwort;
+        }
+        else {
+            let antwort = "User wurde nicht gefunden";
+            return antwort;
+        }
     }
 })(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
 //# sourceMappingURL=server.js.map
