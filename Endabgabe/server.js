@@ -63,13 +63,8 @@ var Endabgabe;
         let cursor = meinedatenbank.find();
         let alleuser = await cursor.toArray();
         for (let i = 0; i < alleuser.length; i++) {
-            console.log(_user.nutzername);
             if (alleuser[i].nutzername == _user.nutzername) {
                 let antwort = "User wurde gefunden";
-                return antwort;
-            }
-            else {
-                let antwort = "Fehler Else";
                 return antwort;
             }
         }
