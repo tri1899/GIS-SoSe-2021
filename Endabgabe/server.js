@@ -60,7 +60,7 @@ var Endabgabe;
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        if (meinedatenbank.findOne({ nutzername: _student.nutzername }) && meinedatenbank.find({ passwort: _student.passwort })) {
+        if (meinedatenbank.findOne({ nutzername: _student.nutzername })) {
             let antwort = "User wurde gefunden";
             return antwort;
         }
