@@ -46,12 +46,21 @@ var Endabgabe;
         await mongoClient.connect();
         if (_user.nutzername && _user.passwort != "") {
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
-            meinedatenbank.insertOne(_user);
-            let antwort = "User wurde gespeichert";
-            return antwort;
+            let cursor = meinedatenbank.find();
+            let alleuser = await cursor.toArray();
+            let ueberpruefen = UeberpruefenUserDatenbank(alleuser, _user);
+            if (ueberpruefen == "User wurde nicht gefunden.") {
+                meinedatenbank.insertOne(_user);
+                let antwort = "User wurde gespeichert";
+                return antwort;
+            }
+            else {
+                let antwort = "Der Name existiert schon!";
+                return antwort;
+            }
         }
         else {
-            let antwort = "Füllen Sie die Felder bitte aus";
+            let antwort = "Füllen Sie bitte alle Felder aus!";
             return antwort;
         }
     }
@@ -59,11 +68,17 @@ var Endabgabe;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        let cursor = meinedatenbank.find();
-        let alleuser = await cursor.toArray();
-        let ueberpruefen = UeberpruefenUserDatenbank(alleuser, _user);
-        return ueberpruefen;
+        if (_user.nutzername && _user.passwort != "") {
+            let meinedatenbank = mongoClient.db("User").collection("Userlist");
+            let cursor = meinedatenbank.find();
+            let alleuser = await cursor.toArray();
+            let ueberpruefen = UeberpruefenUserDatenbank(alleuser, _user);
+            return ueberpruefen;
+        }
+        else {
+            let antwort = "Füllen Sie bitte alle Felder aus!";
+            return antwort;
+        }
     }
     function UeberpruefenUserDatenbank(_userarray, _user) {
         for (let i = 0; i < _userarray.length; i++) {

@@ -13,8 +13,10 @@ var Endabgabe;
         let antwort = await fetch(url);
         let ausgabe = await antwort.text();
         if (ausgabe == "User wurde gefunden") {
+            location.href = "alle_rezepte.html";
+        }
+        else if (ausgabe == "Der Name existiert schon!") {
             rueckgabelogin.innerHTML = ausgabe;
-            //location.href = "alle_rezepte.html";
         }
         else {
             rueckgabelogin.innerHTML = ausgabe;
@@ -32,8 +34,10 @@ var Endabgabe;
         let antwort = await fetch(url);
         let ausgabe = await antwort.text();
         if (ausgabe == "User wurde gespeichert") {
-            //location.href = "alle_rezepte.html";
-            rueckgabe.innerHTML = "angelegt.";
+            location.href = "alle_rezepte.html";
+        }
+        else if (ausgabe == "Der Name existiert schon!") {
+            rueckgabe.innerHTML = ausgabe;
         }
         else {
             rueckgabe.innerHTML = "Bitte füllen Sie die Felder aus.";

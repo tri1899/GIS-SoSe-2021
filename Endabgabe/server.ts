@@ -55,12 +55,23 @@ export namespace Endabgabe {
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         if (_user.nutzername && _user.passwort != "") {
+
             let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-            meinedatenbank.insertOne(_user);
-            let antwort: string = "User wurde gespeichert";
-            return antwort;
+            let cursor: Mongo.Cursor = meinedatenbank.find();
+            let alleuser: User[] = await cursor.toArray();
+            let ueberpruefen: string = UeberpruefenUserDatenbank(alleuser, _user);
+
+            if (ueberpruefen == "User wurde nicht gefunden.") {
+                meinedatenbank.insertOne(_user);
+                let antwort: string = "User wurde gespeichert";
+                return antwort;
+            } else {
+                let antwort: string = "Der Name existiert schon!";
+                return antwort; 
+            }
         } else {
-            let antwort: string = "Füllen Sie die Felder bitte aus";
+            let antwort: string = "Füllen Sie bitte alle Felder aus!";
+
             return antwort;
         }
     }
@@ -70,19 +81,23 @@ export namespace Endabgabe {
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
+        if (_user.nutzername && _user.passwort != "") {
 
-        let cursor: Mongo.Cursor = meinedatenbank.find();
-        let alleuser: User[] = await cursor.toArray();
+            let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
 
-        let ueberpruefen: string = UeberpruefenUserDatenbank(alleuser, _user);
+            let cursor: Mongo.Cursor = meinedatenbank.find();
+            let alleuser: User[] = await cursor.toArray();
 
-        return ueberpruefen;
+            let ueberpruefen: string = UeberpruefenUserDatenbank(alleuser, _user);
 
-
+            return ueberpruefen;
+        } else {
+            let antwort: string = "Füllen Sie bitte alle Felder aus!";
+            return antwort;
+        }
     }
 
-    function UeberpruefenUserDatenbank (_userarray: User[], _user: User): string {
+    function UeberpruefenUserDatenbank(_userarray: User[], _user: User): string {
         for (let i: number = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
                 let antwort: string = "User wurde gefunden";
