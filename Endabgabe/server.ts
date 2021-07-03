@@ -80,11 +80,11 @@ export namespace Endabgabe {
                 let antwort: string = "User wurde gefunden";
                 return antwort;
             } else {
-                let antwort: string = "User wurde nicht gefunden12345.";
+                let antwort: string = _user.nutzername;
                 return antwort;
             }
         } 
-        let antwort: string = "User wurde nicht gefunden11";
+        let antwort: string = _user.nutzername;
         return antwort;
     }
 

@@ -68,11 +68,11 @@ var Endabgabe;
                 return antwort;
             }
             else {
-                let antwort = "User wurde nicht gefunden12345.";
+                let antwort = _user.nutzername;
                 return antwort;
             }
         }
-        let antwort = "User wurde nicht gefunden11";
+        let antwort = _user.nutzername;
         return antwort;
     }
 })(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
