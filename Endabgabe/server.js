@@ -63,7 +63,7 @@ var Endabgabe;
         let cursor = meinedatenbank.find();
         let alleuser = await cursor.toArray();
         for (let i = 0; i < alleuser.length; i++) {
-            if (alleuser[i].nutzername == _user.nutzername && _user.passwort) {
+            if (alleuser[i].nutzername == _user.nutzername && alleuser[i].passwort == _user.passwort) {
                 let antwort = "User wurde gefunden";
                 return antwort;
             }
