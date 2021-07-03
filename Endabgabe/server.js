@@ -68,11 +68,11 @@ var Endabgabe;
                 return antwort;
             }
             else {
-                let antwort = _user.nutzername;
+                let antwort = "User wurde nicht gefunden";
                 return antwort;
             }
         }
-        let antwort = _user.nutzername;
+        let antwort = "User wurde nicht gefunden";
         return antwort;
     }
 })(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
