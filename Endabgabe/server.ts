@@ -71,7 +71,8 @@ export namespace Endabgabe {
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-        if (meinedatenbank.findOne(_student)) {
+
+        if (meinedatenbank.findOne({nutzername: _student.nutzername})) {
             let antwort: string = "User wurde gefunden";
             return antwort;
         } else {
