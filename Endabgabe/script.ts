@@ -21,11 +21,11 @@ namespace Endabgabe {
 
         if (ausgabe == "User wurde gefunden") {
             location.href = "alle_rezepte.html";
-        } else if (ausgabe == "Der Name existiert schon!") {
-            rueckgabelogin.innerHTML = ausgabe;
-        } else {
+        } else if (ausgabe == "User wurde nicht gefunden.") {
             rueckgabelogin.innerHTML = ausgabe;
         }
+        rueckgabelogin.innerHTML = ausgabe;
+
     }
 
 
@@ -55,9 +55,8 @@ namespace Endabgabe {
             rueckgabe.innerHTML = ausgabe;
         } else if (ausgabe == "Der Name existiert schon!") {
             rueckgabe.innerHTML = ausgabe;
-        } else {
-            rueckgabe.innerHTML = ausgabe;
         }
+        rueckgabe.innerHTML = ausgabe;
     }
 }
 

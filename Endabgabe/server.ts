@@ -93,14 +93,18 @@ export namespace Endabgabe {
 
             let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
 
-            return ueberpruefen;
-        } else {
-            let antwort: string = "Füllen Sie bitte alle Felder aus!";
-            return antwort;
+            if (ueberpruefen == "User wurde gefunden") {
+                return ueberpruefen;
+            } else if ("User wurde nicht gefunden.") {
+                return ueberpruefen;
+            }
         }
+        let antwort: string = "Füllen Sie bitte alle Felder aus!";
+        return antwort;
+
     }
 
-    async function UeberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> {
+    async function UeberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> { // Für Registrierung
         for (let i: number = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
                 let antwort: string = "User wurde gefunden";
@@ -111,7 +115,7 @@ export namespace Endabgabe {
         return antwort;
     }
 
-    async function UeberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> {
+    async function UeberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> { // Für Login
         for (let i: number = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername) {
                 let antwort: string = "User wurde gefunden";

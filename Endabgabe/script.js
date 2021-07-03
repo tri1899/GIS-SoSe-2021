@@ -15,12 +15,10 @@ var Endabgabe;
         if (ausgabe == "User wurde gefunden") {
             location.href = "alle_rezepte.html";
         }
-        else if (ausgabe == "Der Name existiert schon!") {
+        else if (ausgabe == "User wurde nicht gefunden.") {
             rueckgabelogin.innerHTML = ausgabe;
         }
-        else {
-            rueckgabelogin.innerHTML = ausgabe;
-        }
+        rueckgabelogin.innerHTML = ausgabe;
     }
     //registrierung
     let registrierung = document.getElementById("registrierung");
@@ -40,9 +38,7 @@ var Endabgabe;
         else if (ausgabe == "Der Name existiert schon!") {
             rueckgabe.innerHTML = ausgabe;
         }
-        else {
-            rueckgabe.innerHTML = ausgabe;
-        }
+        rueckgabe.innerHTML = ausgabe;
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=script.js.map

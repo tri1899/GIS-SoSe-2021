@@ -71,12 +71,15 @@ var Endabgabe;
             let cursor = meinedatenbank.find();
             let alleuser = await cursor.toArray();
             let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
-            return ueberpruefen;
+            if (ueberpruefen == "User wurde gefunden") {
+                return ueberpruefen;
+            }
+            else if ("User wurde nicht gefunden.") {
+                return ueberpruefen;
+            }
         }
-        else {
-            let antwort = "Füllen Sie bitte alle Felder aus!";
-            return antwort;
-        }
+        let antwort = "Füllen Sie bitte alle Felder aus!";
+        return antwort;
     }
     async function UeberpruefenUserDatenbank(_userarray, _user) {
         for (let i = 0; i < _userarray.length; i++) {
