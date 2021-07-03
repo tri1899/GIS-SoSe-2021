@@ -52,7 +52,7 @@ namespace Endabgabe {
 
         if (ausgabe == "User wurde gespeichert") {
             //location.href = "alle_rezepte.html";
-            ausgabe = "ok";
+            rueckgabe.innerHTML = ausgabe;
         } else if (ausgabe == "Der Name existiert schon!") {
             rueckgabe.innerHTML = ausgabe;
         } else {
