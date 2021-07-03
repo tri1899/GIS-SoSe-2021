@@ -26,21 +26,23 @@ var Endabgabe;
         location.href = "registrierung.html";
     }
     //registrierung
-    let registrierung = document.getElementById("buttonabschicken");
-    registrierung.addEventListener("click", Registrierung);
-    let rueckgabe = document.getElementById("serverantwort"); //anheften an die Seite
-    async function Registrierung() {
-        let formData = new FormData(document.forms[0]);
-        let url = "https://tri1899gissose2021.herokuapp.com/datenspeichern";
-        let query = new URLSearchParams(formData);
-        url = url + "?" + query.toString();
-        let antwort = await fetch(url);
-        let ausgabe = await antwort.text();
-        if (ausgabe == "User wurde gespeichert") {
-            location.href = "alle_rezepte.html";
-        }
-        else {
-            rueckgabe.innerHTML = "Bitte füllen Sie die Felder aus.";
+    if (location.href == "registrierung.html") {
+        let registrierung = document.getElementById("buttonabschicken");
+        registrierung.addEventListener("click", Registrierung);
+        let rueckgabe = document.getElementById("serverantwort"); //anheften an die Seite
+        async function Registrierung() {
+            let formData = new FormData(document.forms[0]);
+            let url = "https://tri1899gissose2021.herokuapp.com/datenspeichern";
+            let query = new URLSearchParams(formData);
+            url = url + "?" + query.toString();
+            let antwort = await fetch(url);
+            let ausgabe = await antwort.text();
+            if (ausgabe == "User wurde gespeichert") {
+                location.href = "alle_rezepte.html";
+            }
+            else {
+                rueckgabe.innerHTML = "Bitte füllen Sie die Felder aus.";
+            }
         }
     }
 })(Endabgabe || (Endabgabe = {}));
