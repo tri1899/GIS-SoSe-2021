@@ -34,13 +34,14 @@ var Endabgabe;
         let antwort = await fetch(url);
         let ausgabe = await antwort.text();
         if (ausgabe == "User wurde gespeichert") {
-            location.href = "alle_rezepte.html";
+            //location.href = "alle_rezepte.html";
+            ausgabe = "ok";
         }
         else if (ausgabe == "Der Name existiert schon!") {
             rueckgabe.innerHTML = ausgabe;
         }
         else {
-            rueckgabe.innerHTML = "Bitte füllen Sie die Felder aus.";
+            rueckgabe.innerHTML = ausgabe;
         }
     }
 })(Endabgabe || (Endabgabe = {}));

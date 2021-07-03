@@ -54,7 +54,7 @@ var Endabgabe;
                 let antwort = "User wurde gespeichert";
                 return antwort;
             }
-            else {
+            else if ("User wurde gefunden") {
                 let antwort = "Der Name existiert schon!";
                 return antwort;
             }

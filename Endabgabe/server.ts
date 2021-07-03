@@ -65,7 +65,7 @@ export namespace Endabgabe {
                 meinedatenbank.insertOne(_user);
                 let antwort: string = "User wurde gespeichert";
                 return antwort;
-            } else {
+            } else if ("User wurde gefunden") {
                 let antwort: string = "Der Name existiert schon!";
                 return antwort; 
             }
