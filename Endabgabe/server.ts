@@ -76,12 +76,12 @@ export namespace Endabgabe {
         let alleuser: User[] = await cursor.toArray();
 
         for (let i: number = 0; i < alleuser.length; i++) {
-            if (alleuser[i].nutzername == _user.nutzername) {
+            if (alleuser[i].nutzername == _user.nutzername && _user.passwort) {
                 let antwort: string = "User wurde gefunden";
                 return antwort;
             }
         }
-        let antwort: string = "Fehler For";
+        let antwort: string = "User wurde nicht gefunden.";
         return antwort;
     }
 
