@@ -1,66 +1,57 @@
 namespace Endabgabe {
 
     //login
-    if (location.href == "login.html") {
-        let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("login");
-        login.addEventListener("click", Login);
-        let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortlogin");
 
-        async function Login(): Promise<void> {
-            let formData: FormData = new FormData(document.forms[0]);
+    let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("login");
+    login.addEventListener("click", Login);
+    let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortlogin");
 
-            let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/login";
+    async function Login(): Promise<void> {
+        let formData: FormData = new FormData(document.forms[0]);
 
-            let query: URLSearchParams = new URLSearchParams(<any>formData);
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/login";
 
-            url = url + "?" + query.toString();
+        let query: URLSearchParams = new URLSearchParams(<any>formData);
 
-            let antwort: Response = await fetch(url);
+        url = url + "?" + query.toString();
 
-            let ausgabe: string = await antwort.text();
+        let antwort: Response = await fetch(url);
 
-            if (ausgabe == "User wurde gefunden") {
-                rueckgabelogin.innerHTML = ausgabe;
-                //location.href = "alle_rezepte.html";
-            } else {
-                rueckgabelogin.innerHTML = ausgabe;
-            }
+        let ausgabe: string = await antwort.text();
 
+        if (ausgabe == "User wurde gefunden") {
+            rueckgabelogin.innerHTML = ausgabe;
+            //location.href = "alle_rezepte.html";
+        } else {
+            rueckgabelogin.innerHTML = ausgabe;
         }
     }
 
-    let zurregis: HTMLButtonElement = <HTMLButtonElement>document.getElementById("zurregis");
-    zurregis.addEventListener("click", Zurregis);
-
-    function Zurregis(): void {
-        location.href = "registrierung.html";
-    }
-
     //registrierung
-    if (location.href == "registrierung.html") {
-        let registrierung: HTMLButtonElement = <HTMLButtonElement>document.getElementById("registrierung");
-        registrierung.addEventListener("click", Registrierung);
-        let rueckgabe: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortregis"); //anheften an die Seite
+
+    let registrierung: HTMLButtonElement = <HTMLButtonElement>document.getElementById("registrierung");
+    registrierung.addEventListener("click", Registrierung);
+    let rueckgabe: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortregis"); //anheften an die Seite
 
 
-        async function Registrierung(): Promise<void> {
-            let formData: FormData = new FormData(document.forms[0]);
+    async function Registrierung(): Promise<void> {
+        let formData: FormData = new FormData(document.forms[1]);
 
-            let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenspeichern";
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/regestrieren";
 
-            let query: URLSearchParams = new URLSearchParams(<any>formData);
+        let query: URLSearchParams = new URLSearchParams(<any>formData);
 
-            url = url + "?" + query.toString();
+        url = url + "?" + query.toString();
 
-            let antwort: Response = await fetch(url);
+        let antwort: Response = await fetch(url);
 
-            let ausgabe: string = await antwort.text();
+        let ausgabe: string = await antwort.text();
 
-            if (ausgabe == "User wurde gespeichert") {
-                location.href = "alle_rezepte.html";
-            } else {
-                rueckgabe.innerHTML = "Bitte füllen Sie die Felder aus.";
-            }
+        if (ausgabe == "User wurde gespeichert") {
+            //location.href = "alle_rezepte.html";
+            rueckgabe.innerHTML = "angelegt.";
+        } else {
+            rueckgabe.innerHTML = "Bitte füllen Sie die Felder aus.";
         }
     }
 }
