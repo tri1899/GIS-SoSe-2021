@@ -69,9 +69,10 @@ export namespace Endabgabe {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
+
         let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-        
-        if (meinedatenbank.find({nutzername: _student})) {
+
+        if (meinedatenbank.findOne({nutzername: _student.nutzername}) != null) {
             let antwort: string = "User wurde gefunden";
             return antwort;
         } else {
