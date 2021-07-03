@@ -48,7 +48,7 @@ var Endabgabe;
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
             let cursor = meinedatenbank.find();
             let alleuser = await cursor.toArray();
-            let ueberpruefen = UeberpruefenUserDatenbank(alleuser, _user);
+            let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
             if (ueberpruefen == "User wurde nicht gefunden.") {
                 meinedatenbank.insertOne(_user);
                 let antwort = "User wurde gespeichert";
@@ -59,10 +59,8 @@ var Endabgabe;
                 return antwort;
             }
         }
-        else {
-            let antwort = "Füllen Sie bitte alle Felder aus!";
-            return antwort;
-        }
+        let antwort = "Füllen Sie bitte alle Felder aus!";
+        return antwort;
     }
     async function Login(_url, _user) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
@@ -72,7 +70,7 @@ var Endabgabe;
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
             let cursor = meinedatenbank.find();
             let alleuser = await cursor.toArray();
-            let ueberpruefen = UeberpruefenUserDatenbank(alleuser, _user);
+            let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
             return ueberpruefen;
         }
         else {
@@ -80,7 +78,7 @@ var Endabgabe;
             return antwort;
         }
     }
-    function UeberpruefenUserDatenbank(_userarray, _user) {
+    async function UeberpruefenUserDatenbank(_userarray, _user) {
         for (let i = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
                 let antwort = "User wurde gefunden";

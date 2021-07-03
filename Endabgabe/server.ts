@@ -54,12 +54,15 @@ export namespace Endabgabe {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
+
         if (_user.nutzername && _user.passwort != "") {
 
             let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
+
             let cursor: Mongo.Cursor = meinedatenbank.find();
             let alleuser: User[] = await cursor.toArray();
-            let ueberpruefen: string = UeberpruefenUserDatenbank(alleuser, _user);
+
+            let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
 
             if (ueberpruefen == "User wurde nicht gefunden.") {
                 meinedatenbank.insertOne(_user);
@@ -67,13 +70,13 @@ export namespace Endabgabe {
                 return antwort;
             } else if ("User wurde gefunden") {
                 let antwort: string = "Der Name existiert schon!";
-                return antwort; 
+                return antwort;
             }
-        } else {
-            let antwort: string = "Füllen Sie bitte alle Felder aus!";
-
-            return antwort;
         }
+        let antwort: string = "Füllen Sie bitte alle Felder aus!";
+
+        return antwort;
+
     }
 
     async function Login(_url: string, _user: User): Promise<string> {
@@ -88,7 +91,7 @@ export namespace Endabgabe {
             let cursor: Mongo.Cursor = meinedatenbank.find();
             let alleuser: User[] = await cursor.toArray();
 
-            let ueberpruefen: string = UeberpruefenUserDatenbank(alleuser, _user);
+            let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
 
             return ueberpruefen;
         } else {
@@ -97,7 +100,7 @@ export namespace Endabgabe {
         }
     }
 
-    function UeberpruefenUserDatenbank(_userarray: User[], _user: User): string {
+    async function UeberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> {
         for (let i: number = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
                 let antwort: string = "User wurde gefunden";
