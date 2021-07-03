@@ -75,7 +75,8 @@ export namespace Endabgabe {
         let cursor: Mongo.Cursor = meinedatenbank.find();
         let alleuser: User[] = await cursor.toArray();
 
-        for (let i: number = 0; i < 6; i++) {
+        for (let i: number = 0; i < alleuser.length; i++) {
+            console.log(_user.nutzername);
             if (alleuser[i].nutzername == _user.nutzername) {
                 let antwort: string = "User wurde gefunden";
                 return antwort;
