@@ -76,7 +76,7 @@ export namespace Endabgabe {
         let alleuser: User[] = await cursor.toArray();
 
         for (let i: number = 0; i < alleuser.length; i++) {
-            if (alleuser[i] == _user) {
+            if (alleuser[i].nutzername == _user.nutzername) {
                 let antwort: string = "User wurde gefunden";
                 return antwort;
             } else {
