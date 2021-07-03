@@ -75,14 +75,24 @@ export namespace Endabgabe {
         let cursor: Mongo.Cursor = meinedatenbank.find();
         let alleuser: User[] = await cursor.toArray();
 
-        for (let i: number = 0; i < alleuser.length; i++) {
-            if (alleuser[i].nutzername == _user.nutzername && alleuser[i].passwort == _user.passwort) {
+        let ueberpruefen: string = UeberpruefenUserDatenbank(alleuser, _user);
+
+        return ueberpruefen;
+
+
+    }
+
+    function UeberpruefenUserDatenbank (_userarray: User[], _user: User): string {
+        for (let i: number = 0; i < _userarray.length; i++) {
+            if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
                 let antwort: string = "User wurde gefunden";
                 return antwort;
             }
         }
         let antwort: string = "User wurde nicht gefunden.";
         return antwort;
+
+
     }
 
     interface User {
