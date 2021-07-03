@@ -48,7 +48,7 @@ var Endabgabe;
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
             let cursor = meinedatenbank.find();
             let alleuser = await cursor.toArray();
-            let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
+            let ueberpruefen = await UeberpruefenUserDatenbanknurName(alleuser, _user);
             if (ueberpruefen == "User wurde nicht gefunden.") {
                 meinedatenbank.insertOne(_user);
                 let antwort = "User wurde gespeichert";
@@ -81,6 +81,16 @@ var Endabgabe;
     async function UeberpruefenUserDatenbank(_userarray, _user) {
         for (let i = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
+                let antwort = "User wurde gefunden";
+                return antwort;
+            }
+        }
+        let antwort = "User wurde nicht gefunden.";
+        return antwort;
+    }
+    async function UeberpruefenUserDatenbanknurName(_userarray, _user) {
+        for (let i = 0; i < _userarray.length; i++) {
+            if (_userarray[i].nutzername == _user.nutzername) {
                 let antwort = "User wurde gefunden";
                 return antwort;
             }

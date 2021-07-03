@@ -62,7 +62,7 @@ export namespace Endabgabe {
             let cursor: Mongo.Cursor = meinedatenbank.find();
             let alleuser: User[] = await cursor.toArray();
 
-            let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
+            let ueberpruefen: string = await UeberpruefenUserDatenbanknurName(alleuser, _user);
 
             if (ueberpruefen == "User wurde nicht gefunden.") {
                 meinedatenbank.insertOne(_user);
@@ -109,10 +109,18 @@ export namespace Endabgabe {
         }
         let antwort: string = "User wurde nicht gefunden.";
         return antwort;
-
-
     }
 
+    async function UeberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> {
+        for (let i: number = 0; i < _userarray.length; i++) {
+            if (_userarray[i].nutzername == _user.nutzername) {
+                let antwort: string = "User wurde gefunden";
+                return antwort;
+            }
+        }
+        let antwort: string = "User wurde nicht gefunden.";
+        return antwort;
+    }
     interface User {
         nutzername: string;
         passwort: string;
