@@ -68,11 +68,11 @@ var Endabgabe;
                 return antwort;
             }
             else {
-                let antwort = _user.nutzername;
+                let antwort = "Fehler Else";
                 return antwort;
             }
         }
-        let antwort = _user.nutzername;
+        let antwort = "Fehler For";
         return antwort;
     }
 })(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
