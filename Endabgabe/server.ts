@@ -153,7 +153,7 @@ export namespace Endabgabe {
         passwort: string;
     }
 
-    interface Rezept {
+    export interface Rezept {
        titel: string;
        arbeitszeit: string;
        zutatnr1: string;
@@ -161,5 +161,6 @@ export namespace Endabgabe {
        zuztatnr3: string;
        zutatnr4: string;
        zutatnr5: string;
+       zutatnr6: string;
     }
 }

@@ -8,6 +8,7 @@ namespace Endabgabe {
         zuztatnr3: string;
         zutatnr4: string;
         zutatnr5: string;
+        zutatnr6: string;
     }
 
     let allerezepte: HTMLDivElement = <HTMLDivElement>document.getElementById("behaelter");
@@ -30,6 +31,7 @@ namespace Endabgabe {
 
         for (let i: number = 0; i < rezeptenliste.length; i++) {
 
+            let divallerezepte: HTMLDivElement = document.createElement("div");
 
             let ptitel: HTMLParagraphElement = document.createElement("p");
             let parbeitszeit: HTMLParagraphElement = document.createElement("p");
@@ -47,13 +49,16 @@ namespace Endabgabe {
             pzutatnr4.innerHTML = rezeptenliste[i].zutatnr4;
             pzutatnr5.innerHTML = rezeptenliste[i].zutatnr5;
 
-            allerezepte.appendChild(ptitel);
-            allerezepte.appendChild(parbeitszeit);
-            allerezepte.appendChild(pzutatnr1);
-            allerezepte.appendChild(pzutatnr2);
-            allerezepte.appendChild(pzutatnr3);
-            allerezepte.appendChild(pzutatnr4);
-            allerezepte.appendChild(pzutatnr5);
+            divallerezepte.appendChild(ptitel);
+            divallerezepte.appendChild(parbeitszeit);
+            divallerezepte.appendChild(pzutatnr1);
+            divallerezepte.appendChild(pzutatnr2);
+            divallerezepte.appendChild(pzutatnr3);
+            divallerezepte.appendChild(pzutatnr4);
+            divallerezepte.appendChild(pzutatnr5);
+
+            allerezepte.appendChild(divallerezepte);
+            allerezepte.classList.add("rezepte");
         }
     };
 }
