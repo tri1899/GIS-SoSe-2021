@@ -1,10 +1,7 @@
 namespace Endabgabe {
-    let test: HTMLButtonElement = <HTMLButtonElement>document.getElementById("test");
-    test.addEventListener("click", datenAnzeigen);
-
     let allerezepte: HTMLDivElement = <HTMLDivElement>document.getElementById("behaelter");
 
-    async function datenAnzeigen(): Promise <void> {
+    window.onload = async function datenAnzeigen(): Promise <void> {
 
         let formData: FormData = new FormData (document.forms[0]);
 
@@ -19,6 +16,6 @@ namespace Endabgabe {
         let ausgabe: string = await antwort.text();
 
         allerezepte.innerHTML = ausgabe;
-    }
+    };
 }
 
