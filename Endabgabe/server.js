@@ -36,8 +36,22 @@ var Endabgabe;
                 let antwortdatenbank = await Login(mongoUrl, user);
                 _response.write(antwortdatenbank);
             }
+            else if (url.pathname == "/zeigrezepte") {
+                let rezepte = await Rezepteauslesen(mongoUrl);
+                _response.write(JSON.stringify(rezepte));
+            }
         }
         _response.end();
+    }
+    // Rezepteauslesen
+    async function Rezepteauslesen(_url) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let datenbankrezepte = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        let cursor = datenbankrezepte.find();
+        let antwort = await cursor.toArray();
+        return antwort;
     }
     // Daten in die Datenbank schreiben
     async function Registrierung(_url, _user) {

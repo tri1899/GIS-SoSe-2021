@@ -2,6 +2,7 @@ import * as Http from "http";
 import * as Url from "url";
 import * as Mongo from "mongodb";
 
+
 export namespace Endabgabe {
 
     let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -45,8 +46,26 @@ export namespace Endabgabe {
                 _response.write(antwortdatenbank);
 
             }
+
+            else if (url.pathname == "/zeigrezepte") {
+                let rezepte: Rezept [] = await Rezepteauslesen(mongoUrl);
+                _response.write(JSON.stringify(rezepte));
+            }
         }
         _response.end();
+    }
+
+    // Rezepteauslesen
+
+    async function Rezepteauslesen(_url: string): Promise<Rezept[]> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+
+        let datenbankrezepte: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        let cursor: Mongo.Cursor = datenbankrezepte.find();
+        let antwort: Rezept[] = await cursor.toArray();
+        return antwort;
     }
 
     // Daten in die Datenbank schreiben
@@ -56,6 +75,7 @@ export namespace Endabgabe {
         await mongoClient.connect();
 
         if (_user.nutzername && _user.passwort != "") {
+
 
             let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
 
@@ -125,8 +145,20 @@ export namespace Endabgabe {
         let antwort: string = "User wurde nicht gefunden.";
         return antwort;
     }
+
+
     interface User {
         nutzername: string;
         passwort: string;
+    }
+
+    interface Rezept {
+       titel: string;
+       arbeitszeit: number;
+       zutatnr1: string;
+       zutatnr2: string;
+       zuztatnr3: string;
+       zutatnr5: string;
+       zutatnr6: string;
     }
 }

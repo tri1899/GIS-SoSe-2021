@@ -1,4 +1,38 @@
 body {
+    width: 1024px;
     margin: 0 auto;
-    text-align: center;
+    font-family: sans-serif;
 }
+
+.flexbox{
+    background: lightgray;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: stretch;
+    position: sticky;
+    top: 0;   
+}
+
+.flexelement{
+    background: orange;
+    color: black;
+    text-align: center;
+    width: 33%;
+    margin: 0 0 1% 0;
+    margin: 10px;
+    padding: 15px 0 15px 0;
+    
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+a:hover {
+    opacity: 0.5;
+}
+
+
