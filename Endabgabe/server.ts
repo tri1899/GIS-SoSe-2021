@@ -155,11 +155,11 @@ export namespace Endabgabe {
 
     interface Rezept {
        titel: string;
-       arbeitszeit: number;
+       arbeitszeit: string;
        zutatnr1: string;
        zutatnr2: string;
        zuztatnr3: string;
+       zutatnr4: string;
        zutatnr5: string;
-       zutatnr6: string;
     }
 }
