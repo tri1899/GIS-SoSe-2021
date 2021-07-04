@@ -1,8 +1,10 @@
 namespace Endabgabe {
+    let test: HTMLButtonElement = <HTMLButtonElement>document.getElementById("test");
+    test.addEventListener("click", ZeigealleRezepte);
 
     let allerezepte: HTMLDivElement = <HTMLDivElement>document.getElementById("behaelter");
 
-    window.onload = async function ZeigealleRezepte(): Promise<void> {
+    async function ZeigealleRezepte(): Promise<void> {
         let formData: FormData = new FormData(document.forms[0]);
 
         let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/zeigrezepte";
@@ -17,6 +19,6 @@ namespace Endabgabe {
 
         allerezepte.innerHTML = ausgabe;
 
-    };
+    }
 
 }
