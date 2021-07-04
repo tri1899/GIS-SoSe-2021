@@ -47,9 +47,9 @@ export namespace Endabgabe {
 
             }
 
-            else if (url.pathname == "/zeigrezepte") {
-                let rezepte: Rezept [] = await Rezepteauslesen(mongoUrl);
-                _response.write(JSON.stringify(rezepte));
+            else if (url.pathname == "/datenauslesen") {
+                let studentenliste: Rezept[] = await Rezepteauslesen(mongoUrl);
+                _response.write(JSON.stringify(studentenliste)); 
             }
         }
         _response.end();
@@ -57,15 +57,16 @@ export namespace Endabgabe {
 
     // Rezepteauslesen
 
-    async function Rezepteauslesen(_url: string): Promise<Rezept[]> {
+    async function Rezepteauslesen(_url: string): Promise<Rezept[]> { 
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let datenbankrezepte: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
-        let cursor: Mongo.Cursor = datenbankrezepte.find();
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        let cursor: Mongo.Cursor = meinedatenbank.find();
         let antwort: Rezept[] = await cursor.toArray();
         return antwort;
+
     }
 
     // Daten in die Datenbank schreiben

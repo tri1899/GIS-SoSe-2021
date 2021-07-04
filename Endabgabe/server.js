@@ -36,9 +36,9 @@ var Endabgabe;
                 let antwortdatenbank = await Login(mongoUrl, user);
                 _response.write(antwortdatenbank);
             }
-            else if (url.pathname == "/zeigrezepte") {
-                let rezepte = await Rezepteauslesen(mongoUrl);
-                _response.write(JSON.stringify(rezepte));
+            else if (url.pathname == "/datenauslesen") {
+                let studentenliste = await Rezepteauslesen(mongoUrl);
+                _response.write(JSON.stringify(studentenliste));
             }
         }
         _response.end();
@@ -48,8 +48,8 @@ var Endabgabe;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        let datenbankrezepte = mongoClient.db("Rezeptenliste").collection("Rezepte");
-        let cursor = datenbankrezepte.find();
+        let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        let cursor = meinedatenbank.find();
         let antwort = await cursor.toArray();
         return antwort;
     }

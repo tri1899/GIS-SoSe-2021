@@ -1,24 +1,24 @@
 namespace Endabgabe {
     let test: HTMLButtonElement = <HTMLButtonElement>document.getElementById("test");
-    test.addEventListener("click", ZeigealleRezepte);
+    test.addEventListener("click", datenAnzeigen);
 
     let allerezepte: HTMLDivElement = <HTMLDivElement>document.getElementById("behaelter");
 
-    async function ZeigealleRezepte(): Promise<void> {
-        let formData: FormData = new FormData(document.forms[0]);
+    async function datenAnzeigen(): Promise <void> {
 
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/zeigrezepte";
+        let formData: FormData = new FormData (document.forms[0]);
 
-        let query: URLSearchParams = new URLSearchParams(<any>formData);
+        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenauslesen"; 
+
+        let  query: URLSearchParams = new URLSearchParams(<any> formData);
 
         url = url + "?" + query.toString();
 
-        let antwort: Response = await fetch(url);
+        let antwort: Response = await fetch (url);
 
         let ausgabe: string = await antwort.text();
 
         allerezepte.innerHTML = ausgabe;
-
     }
-
 }
+
