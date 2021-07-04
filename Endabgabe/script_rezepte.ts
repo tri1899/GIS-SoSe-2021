@@ -40,6 +40,7 @@ namespace Endabgabe {
             let pzutatnr3: HTMLParagraphElement = document.createElement("p");
             let pzutatnr4: HTMLParagraphElement = document.createElement("p");
             let pzutatnr5: HTMLParagraphElement = document.createElement("p");
+            let pzutatnr6: HTMLParagraphElement = document.createElement("p");
 
             ptitel.innerHTML = rezeptenliste[i].titel;
             parbeitszeit.innerHTML = rezeptenliste[i].arbeitszeit;
@@ -48,6 +49,7 @@ namespace Endabgabe {
             pzutatnr3.innerHTML = rezeptenliste[i].zuztatnr3;
             pzutatnr4.innerHTML = rezeptenliste[i].zutatnr4;
             pzutatnr5.innerHTML = rezeptenliste[i].zutatnr5;
+            pzutatnr6.innerHTML = rezeptenliste[i].zutatnr6;
 
             divallerezepte.appendChild(ptitel);
             divallerezepte.appendChild(parbeitszeit);
@@ -56,9 +58,12 @@ namespace Endabgabe {
             divallerezepte.appendChild(pzutatnr3);
             divallerezepte.appendChild(pzutatnr4);
             divallerezepte.appendChild(pzutatnr5);
+            divallerezepte.appendChild(pzutatnr6);
 
             allerezepte.appendChild(divallerezepte);
             allerezepte.classList.add("rezepte");
+            let br: HTMLBRElement = document.createElement("br");
+            allerezepte.appendChild(br);
         }
     };
 }
