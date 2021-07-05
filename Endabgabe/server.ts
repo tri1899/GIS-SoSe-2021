@@ -52,7 +52,7 @@ export namespace Endabgabe {
                 _response.write(JSON.stringify(studentenliste));
             }
 
-            else if (url.hostname == "/rezepterstellen") {
+            else if (url.pathname == "/rezepterstellen") {
                 let rezept: Rezept = JSON.parse(jsonstring);
                 let antwortdatenbank: string = await Rezepterstellen(mongoUrl, rezept);
                 _response.write(antwortdatenbank);
@@ -66,9 +66,7 @@ export namespace Endabgabe {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        console.log("Hallo Welt");
         
-
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         meinedatenbank.insertOne(_rezept);
         let antwort: string = "Rezept wurde angelegt";

@@ -40,7 +40,7 @@ var Endabgabe;
                 let studentenliste = await Rezepteauslesen(mongoUrl);
                 _response.write(JSON.stringify(studentenliste));
             }
-            else if (url.hostname == "/rezepterstellen") {
+            else if (url.pathname == "/rezepterstellen") {
                 let rezept = JSON.parse(jsonstring);
                 let antwortdatenbank = await Rezepterstellen(mongoUrl, rezept);
                 _response.write(antwortdatenbank);
@@ -53,7 +53,6 @@ var Endabgabe;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        console.log("Hallo Welt");
         let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
         meinedatenbank.insertOne(_rezept);
         let antwort = "Rezept wurde angelegt";
