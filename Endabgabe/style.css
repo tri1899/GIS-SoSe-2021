@@ -36,5 +36,16 @@ a:hover {
 }
 
 .rezepte {
-    background-color: skyblue;
+    text-align: center;
+}
+
+.diveinzelnrezept {
+    border: 1px solid;
+    padding: 15px 0 15px 0;
+    border-bottom-width: 5px;
+    
+}
+
+#aktive {
+    text-decoration: underline;
 }

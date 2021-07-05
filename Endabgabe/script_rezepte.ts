@@ -3,68 +3,65 @@ namespace Endabgabe {
     interface Rezeptdaten {
         titel: string;
         arbeitszeit: string;
-        zutatnr1: string;
-        zutatnr2: string;
-        zuztatnr3: string;
-        zutatnr4: string;
-        zutatnr5: string;
-        zutatnr6: string;
+        zutat: string;
+        zubereitungsanweisung: string;
     }
 
-    let allerezepte: HTMLDivElement = <HTMLDivElement>document.getElementById("behaelter");
+    let behaelter: HTMLDivElement = <HTMLDivElement>document.getElementById("behaelter");
 
-    window.onload = async function datenAnzeigen(): Promise <void> {
+    if (document.querySelector("title").getAttribute("id") == "allerezepte") {
 
-        let formData: FormData = new FormData (document.forms[0]);
+        window.onload = async function datenAnzeigen(): Promise<void> {
 
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenauslesen"; 
+            let formData: FormData = new FormData(document.forms[0]);
 
-        let  query: URLSearchParams = new URLSearchParams(<any> formData);
+            let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenauslesen";
 
-        url = url + "?" + query.toString();
+            let query: URLSearchParams = new URLSearchParams(<any>formData);
 
-        let antwort: Response = await fetch (url);
+            url = url + "?" + query.toString();
 
-        let ausgabe: string = await antwort.text();
+            let antwort: Response = await fetch(url);
 
-        let rezeptenliste: Rezeptdaten[] = JSON.parse(ausgabe);
+            let ausgabe: string = await antwort.text();
 
-        for (let i: number = 0; i < rezeptenliste.length; i++) {
+            let rezeptenliste: Rezeptdaten[] = JSON.parse(ausgabe);
 
-            let divallerezepte: HTMLDivElement = document.createElement("div");
+            for (let i: number = 0; i < rezeptenliste.length; i++) {
 
-            let ptitel: HTMLParagraphElement = document.createElement("p");
-            let parbeitszeit: HTMLParagraphElement = document.createElement("p");
-            let pzutatnr1: HTMLParagraphElement = document.createElement("p");
-            let pzutatnr2: HTMLParagraphElement = document.createElement("p");
-            let pzutatnr3: HTMLParagraphElement = document.createElement("p");
-            let pzutatnr4: HTMLParagraphElement = document.createElement("p");
-            let pzutatnr5: HTMLParagraphElement = document.createElement("p");
-            let pzutatnr6: HTMLParagraphElement = document.createElement("p");
+                let divallerezepte: HTMLDivElement = document.createElement("div");
 
-            ptitel.innerHTML = rezeptenliste[i].titel;
-            parbeitszeit.innerHTML = rezeptenliste[i].arbeitszeit;
-            pzutatnr1.innerHTML = rezeptenliste[i].zutatnr1;
-            pzutatnr2.innerHTML = rezeptenliste[i].zutatnr2;
-            pzutatnr3.innerHTML = rezeptenliste[i].zuztatnr3;
-            pzutatnr4.innerHTML = rezeptenliste[i].zutatnr4;
-            pzutatnr5.innerHTML = rezeptenliste[i].zutatnr5;
-            pzutatnr6.innerHTML = rezeptenliste[i].zutatnr6;
+                let ptitel: HTMLParagraphElement = document.createElement("p");
+                let parbeitszeit: HTMLParagraphElement = document.createElement("p");
+                let pzutat: HTMLParagraphElement = document.createElement("p");
+                let panweisung: HTMLParagraphElement = document.createElement("p");
 
-            divallerezepte.appendChild(ptitel);
-            divallerezepte.appendChild(parbeitszeit);
-            divallerezepte.appendChild(pzutatnr1);
-            divallerezepte.appendChild(pzutatnr2);
-            divallerezepte.appendChild(pzutatnr3);
-            divallerezepte.appendChild(pzutatnr4);
-            divallerezepte.appendChild(pzutatnr5);
-            divallerezepte.appendChild(pzutatnr6);
+                
 
-            allerezepte.appendChild(divallerezepte);
-            allerezepte.classList.add("rezepte");
-            let br: HTMLBRElement = document.createElement("br");
-            allerezepte.appendChild(br);
-        }
-    };
+                ptitel.innerHTML = rezeptenliste[i].titel;
+                parbeitszeit.innerHTML = rezeptenliste[i].arbeitszeit;
+                pzutat.innerHTML = rezeptenliste[i].zutat;
+                panweisung.innerHTML = rezeptenliste[i].zubereitungsanweisung;
+
+
+                divallerezepte.appendChild(ptitel);
+                divallerezepte.appendChild(parbeitszeit);
+                divallerezepte.appendChild(pzutat);
+                divallerezepte.appendChild(panweisung);
+                divallerezepte.classList.add("diveinzelnrezept");
+                behaelter.appendChild(divallerezepte);
+                behaelter.classList.add("rezepte");
+                let br: HTMLBRElement = document.createElement("br");
+                behaelter.appendChild(br);
+            }
+        };
+    }
+
+    /*if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
+
+
+    }*/
+
+    
 }
 
