@@ -53,6 +53,11 @@ namespace Endabgabe {
                 behaelter.classList.add("rezepte");
                 let br: HTMLBRElement = document.createElement("br");
                 behaelter.appendChild(br);
+
+
+                let favbutton: HTMLButtonElement = document.createElement("button");
+                favbutton.innerHTML = "favorisieren";
+                divallerezepte.appendChild(favbutton);
             }
         };
     }

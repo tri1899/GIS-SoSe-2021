@@ -3,6 +3,7 @@ import * as Url from "url";
 import * as Mongo from "mongodb";
 
 
+
 export namespace Endabgabe {
 
     let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -68,23 +69,26 @@ export namespace Endabgabe {
         await mongoClient.connect();
 
         if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat && _rezept.zubereitungsanweisung != "") {
-
+        
+        let meinedatenbankv2: Mongo.Collection = mongoClient.db.arguments("Rezeptenliste").createCollection("Funktioniert es?");
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         meinedatenbank.insertOne(_rezept);
+        meinedatenbankv2.insertOne(_rezept);
         let antwort: string = "Rezept wurde angelegt";
         return antwort;
         }
         let antwort: string = "Füllen Sie bitte alle Felder aus!";
         return antwort;
+
+
     }
-
-
 
     // Rezepteauslesen
     async function Rezepteauslesen(_url: string): Promise<Rezept[]> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
+        
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         let cursor: Mongo.Cursor = meinedatenbank.find();

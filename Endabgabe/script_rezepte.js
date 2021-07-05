@@ -30,6 +30,9 @@ var Endabgabe;
                 behaelter.classList.add("rezepte");
                 let br = document.createElement("br");
                 behaelter.appendChild(br);
+                let favbutton = document.createElement("button");
+                favbutton.innerHTML = "favorisieren";
+                divallerezepte.appendChild(favbutton);
             }
         };
     }
