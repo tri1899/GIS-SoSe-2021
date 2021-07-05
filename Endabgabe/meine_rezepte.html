@@ -27,14 +27,17 @@
 
     <form id="Rezept">
         <label for="titel">Titel:</label> <br>
-        <input type="text" name="titel" id="titel" required><br>
+        <input type="text" name="titel" id="titel" class="inputmittig" required><br>
 
         <label for="arbeitszeit">Arbeitszeit:</label> <br>
-        <input type="text" name="arbeitszeit" id="arbeitszeit" required><br>
+        <input type="text" name="arbeitszeit" id="arbeitszeit" class="inputmittig" required><br>
 
+        <label for="zutatenliste">Zutatenliste:</label>
+        <textarea id="zutatenliste" class="inputmittig" name="zutatenliste" placeholder="2 Eier, 1 Prise Salz...." style="height:200px"></textarea>
 
+        <label for="zubereitungsanweisung">Zubereitungsanweisung:</label>
+        <textarea id="zubereitungsanweisung" class="inputmittig" name="zubereitungsanweisung" placeholder="Deine Zubereitungsanweisung:" style="height:200px"></textarea>
     </form>
-    </div>
     <br>
     <button type="button" id="rezepterstellen">erstellen</button>
 

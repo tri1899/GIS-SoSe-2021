@@ -40,8 +40,27 @@ var Endabgabe;
                 let studentenliste = await Rezepteauslesen(mongoUrl);
                 _response.write(JSON.stringify(studentenliste));
             }
+            else if (url.hostname == "/rezepterstellen") {
+                let rezept = JSON.parse(jsonstring);
+                let antwortdatenbank = await Rezepterstellen(mongoUrl, rezept);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
+    }
+    // Rezept erstellen
+    async function Rezepterstellen(_url, _rezept) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat && _rezept.zubereitungsanweisung != "") {
+            let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
+            meinedatenbank.insertOne(_rezept);
+            let antwort = "Rezept wurde angelegt";
+            return antwort;
+        }
+        let antowrt = "Füllen Sie bitte alle Felder aus";
+        return antowrt;
     }
     // Rezepteauslesen
     async function Rezepteauslesen(_url) {

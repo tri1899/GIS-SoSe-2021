@@ -51,12 +51,34 @@ export namespace Endabgabe {
                 let studentenliste: Rezept[] = await Rezepteauslesen(mongoUrl);
                 _response.write(JSON.stringify(studentenliste)); 
             }
+
+            else if (url.hostname == "/rezepterstellen") {
+                let rezept: Rezept = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await Rezepterstellen(mongoUrl, rezept);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
     }
 
-    // Rezepteauslesen
+    // Rezept erstellen
+    async function Rezepterstellen (_url: string, _rezept: Rezept): Promise<string> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
 
+        if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat && _rezept.zubereitungsanweisung != "" ) {
+
+            let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+            meinedatenbank.insertOne(_rezept);
+            let antwort: string = "Rezept wurde angelegt";
+            return antwort;
+        }
+        let antowrt: string = "Füllen Sie bitte alle Felder aus";
+        return antowrt; 
+    }
+
+    // Rezepteauslesen
     async function Rezepteauslesen(_url: string): Promise<Rezept[]> { 
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);

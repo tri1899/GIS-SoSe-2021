@@ -36,7 +36,7 @@ namespace Endabgabe {
                 let pzutat: HTMLParagraphElement = document.createElement("p");
                 let panweisung: HTMLParagraphElement = document.createElement("p");
 
-                
+
 
                 ptitel.innerHTML = rezeptenliste[i].titel;
                 parbeitszeit.innerHTML = rezeptenliste[i].arbeitszeit;
@@ -57,11 +57,27 @@ namespace Endabgabe {
         };
     }
 
-    /*if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
+    if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
 
+        let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("rezepterstellen");
+        buttonspeichern.addEventListener("click", Rezepterstellen);
 
-    }*/
+        async function Rezepterstellen(): Promise<void> {
+            let formData: FormData = new FormData(document.forms[0]);
 
-    
+            let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
+
+            let query: URLSearchParams = new URLSearchParams(<any>formData);
+
+            url = url + "?" + query.toString();
+
+            let antwort: Response = await fetch(url);
+
+            let ausgabe: string = await antwort.text();
+
+            behaelter.innerHTML = ausgabe;
+
+        }
+    }
 }
 
