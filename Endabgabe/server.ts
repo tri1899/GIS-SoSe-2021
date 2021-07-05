@@ -49,7 +49,7 @@ export namespace Endabgabe {
 
             else if (url.pathname == "/datenauslesen") {
                 let studentenliste: Rezept[] = await Rezepteauslesen(mongoUrl);
-                _response.write(JSON.stringify(studentenliste)); 
+                _response.write(JSON.stringify(studentenliste));
             }
 
             else if (url.hostname == "/rezepterstellen") {
@@ -62,123 +62,119 @@ export namespace Endabgabe {
     }
 
     // Rezept erstellen
-    async function Rezepterstellen (_url: string, _rezept: Rezept): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
-
-        if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat && _rezept.zubereitungsanweisung != "" ) {
-
-            let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
-            meinedatenbank.insertOne(_rezept);
-            let antwort: string = "Rezept wurde angelegt";
-            return antwort;
-        }
-        let antowrt: string = "Füllen Sie bitte alle Felder aus";
-        return antowrt; 
-    }
-
-    // Rezepteauslesen
-    async function Rezepteauslesen(_url: string): Promise<Rezept[]> { 
+    async function Rezepterstellen(_url: string, _rezept: Rezept): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        meinedatenbank.insertOne(_rezept);
+        let antwort: string = "Rezept wurde angelegt";
+        return antwort;
+    }
+
+}
+
+// Rezepteauslesen
+async function Rezepteauslesen(_url: string): Promise<Rezept[]> {
+    let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+    let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+    await mongoClient.connect();
+
+    let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+    let cursor: Mongo.Cursor = meinedatenbank.find();
+    let antwort: Rezept[] = await cursor.toArray();
+    return antwort;
+
+}
+
+// Daten in die Datenbank schreiben
+async function Registrierung(_url: string, _user: User): Promise<string> {
+    let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+    let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+    await mongoClient.connect();
+
+    if (_user.nutzername && _user.passwort != "") {
+
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
+
         let cursor: Mongo.Cursor = meinedatenbank.find();
-        let antwort: Rezept[] = await cursor.toArray();
-        return antwort;
+        let alleuser: User[] = await cursor.toArray();
 
-    }
+        let ueberpruefen: string = await UeberpruefenUserDatenbanknurName(alleuser, _user);
 
-    // Daten in die Datenbank schreiben
-    async function Registrierung(_url: string, _user: User): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
-
-        if (_user.nutzername && _user.passwort != "") {
-
-
-            let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-
-            let cursor: Mongo.Cursor = meinedatenbank.find();
-            let alleuser: User[] = await cursor.toArray();
-
-            let ueberpruefen: string = await UeberpruefenUserDatenbanknurName(alleuser, _user);
-
-            if (ueberpruefen == "User wurde nicht gefunden.") {
-                meinedatenbank.insertOne(_user);
-                let antwort: string = "User wurde gespeichert";
-                return antwort;
-            } else if ("User wurde gefunden") {
-                let antwort: string = "Der Name existiert schon!";
-                return antwort;
-            }
+        if (ueberpruefen == "User wurde nicht gefunden.") {
+            meinedatenbank.insertOne(_user);
+            let antwort: string = "User wurde gespeichert";
+            return antwort;
+        } else if ("User wurde gefunden") {
+            let antwort: string = "Der Name existiert schon!";
+            return antwort;
         }
-        let antwort: string = "Füllen Sie bitte alle Felder aus!";
-
-        return antwort;
-
     }
+    let antwort: string = "Füllen Sie bitte alle Felder aus!";
 
-    async function Login(_url: string, _user: User): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
+    return antwort;
 
-        if (_user.nutzername && _user.passwort != "") {
+}
 
-            let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
+async function Login(_url: string, _user: User): Promise<string> {
+    let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+    let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+    await mongoClient.connect();
 
-            let cursor: Mongo.Cursor = meinedatenbank.find();
-            let alleuser: User[] = await cursor.toArray();
+    if (_user.nutzername && _user.passwort != "") {
 
-            let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
 
-            if (ueberpruefen == "User wurde gefunden") {
-                return ueberpruefen;
-            } else if ("User wurde nicht gefunden.") {
-                return ueberpruefen;
-            }
+        let cursor: Mongo.Cursor = meinedatenbank.find();
+        let alleuser: User[] = await cursor.toArray();
+
+        let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
+
+        if (ueberpruefen == "User wurde gefunden") {
+            return ueberpruefen;
+        } else if ("User wurde nicht gefunden.") {
+            return ueberpruefen;
         }
-        let antwort: string = "Füllen Sie bitte alle Felder aus!";
-        return antwort;
-
     }
+    let antwort: string = "Füllen Sie bitte alle Felder aus!";
+    return antwort;
 
-    async function UeberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> { // Für Registrierung
-        for (let i: number = 0; i < _userarray.length; i++) {
-            if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
-                let antwort: string = "User wurde gefunden";
-                return antwort;
-            }
+}
+
+async function UeberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> { // Für Registrierung
+    for (let i: number = 0; i < _userarray.length; i++) {
+        if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
+            let antwort: string = "User wurde gefunden";
+            return antwort;
         }
-        let antwort: string = "User wurde nicht gefunden.";
-        return antwort;
     }
+    let antwort: string = "User wurde nicht gefunden.";
+    return antwort;
+}
 
-    async function UeberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> { // Für Login
-        for (let i: number = 0; i < _userarray.length; i++) {
-            if (_userarray[i].nutzername == _user.nutzername) {
-                let antwort: string = "User wurde gefunden";
-                return antwort;
-            }
+async function UeberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> { // Für Login
+    for (let i: number = 0; i < _userarray.length; i++) {
+        if (_userarray[i].nutzername == _user.nutzername) {
+            let antwort: string = "User wurde gefunden";
+            return antwort;
         }
-        let antwort: string = "User wurde nicht gefunden.";
-        return antwort;
     }
+    let antwort: string = "User wurde nicht gefunden.";
+    return antwort;
+}
 
 
-    interface User {
-        nutzername: string;
-        passwort: string;
-    }
+interface User {
+    nutzername: string;
+    passwort: string;
+}
 
-    interface Rezept {
-       titel: string;
-       arbeitszeit: string;
-       zutat: string;
-       zubereitungsanweisung: string;
-    }
+interface Rezept {
+    titel: string;
+    arbeitszeit: string;
+    zutat: string;
+    zubereitungsanweisung: string;
 }
