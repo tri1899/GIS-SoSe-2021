@@ -71,7 +71,7 @@ export namespace Endabgabe {
         if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat && _rezept.zubereitungsanweisung != "") {
         
         
-        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("ErstelleneueCollection");
         meinedatenbank.insertOne(_rezept);
         let antwort: string = "Rezept wurde angelegt";
         return antwort;
