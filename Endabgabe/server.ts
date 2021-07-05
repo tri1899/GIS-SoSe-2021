@@ -58,8 +58,25 @@ export namespace Endabgabe {
                 let antwortdatenbank: string = await Rezepterstellen(mongoUrl, rezept);
                 _response.write(antwortdatenbank);
             }
+
+            else if (url.pathname == "/favorisieren") {
+                let rezept: Rezept = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await Favorisieren(mongoUrl, rezept);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
+    }
+
+    async function Favorisieren (_url: string, _rezept: Rezept): Promise<string> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection(sessionStorage.getItem("user"));
+        meinedatenbank.insertOne(_rezept);
+        let antwort: string = "hinzugefügt!";
+        return antwort;
     }
 
     // Rezept erstellen
@@ -141,6 +158,7 @@ export namespace Endabgabe {
             let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
 
             if (ueberpruefen == "User wurde gefunden") {
+                sessionStorage.setItem("user", _user.nutzername);
                 return ueberpruefen;
             } else if ("User wurde nicht gefunden.") {
                 return ueberpruefen;

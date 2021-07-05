@@ -15,7 +15,7 @@ namespace Endabgabe {
 
             let formData: FormData = new FormData(document.forms[0]);
 
-            let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/datenauslesen";
+            let url: string = "https://tri1899gissose2021.herokuapp.com/datenauslesen";
 
             let query: URLSearchParams = new URLSearchParams(<any>formData);
 
@@ -58,6 +58,21 @@ namespace Endabgabe {
                 let favbutton: HTMLButtonElement = document.createElement("button");
                 favbutton.innerHTML = "favorisieren";
                 divallerezepte.appendChild(favbutton);
+                favbutton.addEventListener("click", Favorisieren);
+
+
+                async function Favorisieren(): Promise<void> {
+
+                    let url: string = "https://tri1899gissose2021.herokuapp.com/favorisieren";
+
+                    url += "?titel" + rezeptenliste[i].titel + "&arbeitszeit" + rezeptenliste[i].arbeitszeit + "&zutat" + rezeptenliste[i].zutat + "&zubereitungsanweisung" + rezeptenliste[i].zubereitungsanweisung;
+
+                    let antwort: Response = await fetch (url);
+
+                    let ausgabe: string = await antwort.text();
+                    
+                    behaelter.innerHTML = ausgabe;
+                }
             }
         };
     }
@@ -70,7 +85,7 @@ namespace Endabgabe {
         async function Rezepterstellen(): Promise<void> {
             let formData: FormData = new FormData(document.forms[0]);
 
-            let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
+            let url: string = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
 
             let query: URLSearchParams = new URLSearchParams(<any>formData);
 

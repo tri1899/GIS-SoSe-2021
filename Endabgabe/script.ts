@@ -10,7 +10,7 @@ namespace Endabgabe {
     async function Login(): Promise<void> {
         let formData: FormData = new FormData(document.forms[0]);
 
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/login";
+        let url: string = "https://tri1899gissose2021.herokuapp.com/login";
 
         let query: URLSearchParams = new URLSearchParams(<any>formData);
 
@@ -43,7 +43,7 @@ namespace Endabgabe {
     async function Registrierung(): Promise<void> {
         let formData: FormData = new FormData(document.forms[1]);
 
-        let url: RequestInfo = "https://tri1899gissose2021.herokuapp.com/regestrieren";
+        let url: string = "https://tri1899gissose2021.herokuapp.com/regestrieren";
 
         let query: URLSearchParams = new URLSearchParams(<any>formData);
 

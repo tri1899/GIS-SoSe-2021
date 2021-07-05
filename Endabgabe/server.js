@@ -45,8 +45,22 @@ var Endabgabe;
                 let antwortdatenbank = await Rezepterstellen(mongoUrl, rezept);
                 _response.write(antwortdatenbank);
             }
+            else if (url.pathname == "/favorisieren") {
+                let rezept = JSON.parse(jsonstring);
+                let antwortdatenbank = await Favorisieren(mongoUrl, rezept);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
+    }
+    async function Favorisieren(_url, _rezept) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("User").collection(sessionStorage.getItem("user"));
+        meinedatenbank.insertOne(_rezept);
+        let antwort = "hinzugefügt!";
+        return antwort;
     }
     // Rezept erstellen
     async function Rezepterstellen(_url, _rezept) {
@@ -105,6 +119,7 @@ var Endabgabe;
             let alleuser = await cursor.toArray();
             let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
             if (ueberpruefen == "User wurde gefunden") {
+                sessionStorage.setItem("user", _user.nutzername);
                 return ueberpruefen;
             }
             else if ("User wurde nicht gefunden.") {
