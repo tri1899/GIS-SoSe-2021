@@ -53,6 +53,7 @@ var Endabgabe;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
+        console.log("Hallo Welt");
         let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
         meinedatenbank.insertOne(_rezept);
         let antwort = "Rezept wurde angelegt";
@@ -64,7 +65,6 @@ async function Rezepteauslesen(_url) {
     let options = { useNewUrlParser: true, useUnifiedTopology: true };
     let mongoClient = new Mongo.MongoClient(_url, options);
     await mongoClient.connect();
-    console.log("Hallo Welt");
     let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
     let cursor = meinedatenbank.find();
     let antwort = await cursor.toArray();

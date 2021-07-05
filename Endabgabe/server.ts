@@ -66,6 +66,8 @@ export namespace Endabgabe {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
+        console.log("Hallo Welt");
+        
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         meinedatenbank.insertOne(_rezept);
@@ -80,8 +82,6 @@ async function Rezepteauslesen(_url: string): Promise<Rezept[]> {
     let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
     let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
     await mongoClient.connect();
-    console.log("Hallo Welt");
-    
 
     let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
     let cursor: Mongo.Cursor = meinedatenbank.find();
