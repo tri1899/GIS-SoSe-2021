@@ -53,82 +53,86 @@ var Endabgabe;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
+        if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat && _rezept.zubereitungsanweisung != "") {
+            let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
+            meinedatenbank.insertOne(_rezept);
+            let antwort = "Rezept wurde angelegt";
+            return antwort;
+        }
+        let antwort = "Füllen Sie bitte alle Felder aus!";
+        return antwort;
+    }
+    // Rezepteauslesen
+    async function Rezepteauslesen(_url) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
         let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
-        meinedatenbank.insertOne(_rezept);
-        let antwort = "Rezept wurde angelegt";
+        let cursor = meinedatenbank.find();
+        let antwort = await cursor.toArray();
+        return antwort;
+    }
+    // Daten in die Datenbank schreiben
+    async function Registrierung(_url, _user) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        if (_user.nutzername && _user.passwort != "") {
+            let meinedatenbank = mongoClient.db("User").collection("Userlist");
+            let cursor = meinedatenbank.find();
+            let alleuser = await cursor.toArray();
+            let ueberpruefen = await UeberpruefenUserDatenbanknurName(alleuser, _user);
+            if (ueberpruefen == "User wurde nicht gefunden.") {
+                meinedatenbank.insertOne(_user);
+                let antwort = "User wurde gespeichert";
+                return antwort;
+            }
+            else if ("User wurde gefunden") {
+                let antwort = "Der Name existiert schon!";
+                return antwort;
+            }
+        }
+        let antwort = "Füllen Sie bitte alle Felder aus!";
+        return antwort;
+    }
+    async function Login(_url, _user) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        if (_user.nutzername && _user.passwort != "") {
+            let meinedatenbank = mongoClient.db("User").collection("Userlist");
+            let cursor = meinedatenbank.find();
+            let alleuser = await cursor.toArray();
+            let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
+            if (ueberpruefen == "User wurde gefunden") {
+                return ueberpruefen;
+            }
+            else if ("User wurde nicht gefunden.") {
+                return ueberpruefen;
+            }
+        }
+        let antwort = "Füllen Sie bitte alle Felder aus!";
+        return antwort;
+    }
+    async function UeberpruefenUserDatenbank(_userarray, _user) {
+        for (let i = 0; i < _userarray.length; i++) {
+            if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
+                let antwort = "User wurde gefunden";
+                return antwort;
+            }
+        }
+        let antwort = "User wurde nicht gefunden.";
+        return antwort;
+    }
+    async function UeberpruefenUserDatenbanknurName(_userarray, _user) {
+        for (let i = 0; i < _userarray.length; i++) {
+            if (_userarray[i].nutzername == _user.nutzername) {
+                let antwort = "User wurde gefunden";
+                return antwort;
+            }
+        }
+        let antwort = "User wurde nicht gefunden.";
         return antwort;
     }
 })(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
-// Rezepteauslesen
-async function Rezepteauslesen(_url) {
-    let options = { useNewUrlParser: true, useUnifiedTopology: true };
-    let mongoClient = new Mongo.MongoClient(_url, options);
-    await mongoClient.connect();
-    let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
-    let cursor = meinedatenbank.find();
-    let antwort = await cursor.toArray();
-    return antwort;
-}
-// Daten in die Datenbank schreiben
-async function Registrierung(_url, _user) {
-    let options = { useNewUrlParser: true, useUnifiedTopology: true };
-    let mongoClient = new Mongo.MongoClient(_url, options);
-    await mongoClient.connect();
-    if (_user.nutzername && _user.passwort != "") {
-        let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        let cursor = meinedatenbank.find();
-        let alleuser = await cursor.toArray();
-        let ueberpruefen = await UeberpruefenUserDatenbanknurName(alleuser, _user);
-        if (ueberpruefen == "User wurde nicht gefunden.") {
-            meinedatenbank.insertOne(_user);
-            let antwort = "User wurde gespeichert";
-            return antwort;
-        }
-        else if ("User wurde gefunden") {
-            let antwort = "Der Name existiert schon!";
-            return antwort;
-        }
-    }
-    let antwort = "Füllen Sie bitte alle Felder aus!";
-    return antwort;
-}
-async function Login(_url, _user) {
-    let options = { useNewUrlParser: true, useUnifiedTopology: true };
-    let mongoClient = new Mongo.MongoClient(_url, options);
-    await mongoClient.connect();
-    if (_user.nutzername && _user.passwort != "") {
-        let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        let cursor = meinedatenbank.find();
-        let alleuser = await cursor.toArray();
-        let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
-        if (ueberpruefen == "User wurde gefunden") {
-            return ueberpruefen;
-        }
-        else if ("User wurde nicht gefunden.") {
-            return ueberpruefen;
-        }
-    }
-    let antwort = "Füllen Sie bitte alle Felder aus!";
-    return antwort;
-}
-async function UeberpruefenUserDatenbank(_userarray, _user) {
-    for (let i = 0; i < _userarray.length; i++) {
-        if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
-            let antwort = "User wurde gefunden";
-            return antwort;
-        }
-    }
-    let antwort = "User wurde nicht gefunden.";
-    return antwort;
-}
-async function UeberpruefenUserDatenbanknurName(_userarray, _user) {
-    for (let i = 0; i < _userarray.length; i++) {
-        if (_userarray[i].nutzername == _user.nutzername) {
-            let antwort = "User wurde gefunden";
-            return antwort;
-        }
-    }
-    let antwort = "User wurde nicht gefunden.";
-    return antwort;
-}
 //# sourceMappingURL=server.js.map
