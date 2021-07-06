@@ -46,7 +46,7 @@ namespace Endabgabev2 {
 
             let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("divfavs");
 
-            let aktiveruser: string = sessionStorage.getItem("aktiveruser");
+            let aktiveruser: string = "Hans";
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/favs";
 

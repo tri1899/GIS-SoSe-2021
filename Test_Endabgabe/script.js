@@ -30,7 +30,7 @@ var Endabgabev2;
         favs.addEventListener("click", Favoriten);
         async function Favoriten() {
             let rueckgabelogin = document.getElementById("divfavs");
-            let aktiveruser = sessionStorage.getItem("aktiveruser");
+            let aktiveruser = "Hans";
             let url = "https://tri1899gissose2021.herokuapp.com/favs";
             url += "?nutzername" + aktiveruser;
             let antwort = await fetch(url);
