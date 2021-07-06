@@ -1,5 +1,10 @@
 namespace Endabgabe {
 
+    interface User {
+        nutzername: string;
+        passwort: string;
+    }
+
     //login
 
     let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("login");
@@ -28,7 +33,6 @@ namespace Endabgabe {
         }
         rueckgabelogin.innerHTML = ausgabe;
         loginentleeren.reset();
-
     }
 
     //registrierung
@@ -37,8 +41,8 @@ namespace Endabgabe {
     registrierung.addEventListener("click", Registrierung);
     let rueckgabe: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortregis"); //anheften an die Seite
     let loginregis: HTMLFormElement = <HTMLFormElement>document.getElementById("Registration");
-    
-    
+
+
 
     async function Registrierung(): Promise<void> {
         let formData: FormData = new FormData(document.forms[1]);

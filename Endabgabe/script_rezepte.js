@@ -39,7 +39,10 @@ var Endabgabe;
                     url += "?titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung;
                     let antwort = await fetch(url);
                     let ausgabe = await antwort.text();
-                    behaelter.innerHTML = ausgabe;
+                    let divfav = document.createElement("div");
+                    divfav.classList.add("divfav");
+                    divfav.innerHTML = ausgabe;
+                    divallerezepte.appendChild(divfav);
                 }
             }
         };

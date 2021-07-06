@@ -49,8 +49,8 @@ export namespace Endabgabe {
             }
 
             else if (url.pathname == "/datenauslesen") {
-                let studentenliste: Rezept[] = await Rezepteauslesen(mongoUrl);
-                _response.write(JSON.stringify(studentenliste));
+                let userliste: Rezept[] = await Rezepteauslesen(mongoUrl);
+                _response.write(JSON.stringify(userliste));
             }
 
             else if (url.pathname == "/rezepterstellen") {
@@ -73,7 +73,7 @@ export namespace Endabgabe {
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("MeineFavs");
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
         meinedatenbank.insertOne(_rezept);
         let antwort: string = "hinzugefügt!";
         return antwort;

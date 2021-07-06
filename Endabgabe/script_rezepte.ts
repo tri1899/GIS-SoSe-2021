@@ -70,8 +70,11 @@ namespace Endabgabe {
                     let antwort: Response = await fetch (url);
 
                     let ausgabe: string = await antwort.text();
-                    
-                    behaelter.innerHTML = ausgabe;
+
+                    let divfav: HTMLDivElement = document.createElement("div");
+                    divfav.classList.add("divfav");
+                    divfav.innerHTML = ausgabe;
+                    divallerezepte.appendChild(divfav);
                 }
             }
         };
