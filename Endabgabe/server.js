@@ -68,7 +68,7 @@ var Endabgabe;
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat && _rezept.zubereitungsanweisung != "") {
-            let meinedatenbank = mongoClient.db("Rezeptenliste").collection("ErstelleneueCollection");
+            let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
             meinedatenbank.insertOne(_rezept);
             let antwort = "Rezept wurde angelegt";
             return antwort;

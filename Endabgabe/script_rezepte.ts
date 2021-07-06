@@ -65,7 +65,7 @@ namespace Endabgabe {
 
                     let url: string = "https://tri1899gissose2021.herokuapp.com/favorisieren";
 
-                    url += "?titel" + rezeptenliste[i].titel + "&arbeitszeit" + rezeptenliste[i].arbeitszeit + "&zutat" + rezeptenliste[i].zutat + "&zubereitungsanweisung" + rezeptenliste[i].zubereitungsanweisung;
+                    url += "?titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung;
 
                     let antwort: Response = await fetch (url);
 

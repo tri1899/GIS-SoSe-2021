@@ -36,7 +36,7 @@ var Endabgabe;
                 favbutton.addEventListener("click", Favorisieren);
                 async function Favorisieren() {
                     let url = "https://tri1899gissose2021.herokuapp.com/favorisieren";
-                    url += "?titel" + rezeptenliste[i].titel + "&arbeitszeit" + rezeptenliste[i].arbeitszeit + "&zutat" + rezeptenliste[i].zutat + "&zubereitungsanweisung" + rezeptenliste[i].zubereitungsanweisung;
+                    url += "?titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung;
                     let antwort = await fetch(url);
                     let ausgabe = await antwort.text();
                     behaelter.innerHTML = ausgabe;
