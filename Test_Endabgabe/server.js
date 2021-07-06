@@ -49,7 +49,7 @@ var Endabgabev2;
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         let aktiveruser = _favsname.nutzername;
-        let meinedatenbank = mongoClient.db("User").collection(aktiveruser);
+        let meinedatenbank = mongoClient.db("User").collection("aktiverUser");
         meinedatenbank.insertOne(_favsname.nutzername);
         let antwort = "User wurde gespeichert";
         return antwort;

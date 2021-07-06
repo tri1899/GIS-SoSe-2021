@@ -32,7 +32,7 @@ var Endabgabev2;
             let rueckgabelogin = document.getElementById("divfavs");
             let aktiveruser = "Hans";
             let url = "https://tri1899gissose2021.herokuapp.com/favs";
-            url += "?nutzername" + aktiveruser;
+            url += "?nutzername=" + aktiveruser;
             let antwort = await fetch(url);
             let ausgabe = await antwort.text();
             rueckgabelogin.innerHTML = ausgabe;

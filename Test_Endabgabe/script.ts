@@ -50,7 +50,7 @@ namespace Endabgabev2 {
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/favs";
 
-            url += "?nutzername" + aktiveruser;
+            url += "?nutzername=" + aktiveruser;
 
             let antwort: Response = await fetch(url);
             let ausgabe: string = await antwort.text();

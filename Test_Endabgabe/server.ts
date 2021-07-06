@@ -64,7 +64,7 @@ export namespace Endabgabev2 {
 
         let aktiveruser: string = _favsname.nutzername;
 
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection(aktiveruser);
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("aktiverUser");
 
         meinedatenbank.insertOne(_favsname.nutzername);
         let antwort: string = "User wurde gespeichert";
