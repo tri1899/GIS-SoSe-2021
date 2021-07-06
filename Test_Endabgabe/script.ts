@@ -35,23 +35,26 @@ namespace Endabgabev2 {
         }
     }
 
-    let favs: HTMLButtonElement = <HTMLButtonElement>document.getElementById("favs");
-    favs.addEventListener("click", Favoriten);
+    if (document.querySelector("title").getAttribute("id") == "meinefavs") {
 
-    async function Favoriten (): Promise<void> {
+        let favs: HTMLButtonElement = <HTMLButtonElement>document.getElementById("favs");
+        favs.addEventListener("click", Favoriten);
 
-        let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("divfavs");
+        async function Favoriten(): Promise<void> {
 
-        let aktiveruser: string = sessionStorage.getItem("aktiveruser");
+            let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("divfavs");
 
-        let url: string = "https://tri1899gissose2021.herokuapp.com/favs";
+            let aktiveruser: string = sessionStorage.getItem("aktiveruser");
 
-        url += "?nutzername" + aktiveruser;
+            let url: string = "https://tri1899gissose2021.herokuapp.com/favs";
 
-        let antwort: Response = await fetch (url);
-        let ausgabe: string = await antwort.text();
+            url += "?nutzername" + aktiveruser;
 
-        rueckgabelogin.innerHTML = ausgabe;
+            let antwort: Response = await fetch(url);
+            let ausgabe: string = await antwort.text();
+
+            rueckgabelogin.innerHTML = ausgabe;
+        }
     }
 
 

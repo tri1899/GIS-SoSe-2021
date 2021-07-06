@@ -25,16 +25,18 @@ var Endabgabev2;
             }
         }
     }
-    let favs = document.getElementById("favs");
-    favs.addEventListener("click", Favoriten);
-    async function Favoriten() {
-        let rueckgabelogin = document.getElementById("divfavs");
-        let aktiveruser = sessionStorage.getItem("aktiveruser");
-        let url = "https://tri1899gissose2021.herokuapp.com/favs";
-        url += "?nutzername" + aktiveruser;
-        let antwort = await fetch(url);
-        let ausgabe = await antwort.text();
-        rueckgabelogin.innerHTML = ausgabe;
+    if (document.querySelector("title").getAttribute("id") == "meinefavs") {
+        let favs = document.getElementById("favs");
+        favs.addEventListener("click", Favoriten);
+        async function Favoriten() {
+            let rueckgabelogin = document.getElementById("divfavs");
+            let aktiveruser = sessionStorage.getItem("aktiveruser");
+            let url = "https://tri1899gissose2021.herokuapp.com/favs";
+            url += "?nutzername" + aktiveruser;
+            let antwort = await fetch(url);
+            let ausgabe = await antwort.text();
+            rueckgabelogin.innerHTML = ausgabe;
+        }
     }
     //registrierung
     /*let registrierung: HTMLButtonElement = <HTMLButtonElement>document.getElementById("registrierung");
