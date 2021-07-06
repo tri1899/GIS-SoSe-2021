@@ -1,11 +1,6 @@
 namespace Endabgabe {
 
-    interface User {
-        nutzername: string;
-        passwort: string;
-    }
-
-    //login
+   //login
 
     let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("login");
     login.addEventListener("click", Login);

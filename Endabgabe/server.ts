@@ -156,7 +156,7 @@ export namespace Endabgabe {
             let alleuser: User[] = await cursor.toArray();
 
             let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
-
+            
             if (ueberpruefen == "User wurde gefunden") {
                 return ueberpruefen;
             } else if ("User wurde nicht gefunden.") {
@@ -168,7 +168,7 @@ export namespace Endabgabe {
 
     }
 
-    async function UeberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> { // Für Registrierung
+    async function UeberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> { // Für Login
         for (let i: number = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
                 let antwort: string = "User wurde gefunden";
@@ -179,7 +179,7 @@ export namespace Endabgabe {
         return antwort;
     }
 
-    async function UeberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> { // Für Login
+    async function UeberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> { // Für Registrierung
         for (let i: number = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername) {
                 let antwort: string = "User wurde gefunden";
