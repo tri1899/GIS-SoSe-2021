@@ -1,4 +1,7 @@
-namespace Endabgabe {
+namespace Endabgabev2 {
+
+    console.log("HAllo ");
+    
 
     //login
 
@@ -20,14 +23,12 @@ namespace Endabgabe {
 
         let ausgabe: string = await antwort.text();
 
-        if (ausgabe == "User wurde gefunden") {
-            location.href = "alle_rezepte.html";
-        } else if (ausgabe == "User wurde nicht gefunden.") {
+        if (ausgabe == "User wurde nicht gefunden.") {
             rueckgabelogin.innerHTML = ausgabe;
             loginentleeren.reset();
+        } else {
+            rueckgabelogin.innerHTML = ausgabe;
         }
-        rueckgabelogin.innerHTML = ausgabe;
-        loginentleeren.reset();
     }
 
     //registrierung
