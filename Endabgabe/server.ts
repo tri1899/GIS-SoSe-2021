@@ -73,7 +73,7 @@ export namespace Endabgabe {
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection(sessionStorage.getItem("user"));
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("MeineFavs");
         meinedatenbank.insertOne(_rezept);
         let antwort: string = "hinzugefügt!";
         return antwort;
@@ -158,7 +158,6 @@ export namespace Endabgabe {
             let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
 
             if (ueberpruefen == "User wurde gefunden") {
-                sessionStorage.setItem("user", _user.nutzername);
                 return ueberpruefen;
             } else if ("User wurde nicht gefunden.") {
                 return ueberpruefen;
