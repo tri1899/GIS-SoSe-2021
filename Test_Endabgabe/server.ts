@@ -62,7 +62,9 @@ export namespace Endabgabev2 {
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection(_favsname.nutzername);
+        let aktiveruser: string = _favsname.nutzername;
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection(aktiveruser);
 
         meinedatenbank.insertOne(_favsname.nutzername);
         let antwort: string = "User wurde gespeichert";

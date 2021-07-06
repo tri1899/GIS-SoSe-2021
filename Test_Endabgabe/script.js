@@ -26,7 +26,7 @@ var Endabgabev2;
         }
     }
     if (document.querySelector("title").getAttribute("id") == "meinefavs") {
-        let favs = document.getElementById("/favs");
+        let favs = document.getElementById("favs");
         favs.addEventListener("click", Favoriten);
         async function Favoriten() {
             let rueckgabelogin = document.getElementById("divfavs");

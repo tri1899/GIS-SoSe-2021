@@ -39,7 +39,7 @@ namespace Endabgabev2 {
 
     if (document.querySelector("title").getAttribute("id") == "meinefavs") {
 
-        let favs: HTMLButtonElement = <HTMLButtonElement>document.getElementById("/favs");
+        let favs: HTMLButtonElement = <HTMLButtonElement>document.getElementById("favs");
         favs.addEventListener("click", Favoriten);
 
         async function Favoriten(): Promise<void> {
