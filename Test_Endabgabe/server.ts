@@ -47,8 +47,26 @@ export namespace Endabgabev2 {
                 _response.write(useraktiv);
 
             }
+
+            else if (url.pathname == "/favs") {
+                let favsname: Aktiveruser = JSON.parse(jsonstring);
+                let userfavs: string = await Anlegen(mongoUrl, favsname);
+                _response.write(userfavs);
+            }
         }
         _response.end();
+    }
+
+    async function Anlegen (_url: string, _favsname: Aktiveruser): Promise<string> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection(_favsname.nutzername);
+
+        meinedatenbank.insertOne(_favsname.nutzername);
+        let antwort: string = "User wurde gespeichert";
+        return antwort;  
     }
 
     async function Login(_url: string, _user: User): Promise<string> {
@@ -131,5 +149,9 @@ export namespace Endabgabev2 {
     interface User {
         nutzername: string;
         passwort: string;
+    }
+
+    interface Aktiveruser {
+        nutzername: string;
     }
 }

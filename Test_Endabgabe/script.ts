@@ -1,39 +1,80 @@
 namespace Endabgabev2 {
 
     console.log("HAllo ");
-    
+
 
     //login
 
-    let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("login");
-    login.addEventListener("click", Login);
     let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortlogin");
     let loginentleeren: HTMLFormElement = <HTMLFormElement>document.getElementById("Login");
 
-    async function Login(): Promise<void> {
-        let formData: FormData = new FormData(document.forms[0]);
+    if (document.querySelector("title").getAttribute("id") == "login") {
+        let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("login");
+        login.addEventListener("click", Login);
 
-        let url: string = "https://tri1899gissose2021.herokuapp.com/login";
+        async function Login(): Promise<void> {
+            let formData: FormData = new FormData(document.forms[0]);
 
-        let query: URLSearchParams = new URLSearchParams(<any>formData);
+            let url: string = "https://tri1899gissose2021.herokuapp.com/login";
 
-        url = url + "?" + query.toString();
+            let query: URLSearchParams = new URLSearchParams(<any>formData);
 
-        let antwort: Response = await fetch(url);
+            url = url + "?" + query.toString();
 
-        let ausgabe: string = await antwort.text();
+            let antwort: Response = await fetch(url);
 
-        if (ausgabe == "User wurde nicht gefunden.") {
-            rueckgabelogin.innerHTML = ausgabe;
-            loginentleeren.reset();
-        } else {
-            rueckgabelogin.innerHTML = ausgabe;
+            let ausgabe: string = await antwort.text();
+
+            if (ausgabe == "User wurde nicht gefunden.") {
+                rueckgabelogin.innerHTML = ausgabe;
+                loginentleeren.reset();
+            } else {
+                sessionStorage.setItem("aktiveruser", ausgabe);
+                location.href = "meinefavs.html";
+            }
         }
     }
 
+    let favs: HTMLButtonElement = <HTMLButtonElement>document.getElementById("favs");
+    favs.addEventListener("click", Favoriten);
+
+    async function Favoriten (): Promise<void> {
+
+        let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("divfavs");
+
+        let aktiveruser: string = sessionStorage.getItem("aktiveruser");
+
+        let url: string = "https://tri1899gissose2021.herokuapp.com/favs";
+
+        url += "?nutzername" + aktiveruser;
+
+        let antwort: Response = await fetch (url);
+        let ausgabe: string = await antwort.text();
+
+        rueckgabelogin.innerHTML = ausgabe;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //registrierung
 
-    let registrierung: HTMLButtonElement = <HTMLButtonElement>document.getElementById("registrierung");
+    /*let registrierung: HTMLButtonElement = <HTMLButtonElement>document.getElementById("registrierung");
     registrierung.addEventListener("click", Registrierung);
     let rueckgabe: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortregis"); //anheften an die Seite
     let loginregis: HTMLFormElement = <HTMLFormElement>document.getElementById("Registration");
@@ -61,6 +102,6 @@ namespace Endabgabev2 {
         }
         rueckgabe.innerHTML = ausgabe;
         loginregis.reset();
-    }
+    }*/
 }
 

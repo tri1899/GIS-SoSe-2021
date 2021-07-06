@@ -36,8 +36,22 @@ var Endabgabev2;
                 let useraktiv = await Login(mongoUrl, user);
                 _response.write(useraktiv);
             }
+            else if (url.pathname == "/favs") {
+                let favsname = JSON.parse(jsonstring);
+                let userfavs = await Anlegen(mongoUrl, favsname);
+                _response.write(userfavs);
+            }
         }
         _response.end();
+    }
+    async function Anlegen(_url, _favsname) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("User").collection(_favsname.nutzername);
+        meinedatenbank.insertOne(_favsname.nutzername);
+        let antwort = "User wurde gespeichert";
+        return antwort;
     }
     async function Login(_url, _user) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
