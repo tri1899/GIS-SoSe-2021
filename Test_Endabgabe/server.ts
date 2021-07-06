@@ -19,7 +19,7 @@ export namespace Endabgabev2 {
 
     function Serverstarten(_port: number | string): void {
         let server: Http.Server = Http.createServer();
-        console.log("Starting Server!");
+        console.log("Starting Server!Test");
         server.listen(_port);
         server.addListener("request", handleRequest);
     }

@@ -14,7 +14,7 @@ var Endabgabev2;
     Serverstarten(port);
     function Serverstarten(_port) {
         let server = Http.createServer();
-        console.log("Starting Server!");
+        console.log("Starting Server!Test");
         server.listen(_port);
         server.addListener("request", handleRequest);
     }

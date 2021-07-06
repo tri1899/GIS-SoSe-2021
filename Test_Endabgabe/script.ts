@@ -9,6 +9,8 @@ namespace Endabgabev2 {
     let loginentleeren: HTMLFormElement = <HTMLFormElement>document.getElementById("Login");
 
     if (document.querySelector("title").getAttribute("id") == "login") {
+
+
         let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("login");
         login.addEventListener("click", Login);
 
@@ -37,7 +39,7 @@ namespace Endabgabev2 {
 
     if (document.querySelector("title").getAttribute("id") == "meinefavs") {
 
-        let favs: HTMLButtonElement = <HTMLButtonElement>document.getElementById("favs");
+        let favs: HTMLButtonElement = <HTMLButtonElement>document.getElementById("/favs");
         favs.addEventListener("click", Favoriten);
 
         async function Favoriten(): Promise<void> {
