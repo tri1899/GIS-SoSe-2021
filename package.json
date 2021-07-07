@@ -9,7 +9,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "start": "node Test_Endabgabe/server.js remote"
+    "start": "node Endabgabe/server.js remote"
   },
   "repository": {
     "type": "git",
