@@ -48,7 +48,6 @@ var Endabgabe;
                     url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung;
                     let antwort = await fetch(url);
                     let ausgabe = await antwort.text();
-                    behaelter.innerHTML = ausgabe;
                 }
             }
         };
@@ -63,7 +62,8 @@ var Endabgabe;
             url = url + "?" + query.toString();
             let antwort = await fetch(url);
             let ausgabe = await antwort.text();
-            console.log(ausgabe);
+            console.log(aktiveruser);
+            behaelter.innerHTML = ausgabe;
         };
     }
     if (document.querySelector("title").getAttribute("id") == "meinerezepte") {

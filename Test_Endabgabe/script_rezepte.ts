@@ -85,7 +85,6 @@ namespace Endabgabe {
 
                     let ausgabe: string = await antwort.text();
 
-                    behaelter.innerHTML = ausgabe;
                 }
             }
         };
@@ -110,7 +109,9 @@ namespace Endabgabe {
 
             let ausgabe: string = await antwort.text();
 
-            console.log(ausgabe);
+            console.log(aktiveruser);
+            
+            behaelter.innerHTML = ausgabe;
             
         };
     }

@@ -63,6 +63,7 @@ var Endabgabe;
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
+        console.log(_aktiveruser.aktiveruser);
         let cursor = meinedatenbank.find({ aktiveruser: _aktiveruser.aktiveruser });
         let antwort = await cursor.toArray();
         return antwort;
