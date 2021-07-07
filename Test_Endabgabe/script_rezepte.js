@@ -34,32 +34,14 @@ var Endabgabe;
                 favbutton.innerHTML = "favorisieren";
                 divallerezepte.appendChild(favbutton);
                 favbutton.addEventListener("click", Favorisieren);
-                function Favorisieren() {
-                    document.cookie = "titel=";
-                    localStorage.setItem("titel", rezeptenliste[i].titel);
-                    localStorage.setItem("arbeitszeit", rezeptenliste[i].arbeitszeit);
-                    localStorage.setItem("zutat", rezeptenliste[i].zutat);
-                    localStorage.setItem("zubereitungsanweisung", rezeptenliste[i].zubereitungsanweisung);
+                async function Favorisieren() {
+                    let i = 2;
+                    console.log(i);
                 }
             }
         };
     }
     if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
-        let meinefavs = document.createElement("div");
-        let ptitel = document.createElement("p");
-        ptitel.innerHTML = localStorage.getItem("titel");
-        let parbeitszeit = document.createElement("p");
-        parbeitszeit.innerHTML = localStorage.getItem("arbeitszeit");
-        let pzutat = document.createElement("p");
-        pzutat.innerHTML = localStorage.getItem("zutat");
-        let pzubereitungsanweisung = document.createElement("p");
-        pzubereitungsanweisung.innerHTML = localStorage.getItem("zubereitungsanweisung");
-        meinefavs.appendChild(ptitel);
-        meinefavs.appendChild(parbeitszeit);
-        meinefavs.appendChild(pzutat);
-        meinefavs.appendChild(pzubereitungsanweisung);
-        meinefavs.classList.add("meinefavs");
-        behaelter.appendChild(meinefavs);
     }
     if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
         let buttonspeichern = document.getElementById("rezepterstellen");
