@@ -78,6 +78,7 @@ export namespace Aufgabe3_4 {
         adresse: string;
         hausnummer: number;
         studiengang: string;
+        bild: string;
     }
 }
 
