@@ -29,7 +29,7 @@ namespace Endabgabe {
         } else {
         localStorage.setItem("aktiveruser", ausgabe);
         console.log(ausgabe);
-        location.href = "allerezepte.html";
+        location.href = "alle_rezepte.html";
         }
     }
 
@@ -65,7 +65,7 @@ namespace Endabgabe {
         else {
         localStorage.setItem("aktiveruser", ausgabe);
         console.log(ausgabe);
-        location.href = "allerezepte.html";
+        location.href = "alle_rezepte.html";
         }
     }
 }
