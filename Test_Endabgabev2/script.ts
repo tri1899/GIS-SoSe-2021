@@ -20,17 +20,14 @@ namespace Endabgabe {
 
         let ausgabe: string = await antwort.text();
 
-        if (ausgabe == "User wurde nicht gefunden.") {
+        if (ausgabe == "User wurde gefunden") {
+            location.href = "alle_rezepte.html";
+        } else if (ausgabe == "User wurde nicht gefunden.") {
             rueckgabelogin.innerHTML = ausgabe;
             loginentleeren.reset();
-        } else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
-            rueckgabelogin.innerHTML = ausgabe;
-            loginentleeren.reset();
-        } else {
-        localStorage.setItem("aktiveruser", ausgabe);
-        console.log(ausgabe);
-        location.href = "alle_rezepte.html";
         }
+        rueckgabelogin.innerHTML = ausgabe;
+        loginentleeren.reset();
     }
 
     //registrierung
@@ -55,18 +52,14 @@ namespace Endabgabe {
 
         let ausgabe: string = await antwort.text();
 
-        if (ausgabe == "Der Name existiert schon!") {
-            rueckgabe.innerHTML = ausgabe;
-            loginregis.reset(); 
-        } else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
+        if (ausgabe == "User wurde gespeichert") {
+            location.href = "alle_rezepte.html";
+        } else if (ausgabe == "Der Name existiert schon!") {
             rueckgabe.innerHTML = ausgabe;
             loginregis.reset();
         }
-        else {
-        localStorage.setItem("aktiveruser", ausgabe);
-        console.log(ausgabe);
-        location.href = "alle_rezepte.html";
-        }
+        rueckgabe.innerHTML = ausgabe;
+        loginregis.reset();
     }
 }
 

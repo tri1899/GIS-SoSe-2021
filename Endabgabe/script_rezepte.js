@@ -4,10 +4,7 @@ var Endabgabe;
     let behaelter = document.getElementById("behaelter");
     if (document.querySelector("title").getAttribute("id") == "allerezepte") {
         window.onload = async function datenAnzeigen() {
-            let formData = new FormData(document.forms[0]);
             let url = "https://tri1899gissose2021.herokuapp.com/datenauslesen";
-            let query = new URLSearchParams(formData);
-            url = url + "?" + query.toString();
             let antwort = await fetch(url);
             let ausgabe = await antwort.text();
             let rezeptenliste = JSON.parse(ausgabe);
@@ -34,32 +31,58 @@ var Endabgabe;
                 favbutton.innerHTML = "favorisieren";
                 divallerezepte.appendChild(favbutton);
                 favbutton.addEventListener("click", Favorisieren);
-                function Favorisieren() {
-                    document.cookie = "titel=";
-                    localStorage.setItem("titel", rezeptenliste[i].titel);
-                    localStorage.setItem("arbeitszeit", rezeptenliste[i].arbeitszeit);
-                    localStorage.setItem("zutat", rezeptenliste[i].zutat);
-                    localStorage.setItem("zubereitungsanweisung", rezeptenliste[i].zubereitungsanweisung);
+                async function Favorisieren() {
+                    let aktiveruser = localStorage.getItem("aktiveruser");
+                    console.log("favorisieren");
+                    let url = "https://tri1899gissose2021.herokuapp.com/favorisieren";
+                    url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung;
+                    let antwort = await fetch(url);
+                    let ausgabe = await antwort.text();
                 }
             }
         };
     }
     if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
-        let meinefavs = document.createElement("div");
-        let ptitel = document.createElement("p");
-        ptitel.innerHTML = localStorage.getItem("titel");
-        let parbeitszeit = document.createElement("p");
-        parbeitszeit.innerHTML = localStorage.getItem("arbeitszeit");
-        let pzutat = document.createElement("p");
-        pzutat.innerHTML = localStorage.getItem("zutat");
-        let pzubereitungsanweisung = document.createElement("p");
-        pzubereitungsanweisung.innerHTML = localStorage.getItem("zubereitungsanweisung");
-        meinefavs.appendChild(ptitel);
-        meinefavs.appendChild(parbeitszeit);
-        meinefavs.appendChild(pzutat);
-        meinefavs.appendChild(pzubereitungsanweisung);
-        meinefavs.classList.add("meinefavs");
-        behaelter.appendChild(meinefavs);
+        window.onload = async function datenAnzeigen() {
+            let aktiveruser = localStorage.getItem("aktiveruser");
+            let url = "https://tri1899gissose2021.herokuapp.com/favsauslesen";
+            url += "?aktiveruser=" + aktiveruser;
+            let antwort = await fetch(url);
+            let ausgabe = await antwort.text();
+            let favliste = JSON.parse(ausgabe);
+            for (let i = 0; i < favliste.length; i++) {
+                let divallefavs = document.createElement("div");
+                let ptitel = document.createElement("p");
+                let parbeitszeit = document.createElement("p");
+                let pzutat = document.createElement("p");
+                let panweisung = document.createElement("p");
+                ptitel.innerHTML = favliste[i].titel;
+                parbeitszeit.innerHTML = favliste[i].arbeitszeit;
+                pzutat.innerHTML = favliste[i].zutat;
+                panweisung.innerHTML = favliste[i].zubereitungsanweisung;
+                divallefavs.appendChild(ptitel);
+                divallefavs.appendChild(parbeitszeit);
+                divallefavs.appendChild(pzutat);
+                divallefavs.appendChild(panweisung);
+                divallefavs.classList.add("diveinzelnrezept");
+                behaelter.appendChild(divallefavs);
+                behaelter.classList.add("rezepte");
+                let br = document.createElement("br");
+                behaelter.appendChild(br);
+                let loeschen = document.createElement("button");
+                loeschen.innerHTML = "löschen";
+                divallefavs.appendChild(loeschen);
+                loeschen.addEventListener("click", Loeschen);
+                async function Loeschen() {
+                    console.log("loeschen");
+                    let url = "https://tri1899gissose2021.herokuapp.com/loeschen";
+                    url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat=" + favliste[i].zutat + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
+                    let antwort = await fetch(url);
+                    let ausgabe = await antwort.text();
+                    window.location.reload();
+                }
+            }
+        };
     }
     if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
         let buttonspeichern = document.getElementById("rezepterstellen");

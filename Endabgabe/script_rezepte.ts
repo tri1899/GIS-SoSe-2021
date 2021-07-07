@@ -7,19 +7,20 @@ namespace Endabgabe {
         zubereitungsanweisung: string;
     }
 
+    interface Favliste {
+        aktiveruser: string;
+        titel: string;
+        arbeitszeit: string;
+        zutat: string;
+        zubereitungsanweisung: string;
+    }
+
     let behaelter: HTMLDivElement = <HTMLDivElement>document.getElementById("behaelter");
 
     if (document.querySelector("title").getAttribute("id") == "allerezepte") {
 
         window.onload = async function datenAnzeigen(): Promise<void> {
-
-            let formData: FormData = new FormData(document.forms[0]);
-
             let url: string = "https://tri1899gissose2021.herokuapp.com/datenauslesen";
-
-            let query: URLSearchParams = new URLSearchParams(<any>formData);
-
-            url = url + "?" + query.toString();
 
             let antwort: Response = await fetch(url);
 
@@ -63,13 +64,19 @@ namespace Endabgabe {
                 favbutton.addEventListener("click", Favorisieren);
 
 
-                function Favorisieren(): void {
-                    document.cookie = "titel="
-                    localStorage.setItem("titel", rezeptenliste[i].titel);
-                    localStorage.setItem("arbeitszeit", rezeptenliste[i].arbeitszeit);
-                    localStorage.setItem("zutat", rezeptenliste[i].zutat);
-                    localStorage.setItem("zubereitungsanweisung", rezeptenliste[i].zubereitungsanweisung);
+                async function Favorisieren(): Promise<void> {
 
+                    let aktiveruser: string = localStorage.getItem("aktiveruser");
+
+                    console.log("favorisieren");
+                    
+
+                    let url: string = "https://tri1899gissose2021.herokuapp.com/favorisieren";
+                    url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung; 
+
+                    let antwort: Response = await fetch (url);
+
+                    let ausgabe: string = await antwort.text();
                 }
             }
         };
@@ -77,23 +84,63 @@ namespace Endabgabe {
 
     if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
 
-        let meinefavs: HTMLDivElement = document.createElement("div");
-        let ptitel: HTMLParagraphElement = document.createElement("p");
+        window.onload = async function datenAnzeigen(): Promise<void> {
+            let aktiveruser: string = localStorage.getItem("aktiveruser");
 
-        ptitel.innerHTML = localStorage.getItem ("titel");
-        let parbeitszeit: HTMLParagraphElement = document.createElement("p");
-        parbeitszeit.innerHTML = localStorage.getItem("arbeitszeit");
-        let pzutat: HTMLParagraphElement = document.createElement("p");
-        pzutat.innerHTML = localStorage.getItem("zutat");
-        let pzubereitungsanweisung: HTMLParagraphElement = document.createElement("p");
-        pzubereitungsanweisung.innerHTML = localStorage.getItem("zubereitungsanweisung");
-        meinefavs.appendChild(ptitel);
-        meinefavs.appendChild(parbeitszeit);
-        meinefavs.appendChild(pzutat);
-        meinefavs.appendChild(pzubereitungsanweisung);
-        meinefavs.classList.add("meinefavs");
-        behaelter.appendChild(meinefavs);
+            let url: string = "https://tri1899gissose2021.herokuapp.com/favsauslesen";
 
+            url += "?aktiveruser=" + aktiveruser;
+
+            let antwort: Response = await fetch(url);
+
+            let ausgabe: string = await antwort.text();
+
+            let favliste: Favliste[] = JSON.parse(ausgabe);
+
+            for (let i: number = 0; i < favliste.length; i++) {
+                let divallefavs: HTMLDivElement = document.createElement("div");
+
+                let ptitel: HTMLParagraphElement = document.createElement("p");
+                let parbeitszeit: HTMLParagraphElement = document.createElement("p");
+                let pzutat: HTMLParagraphElement = document.createElement("p");
+                let panweisung: HTMLParagraphElement = document.createElement("p");
+
+                ptitel.innerHTML = favliste[i].titel;
+                
+                parbeitszeit.innerHTML = favliste[i].arbeitszeit;
+                
+                pzutat.innerHTML = favliste[i].zutat;
+                
+                panweisung.innerHTML = favliste[i].zubereitungsanweisung;
+
+                divallefavs.appendChild(ptitel);
+                divallefavs.appendChild(parbeitszeit);
+                divallefavs.appendChild(pzutat);
+                divallefavs.appendChild(panweisung);
+                divallefavs.classList.add("diveinzelnrezept");
+                behaelter.appendChild(divallefavs);
+                behaelter.classList.add("rezepte");
+                let br: HTMLBRElement = document.createElement("br");
+                behaelter.appendChild(br);
+
+                let loeschen: HTMLButtonElement = document.createElement("button");
+                loeschen.innerHTML = "löschen";
+                divallefavs.appendChild(loeschen);
+                loeschen.addEventListener("click", Loeschen);
+
+                async function Loeschen (): Promise<void> {
+                    
+                    console.log("loeschen");
+                    
+                    let url: string = "https://tri1899gissose2021.herokuapp.com/loeschen";
+                    url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat=" + favliste[i].zutat + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
+                    let antwort: Response = await fetch (url);
+
+                    let ausgabe: string = await antwort.text();
+                    window.location.reload();
+                }
+            }
+        };
     }
 
 

@@ -13,19 +13,15 @@ var Endabgabe;
         url = url + "?" + query.toString();
         let antwort = await fetch(url);
         let ausgabe = await antwort.text();
-        if (ausgabe == "User wurde nicht gefunden.") {
-            rueckgabelogin.innerHTML = ausgabe;
-            loginentleeren.reset();
-        }
-        else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
-            rueckgabelogin.innerHTML = ausgabe;
-            loginentleeren.reset();
-        }
-        else {
-            localStorage.setItem("aktiveruser", ausgabe);
-            console.log(ausgabe);
+        if (ausgabe == "User wurde gefunden") {
             location.href = "alle_rezepte.html";
         }
+        else if (ausgabe == "User wurde nicht gefunden.") {
+            rueckgabelogin.innerHTML = ausgabe;
+            loginentleeren.reset();
+        }
+        rueckgabelogin.innerHTML = ausgabe;
+        loginentleeren.reset();
     }
     //registrierung
     let registrierung = document.getElementById("registrierung");
@@ -39,19 +35,15 @@ var Endabgabe;
         url = url + "?" + query.toString();
         let antwort = await fetch(url);
         let ausgabe = await antwort.text();
-        if (ausgabe == "Der Name existiert schon!") {
-            rueckgabe.innerHTML = ausgabe;
-            loginregis.reset();
-        }
-        else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
-            rueckgabe.innerHTML = ausgabe;
-            loginregis.reset();
-        }
-        else {
-            localStorage.setItem("aktiveruser", ausgabe);
-            console.log(ausgabe);
+        if (ausgabe == "User wurde gespeichert") {
             location.href = "alle_rezepte.html";
         }
+        else if (ausgabe == "Der Name existiert schon!") {
+            rueckgabe.innerHTML = ausgabe;
+            loginregis.reset();
+        }
+        rueckgabe.innerHTML = ausgabe;
+        loginregis.reset();
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=script.js.map

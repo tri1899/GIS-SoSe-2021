@@ -14,7 +14,7 @@ var Endabgabe;
     Serverstarten(port);
     function Serverstarten(_port) {
         let server = Http.createServer();
-        console.log("Starting Server!");
+        console.log("Starting Server.");
         server.listen(_port);
         server.addListener("request", handleRequest);
     }
@@ -46,19 +46,48 @@ var Endabgabe;
                 _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/favorisieren") {
-                let rezept = JSON.parse(jsonstring);
-                let antwortdatenbank = await Favorisieren(mongoUrl, rezept);
+                let rezeptfav = JSON.parse(jsonstring);
+                let antwortdatenbank = await Favorisieren(mongoUrl, rezeptfav);
+                _response.write(antwortdatenbank);
+            }
+            else if (url.pathname == "/favsauslesen") {
+                let favsauslesen = JSON.parse(jsonstring);
+                let favsliste = await Favsauslesen(mongoUrl, favsauslesen);
+                _response.write(JSON.stringify(favsliste));
+            }
+            else if (url.pathname == "/loeschen") {
+                let loeschenausfav = JSON.parse(jsonstring);
+                let antwortdatenbank = await FavsLoeschen(mongoUrl, loeschenausfav);
                 _response.write(antwortdatenbank);
             }
         }
         _response.end();
     }
-    async function Favorisieren(_url, _rezept) {
+    async function FavsLoeschen(_url, _loeschenausfav) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        meinedatenbank.insertOne(_rezept);
+        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
+        meinedatenbank.deleteOne(_loeschenausfav);
+        let antwort = "gelöscht!";
+        return antwort;
+    }
+    async function Favsauslesen(_url, _aktiveruser) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
+        let aktivernutzer = _aktiveruser.aktiveruser;
+        let cursor = meinedatenbank.find({ aktiveruser: aktivernutzer });
+        let antwort = await cursor.toArray();
+        return antwort;
+    }
+    async function Favorisieren(_url, _rezeptfav) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
+        meinedatenbank.insertOne(_rezeptfav);
         let antwort = "hinzugefügt!";
         return antwort;
     }
@@ -96,15 +125,12 @@ var Endabgabe;
             let cursor = meinedatenbank.find();
             let alleuser = await cursor.toArray();
             let ueberpruefen = await UeberpruefenUserDatenbanknurName(alleuser, _user);
-            if (ueberpruefen == "User wurde nicht gefunden.") {
-                meinedatenbank.insertOne(_user);
-                let antwort = "User wurde gespeichert";
-                return antwort;
-            }
-            else if ("User wurde gefunden") {
+            if (ueberpruefen == "User wurde gefunden") {
                 let antwort = "Der Name existiert schon!";
                 return antwort;
             }
+            meinedatenbank.insertOne(_user);
+            return ueberpruefen;
         }
         let antwort = "Füllen Sie bitte alle Felder aus!";
         return antwort;
@@ -118,10 +144,10 @@ var Endabgabe;
             let cursor = meinedatenbank.find();
             let alleuser = await cursor.toArray();
             let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
-            if (ueberpruefen == "User wurde gefunden") {
+            if (ueberpruefen == "User wurde nicht gefunden.") {
                 return ueberpruefen;
             }
-            else if ("User wurde nicht gefunden.") {
+            else {
                 return ueberpruefen;
             }
         }
@@ -131,7 +157,7 @@ var Endabgabe;
     async function UeberpruefenUserDatenbank(_userarray, _user) {
         for (let i = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
-                let antwort = "User wurde gefunden";
+                let antwort = _user.nutzername;
                 return antwort;
             }
         }
@@ -145,7 +171,7 @@ var Endabgabe;
                 return antwort;
             }
         }
-        let antwort = "User wurde nicht gefunden.";
+        let antwort = _user.nutzername;
         return antwort;
     }
 })(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
