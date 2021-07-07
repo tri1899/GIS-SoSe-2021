@@ -7,6 +7,14 @@ namespace Endabgabe {
         zubereitungsanweisung: string;
     }
 
+    /*interface Favliste {
+        aktiveruser: string;
+        titel: string;
+        arbeitszeit: string;
+        zutat: string;
+        zubereitungsanweisung: string;
+    }*/
+
     let behaelter: HTMLDivElement = <HTMLDivElement>document.getElementById("behaelter");
 
     if (document.querySelector("title").getAttribute("id") == "allerezepte") {
@@ -76,14 +84,36 @@ namespace Endabgabe {
                     let antwort: Response = await fetch (url);
 
                     let ausgabe: string = await antwort.text();
+
+                    behaelter.innerHTML = ausgabe;
                 }
             }
         };
     }
 
-    /*if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
+    if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
 
-    }*/
+        window.onload = async function datenAnzeigen(): Promise<void> {
+            let aktiveruser: string = localStorage.getItem("aktiveruser");
+
+            let formData: FormData = new FormData(document.forms[0]);
+
+            let url: string = "https://tri1899gissose2021.herokuapp.com/favsauslesen";
+
+            url += "?aktiveruser=" + aktiveruser;
+
+            let query: URLSearchParams = new URLSearchParams(<any>formData);
+
+            url = url + "?" + query.toString();
+
+            let antwort: Response = await fetch(url);
+
+            let ausgabe: string = await antwort.text();
+
+            console.log(ausgabe);
+            
+        };
+    }
 
 
 

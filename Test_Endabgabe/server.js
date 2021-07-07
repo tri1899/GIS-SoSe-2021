@@ -50,8 +50,22 @@ var Endabgabe;
                 let antwortdatenbank = await Favorisieren(mongoUrl, rezeptfav);
                 _response.write(antwortdatenbank);
             }
+            else if (url.pathname == "/favsauslesen") {
+                let favsauslesen = JSON.parse(jsonstring);
+                let favsliste = await Favsauslesen(mongoUrl, favsauslesen);
+                _response.write(JSON.stringify(favsliste));
+            }
         }
         _response.end();
+    }
+    async function Favsauslesen(_url, _aktiveruser) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
+        let cursor = meinedatenbank.find({ aktiveruser: _aktiveruser.aktiveruser });
+        let antwort = await cursor.toArray();
+        return antwort;
     }
     async function Favorisieren(_url, _rezeptfav) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };

@@ -64,8 +64,26 @@ export namespace Endabgabe {
                 let antwortdatenbank: string = await Favorisieren(mongoUrl, rezeptfav);
                 _response.write(antwortdatenbank);
             }
+
+            else if (url.pathname == "/favsauslesen") {
+                let favsauslesen: Userfavorisieren = JSON.parse(jsonstring);
+                let favsliste: Userfavorisieren[] = await Favsauslesen(mongoUrl, favsauslesen);
+                _response.write(JSON.stringify(favsliste));
+
+            }
         }
         _response.end();
+    }
+
+    async function Favsauslesen (_url: string, _aktiveruser: Userfavorisieren): Promise<Userfavorisieren[]> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
+        let cursor: Mongo.Cursor = meinedatenbank.find({aktiveruser: _aktiveruser.aktiveruser});
+        let antwort: Userfavorisieren[] = await cursor.toArray();
+        return antwort;   
     }
 
     async function Favorisieren (_url: string, _rezeptfav: Rezept): Promise<string> {
