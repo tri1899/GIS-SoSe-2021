@@ -71,8 +71,25 @@ export namespace Endabgabe {
                 _response.write(JSON.stringify(favsliste));
 
             }
+
+            else if (url.pathname == "/loeschen") {
+                let loeschenausfav: Userfavorisieren = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await FavsLoeschen(mongoUrl, loeschenausfav);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
+    }
+
+    async function FavsLoeschen (_url: string, _loeschenausfav: Userfavorisieren): Promise<string> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
+        meinedatenbank.deleteOne(_loeschenausfav);
+        let antwort: string = "gelöscht!";
+        return antwort;
     }
 
     async function Favsauslesen (_url: string, _aktiveruser: Userfavorisieren): Promise<Userfavorisieren[]> {

@@ -55,8 +55,22 @@ var Endabgabe;
                 let favsliste = await Favsauslesen(mongoUrl, favsauslesen);
                 _response.write(JSON.stringify(favsliste));
             }
+            else if (url.pathname == "/loeschen") {
+                let loeschenausfav = JSON.parse(jsonstring);
+                let antwortdatenbank = await FavsLoeschen(mongoUrl, loeschenausfav);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
+    }
+    async function FavsLoeschen(_url, _loeschenausfav) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
+        meinedatenbank.deleteOne(_loeschenausfav);
+        let antwort = "gelöscht!";
+        return antwort;
     }
     async function Favsauslesen(_url, _aktiveruser) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
