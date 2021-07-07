@@ -35,14 +35,19 @@ var Endabgabe;
                 divallerezepte.appendChild(favbutton);
                 favbutton.addEventListener("click", Favorisieren);
                 async function Favorisieren() {
-                    let i = 2;
-                    console.log(i);
+                    let aktiveruser = localStorage.getItem("aktiveruser");
+                    console.log("favorisieren");
+                    let url = "https://tri1899gissose2021.herokuapp.com/favorisieren";
+                    url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung;
+                    let antwort = await fetch(url);
+                    let ausgabe = await antwort.text();
                 }
             }
         };
     }
-    if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
-    }
+    /*if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
+
+    }*/
     if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
         let buttonspeichern = document.getElementById("rezepterstellen");
         buttonspeichern.addEventListener("click", Rezepterstellen);

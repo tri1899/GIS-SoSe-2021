@@ -60,21 +60,21 @@ export namespace Endabgabe {
             }
 
             else if (url.pathname == "/favorisieren") {
-                let rezept: Rezept = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await Favorisieren(mongoUrl, rezept);
+                let rezeptfav: Userfavorisieren = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await Favorisieren(mongoUrl, rezeptfav);
                 _response.write(antwortdatenbank);
             }
         }
         _response.end();
     }
 
-    async function Favorisieren (_url: string, _rezept: Rezept): Promise<string> {
+    async function Favorisieren (_url: string, _rezeptfav: Rezept): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-        meinedatenbank.insertOne(_rezept);
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
+        meinedatenbank.insertOne(_rezeptfav);
         let antwort: string = "hinzugefügt!";
         return antwort;
     }
@@ -195,6 +195,14 @@ export namespace Endabgabe {
     }
 
     interface Rezept {
+        titel: string;
+        arbeitszeit: string;
+        zutat: string;
+        zubereitungsanweisung: string;
+    }
+
+    interface Userfavorisieren {
+        aktiveruser: string;
         titel: string;
         arbeitszeit: string;
         zutat: string;

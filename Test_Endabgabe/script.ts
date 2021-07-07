@@ -26,11 +26,11 @@ namespace Endabgabe {
         } else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
             rueckgabelogin.innerHTML = ausgabe;
             loginentleeren.reset();
-        }
+        } else {
         localStorage.setItem("aktiveruser", ausgabe);
         console.log(ausgabe);
         location.href = "allerezepte.html";
-
+        }
     }
 
     //registrierung
@@ -57,14 +57,16 @@ namespace Endabgabe {
 
         if (ausgabe == "Der Name existiert schon!") {
             rueckgabe.innerHTML = ausgabe;
-            loginentleeren.reset();  
+            loginregis.reset(); 
         } else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
             rueckgabe.innerHTML = ausgabe;
             loginregis.reset();
         }
+        else {
         localStorage.setItem("aktiveruser", ausgabe);
         console.log(ausgabe);
-        location.href = "allerezepte.html";  
+        location.href = "allerezepte.html";
+        }
     }
 }
 

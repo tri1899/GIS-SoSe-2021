@@ -64,16 +64,26 @@ namespace Endabgabe {
 
 
                 async function Favorisieren(): Promise<void> {
-                    let i: number = 2;
-                    console.log(i);
+
+                    let aktiveruser: string = localStorage.getItem("aktiveruser");
+
+                    console.log("favorisieren");
+                    
+
+                    let url: string = "https://tri1899gissose2021.herokuapp.com/favorisieren";
+                    url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung; 
+
+                    let antwort: Response = await fetch (url);
+
+                    let ausgabe: string = await antwort.text();
                 }
             }
         };
     }
 
-    if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
+    /*if (document.querySelector("title").getAttribute("id") == "meinefavoriten") {
 
-    }
+    }*/
 
 
 

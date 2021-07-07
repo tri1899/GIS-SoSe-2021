@@ -21,9 +21,11 @@ var Endabgabe;
             rueckgabelogin.innerHTML = ausgabe;
             loginentleeren.reset();
         }
-        localStorage.setItem("aktiveruser", ausgabe);
-        console.log(ausgabe);
-        location.href = "allerezepte.html";
+        else {
+            localStorage.setItem("aktiveruser", ausgabe);
+            console.log(ausgabe);
+            location.href = "allerezepte.html";
+        }
     }
     //registrierung
     let registrierung = document.getElementById("registrierung");
@@ -39,15 +41,17 @@ var Endabgabe;
         let ausgabe = await antwort.text();
         if (ausgabe == "Der Name existiert schon!") {
             rueckgabe.innerHTML = ausgabe;
-            loginentleeren.reset();
+            loginregis.reset();
         }
         else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
             rueckgabe.innerHTML = ausgabe;
             loginregis.reset();
         }
-        localStorage.setItem("aktiveruser", ausgabe);
-        console.log(ausgabe);
-        location.href = "allerezepte.html";
+        else {
+            localStorage.setItem("aktiveruser", ausgabe);
+            console.log(ausgabe);
+            location.href = "allerezepte.html";
+        }
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=script.js.map

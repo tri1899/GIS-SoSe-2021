@@ -46,19 +46,19 @@ var Endabgabe;
                 _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/favorisieren") {
-                let rezept = JSON.parse(jsonstring);
-                let antwortdatenbank = await Favorisieren(mongoUrl, rezept);
+                let rezeptfav = JSON.parse(jsonstring);
+                let antwortdatenbank = await Favorisieren(mongoUrl, rezeptfav);
                 _response.write(antwortdatenbank);
             }
         }
         _response.end();
     }
-    async function Favorisieren(_url, _rezept) {
+    async function Favorisieren(_url, _rezeptfav) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("User").collection("Userlist");
-        meinedatenbank.insertOne(_rezept);
+        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
+        meinedatenbank.insertOne(_rezeptfav);
         let antwort = "hinzugefügt!";
         return antwort;
     }
