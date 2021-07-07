@@ -95,15 +95,9 @@ namespace Endabgabe {
         window.onload = async function datenAnzeigen(): Promise<void> {
             let aktiveruser: string = localStorage.getItem("aktiveruser");
 
-            let formData: FormData = new FormData(document.forms[0]);
-
             let url: string = "https://tri1899gissose2021.herokuapp.com/favsauslesen";
 
             url += "?aktiveruser=" + aktiveruser;
-
-            let query: URLSearchParams = new URLSearchParams(<any>formData);
-
-            url = url + "?" + query.toString();
 
             let antwort: Response = await fetch(url);
 
