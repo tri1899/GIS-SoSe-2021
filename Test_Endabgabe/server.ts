@@ -81,8 +81,9 @@ export namespace Endabgabe {
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
-        console.log(_aktiveruser.aktiveruser);
-        let cursor: Mongo.Cursor = meinedatenbank.find({aktiveruser: "wertzu"});
+        let aktivernutzer: string = _aktiveruser.aktiveruser;
+
+        let cursor: Mongo.Cursor = meinedatenbank.find({aktiveruser: aktivernutzer});
         let antwort: Userfavorisieren[] = await cursor.toArray();
         return antwort;   
     }
