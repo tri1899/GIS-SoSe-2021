@@ -77,7 +77,6 @@ namespace Endabgabe {
                     let antwort: Response = await fetch (url);
 
                     let ausgabe: string = await antwort.text();
-
                 }
             }
         };
@@ -138,6 +137,7 @@ namespace Endabgabe {
                     let antwort: Response = await fetch (url);
 
                     let ausgabe: string = await antwort.text();
+                    window.location.reload();
                 }
             }
         };

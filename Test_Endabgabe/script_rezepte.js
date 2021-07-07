@@ -79,6 +79,7 @@ var Endabgabe;
                     url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat=" + favliste[i].zutat + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
                     let antwort = await fetch(url);
                     let ausgabe = await antwort.text();
+                    window.location.reload();
                 }
             }
         };
