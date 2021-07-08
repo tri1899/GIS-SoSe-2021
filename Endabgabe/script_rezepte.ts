@@ -52,22 +52,47 @@ namespace Endabgabe {
 
                 let ptitel: HTMLParagraphElement = document.createElement("p");
                 let parbeitszeit: HTMLParagraphElement = document.createElement("p");
-                let pzutat: HTMLParagraphElement = document.createElement("p");
+                let pzutat1: HTMLParagraphElement = document.createElement("p");
+                let pzutat2: HTMLParagraphElement = document.createElement("p");
+                let pzutat3: HTMLParagraphElement = document.createElement("p");
+                let pzutat4: HTMLParagraphElement = document.createElement("p");
+                let pzutat5: HTMLParagraphElement = document.createElement("p");
+                let pzutat6: HTMLParagraphElement = document.createElement("p");
+                let pzutat7: HTMLParagraphElement = document.createElement("p");
+                let pzutat8: HTMLParagraphElement = document.createElement("p");
+                let pzutat9: HTMLParagraphElement = document.createElement("p");
+                let pzutat10: HTMLParagraphElement = document.createElement("p");
                 let panweisung: HTMLParagraphElement = document.createElement("p");
 
                 ptitel.innerHTML = rezeptenliste[i].titel;
                 
                 parbeitszeit.innerHTML = rezeptenliste[i].arbeitszeit;
                 
-                pzutat.innerHTML = rezeptenliste[i].zutat1;
+                pzutat1.innerHTML = rezeptenliste[i].zutat1;
+                pzutat2.innerHTML = rezeptenliste[i].zutat2;
+                pzutat3.innerHTML = rezeptenliste[i].zutat3;
+                pzutat4.innerHTML = rezeptenliste[i].zutat4;
+                pzutat5.innerHTML = rezeptenliste[i].zutat5;
+                pzutat6.innerHTML = rezeptenliste[i].zutat6;
+                pzutat7.innerHTML = rezeptenliste[i].zutat7;
+                pzutat8.innerHTML = rezeptenliste[i].zutat8;
+                pzutat9.innerHTML = rezeptenliste[i].zutat9;
+                pzutat10.innerHTML = rezeptenliste[i].zutat10;
                 
                 panweisung.innerHTML = rezeptenliste[i].zubereitungsanweisung;
                 
-
-
                 divallerezepte.appendChild(ptitel);
                 divallerezepte.appendChild(parbeitszeit);
-                divallerezepte.appendChild(pzutat);
+                divallerezepte.appendChild(pzutat1);
+                divallerezepte.appendChild(pzutat2);
+                divallerezepte.appendChild(pzutat3);
+                divallerezepte.appendChild(pzutat4);
+                divallerezepte.appendChild(pzutat5);
+                divallerezepte.appendChild(pzutat6);
+                divallerezepte.appendChild(pzutat7);
+                divallerezepte.appendChild(pzutat8);
+                divallerezepte.appendChild(pzutat9);
+                divallerezepte.appendChild(pzutat10);
                 divallerezepte.appendChild(panweisung);
                 divallerezepte.classList.add("diveinzelnrezept");
                 behaelter.appendChild(divallerezepte);
@@ -90,7 +115,9 @@ namespace Endabgabe {
                     
 
                     let url: string = "https://tri1899gissose2021.herokuapp.com/favorisieren";
-                    url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat1 + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung; 
+                    url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat1=" + rezeptenliste[i].zutat1 + "&zutat2=" + rezeptenliste[i].zutat2 + "&zutat3=" + rezeptenliste[i].zutat3 + "&zutat4=" + rezeptenliste[i].zutat4 + "&zutat5=" + rezeptenliste[i].zutat5 + "&zutat6=" + rezeptenliste[i].zutat6 + "&zutat7=" + rezeptenliste[i].zutat7 + "&zutat8=" + rezeptenliste[i].zutat8 + "&zutat9=" + rezeptenliste[i].zutat9 + "&zutat10=" + rezeptenliste[i].zutat10 + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung;
+
+
 
                     let antwort: Response = await fetch (url);
 
@@ -120,20 +147,48 @@ namespace Endabgabe {
 
                 let ptitel: HTMLParagraphElement = document.createElement("p");
                 let parbeitszeit: HTMLParagraphElement = document.createElement("p");
-                let pzutat: HTMLParagraphElement = document.createElement("p");
+                let pzutat1: HTMLParagraphElement = document.createElement("p");
+                let pzutat2: HTMLParagraphElement = document.createElement("p");
+                let pzutat3: HTMLParagraphElement = document.createElement("p");
+                let pzutat4: HTMLParagraphElement = document.createElement("p");
+                let pzutat5: HTMLParagraphElement = document.createElement("p");
+                let pzutat6: HTMLParagraphElement = document.createElement("p");
+                let pzutat7: HTMLParagraphElement = document.createElement("p");
+                let pzutat8: HTMLParagraphElement = document.createElement("p");
+                let pzutat9: HTMLParagraphElement = document.createElement("p");
+                let pzutat10: HTMLParagraphElement = document.createElement("p");
+
                 let panweisung: HTMLParagraphElement = document.createElement("p");
 
                 ptitel.innerHTML = favliste[i].titel;
                 
                 parbeitszeit.innerHTML = favliste[i].arbeitszeit;
                 
-                pzutat.innerHTML = favliste[i].zutat1;
-                
+                pzutat1.innerHTML = favliste[i].zutat1;
+                pzutat2.innerHTML = favliste[i].zutat2;
+                pzutat3.innerHTML = favliste[i].zutat3;
+                pzutat4.innerHTML = favliste[i].zutat4;
+                pzutat5.innerHTML = favliste[i].zutat5;
+                pzutat6.innerHTML = favliste[i].zutat6;
+                pzutat7.innerHTML = favliste[i].zutat7;
+                pzutat8.innerHTML = favliste[i].zutat8;
+                pzutat9.innerHTML = favliste[i].zutat9;
+                pzutat10.innerHTML = favliste[i].zutat10;
+
                 panweisung.innerHTML = favliste[i].zubereitungsanweisung;
 
                 divallefavs.appendChild(ptitel);
                 divallefavs.appendChild(parbeitszeit);
-                divallefavs.appendChild(pzutat);
+                divallefavs.appendChild(pzutat1);
+                divallefavs.appendChild(pzutat2);
+                divallefavs.appendChild(pzutat3);
+                divallefavs.appendChild(pzutat4);
+                divallefavs.appendChild(pzutat5);
+                divallefavs.appendChild(pzutat6);
+                divallefavs.appendChild(pzutat7);
+                divallefavs.appendChild(pzutat8);
+                divallefavs.appendChild(pzutat9);
+                divallefavs.appendChild(pzutat10);
                 divallefavs.appendChild(panweisung);
                 divallefavs.classList.add("diveinzelnrezept");
                 behaelter.appendChild(divallefavs);
@@ -151,7 +206,7 @@ namespace Endabgabe {
                     console.log("loeschen");
                     
                     let url: string = "https://tri1899gissose2021.herokuapp.com/loeschen";
-                    url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat=" + favliste[i].zutat1 + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
+                    url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" +  favliste[i].arbeitszeit + "&zutat1=" + favliste[i].zutat1 + "&zutat2=" + favliste[i].zutat2 + "&zutat3=" + favliste[i].zutat3 + "&zutat4=" + favliste[i].zutat4 + "&zutat5=" + favliste[i].zutat5 + "&zutat6=" + favliste[i].zutat6 + "&zutat7=" + favliste[i].zutat7 + "&zutat8=" + favliste[i].zutat8 + "&zutat9=" + favliste[i].zutat9 + "&zutat10=" + favliste[i].zutat10 + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
                     let antwort: Response = await fetch (url);
 
                     let ausgabe: string = await antwort.text();
