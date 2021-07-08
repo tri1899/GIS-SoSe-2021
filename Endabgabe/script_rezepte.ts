@@ -3,7 +3,16 @@ namespace Endabgabe {
     interface Rezeptdaten {
         titel: string;
         arbeitszeit: string;
-        zutat: string;
+        zutat1: string;
+        zutat2: string;
+        zutat3: string;
+        zutat4: string;
+        zutat5: string;
+        zutat6: string;
+        zutat7: string;
+        zutat8: string;
+        zutat9: string;
+        zutat10: string;
         zubereitungsanweisung: string;
     }
 
@@ -11,7 +20,16 @@ namespace Endabgabe {
         aktiveruser: string;
         titel: string;
         arbeitszeit: string;
-        zutat: string;
+        zutat1: string;
+        zutat2: string;
+        zutat3: string;
+        zutat4: string;
+        zutat5: string;
+        zutat6: string;
+        zutat7: string;
+        zutat8: string;
+        zutat9: string;
+        zutat10: string;
         zubereitungsanweisung: string;
     }
 
@@ -41,7 +59,7 @@ namespace Endabgabe {
                 
                 parbeitszeit.innerHTML = rezeptenliste[i].arbeitszeit;
                 
-                pzutat.innerHTML = rezeptenliste[i].zutat;
+                pzutat.innerHTML = rezeptenliste[i].zutat1;
                 
                 panweisung.innerHTML = rezeptenliste[i].zubereitungsanweisung;
                 
@@ -72,7 +90,7 @@ namespace Endabgabe {
                     
 
                     let url: string = "https://tri1899gissose2021.herokuapp.com/favorisieren";
-                    url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung; 
+                    url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat=" + rezeptenliste[i].zutat1 + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung; 
 
                     let antwort: Response = await fetch (url);
 
@@ -109,7 +127,7 @@ namespace Endabgabe {
                 
                 parbeitszeit.innerHTML = favliste[i].arbeitszeit;
                 
-                pzutat.innerHTML = favliste[i].zutat;
+                pzutat.innerHTML = favliste[i].zutat1;
                 
                 panweisung.innerHTML = favliste[i].zubereitungsanweisung;
 
@@ -133,7 +151,7 @@ namespace Endabgabe {
                     console.log("loeschen");
                     
                     let url: string = "https://tri1899gissose2021.herokuapp.com/loeschen";
-                    url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat=" + favliste[i].zutat + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
+                    url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat=" + favliste[i].zutat1 + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
                     let antwort: Response = await fetch (url);
 
                     let ausgabe: string = await antwort.text();

@@ -122,7 +122,7 @@ export namespace Endabgabe {
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat && _rezept.zubereitungsanweisung != "") {
+        if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat1 && _rezept.zubereitungsanweisung != "") {
         
         
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
@@ -234,7 +234,16 @@ export namespace Endabgabe {
     interface Rezept {
         titel: string;
         arbeitszeit: string;
-        zutat: string;
+        zutat1: string;
+        zutat2: string;
+        zutat3: string;
+        zutat4: string;
+        zutat5: string;
+        zutat6: string;
+        zutat7: string;
+        zutat8: string;
+        zutat9: string;
+        zutat10: string;
         zubereitungsanweisung: string;
     }
 
@@ -242,7 +251,16 @@ export namespace Endabgabe {
         aktiveruser: string;
         titel: string;
         arbeitszeit: string;
-        zutat: string;
+        zutat1: string;
+        zutat2: string;
+        zutat3: string;
+        zutat4: string;
+        zutat5: string;
+        zutat6: string;
+        zutat7: string;
+        zutat8: string;
+        zutat9: string;
+        zutat10: string;
         zubereitungsanweisung: string;
     }
 }

@@ -80,11 +80,6 @@ export namespace Aufgabe3_4 {
         studiengang: string;
         bild: string;
     }
-
-    interface Bild {
-        name: string;
-        url: string;
-    }
 }
 
 
