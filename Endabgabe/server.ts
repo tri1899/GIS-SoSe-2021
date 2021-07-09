@@ -116,7 +116,7 @@ export namespace Endabgabe {
         for (let i: number = 0; i < meinerezept.length; i++) {
             if (meinerezept[i].titel == _rezept.titel) {
             let gefunden: MeineRezepte = meinerezept[i];
-            meinedatenbank.updateOne(gefunden, _rezept, { upsert: true });
+            meinedatenbank.replaceOne(gefunden, _rezept, { upsert: true });
             let antwort: string = "update";
             return antwort;
             }

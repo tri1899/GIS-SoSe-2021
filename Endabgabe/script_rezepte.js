@@ -227,24 +227,27 @@ var Endabgabe;
                     window.location.reload();
                 }
                 async function Updaten() {
-                    location.href = "updaten.html";
-                    let buttonspeichern = document.getElementById("update");
-                    buttonspeichern.addEventListener("click", Updatelosschicken);
-                    async function Updatelosschicken() {
-                        let aktiveruser = localStorage.getItem("aktiveruser");
-                        let formData = new FormData(document.forms[0]);
-                        let url = "https://tri1899gissose2021.herokuapp.com/rezeptupdaten";
-                        let query = new URLSearchParams(formData);
-                        url += "?aktiveruser=" + aktiveruser;
-                        url = url + "&" + query.toString();
-                        let antwort = await fetch(url);
-                        let ausgabe = await antwort.text();
-                        console.log(ausgabe);
-                        location.href = "meine_rezepte.html";
-                    }
+                    window.open("updaten.html");
+                    console.log("HALLO");
                 }
             }
         };
+    }
+    if (document.querySelector("title").getAttribute("id") == "updaten") {
+        let buttonspeichern = document.getElementById("update");
+        buttonspeichern.addEventListener("click", Updatelosschicken);
+        async function Updatelosschicken() {
+            let aktiveruser = localStorage.getItem("aktiveruser");
+            let formData = new FormData(document.forms[0]);
+            let url = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
+            let query = new URLSearchParams(formData);
+            url += "?aktiveruser=" + aktiveruser;
+            url = url + "&" + query.toString();
+            let antwort = await fetch(url);
+            let ausgabe = await antwort.text();
+            console.log(ausgabe);
+            location.href = "meine_rezepte.html";
+        }
     }
 })(Endabgabe || (Endabgabe = {}));
 /*let inputtitel: HTMLInputElement = document.createElement("input");

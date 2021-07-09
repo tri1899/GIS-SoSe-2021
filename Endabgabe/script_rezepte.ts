@@ -323,38 +323,48 @@ namespace Endabgabe {
                 }
 
                 async function Updaten(): Promise<void> {
-                    location.href = "updaten.html";
-
-                    let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
-                    buttonspeichern.addEventListener("click", Updatelosschicken);
-
-                    async function Updatelosschicken(): Promise<void> {
-
-                    let aktiveruser: string = localStorage.getItem("aktiveruser");
-
-                    let formData: FormData = new FormData(document.forms[0]);
-
-                    let url: string = "https://tri1899gissose2021.herokuapp.com/rezeptupdaten";
-
-                    let query: URLSearchParams = new URLSearchParams(<any>formData);
-
-                    url += "?aktiveruser=" + aktiveruser;
-
-                    url = url + "&" + query.toString();
-
-                    let antwort: Response = await fetch(url);
-
-                    let ausgabe: string = await antwort.text();
-
-                    console.log(ausgabe);
-
-                    location.href = "meine_rezepte.html";
-                    }
+                    window.open("updaten.html");
+                    console.log("HALLO");
                 }
             }
         };
     }
+
+    if (document.querySelector("title").getAttribute("id") == "updaten") {
+
+        let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
+        buttonspeichern.addEventListener("click", Updatelosschicken);
+
+        async function Updatelosschicken(): Promise<void> {
+            let aktiveruser: string = localStorage.getItem("aktiveruser");
+
+            let formData: FormData = new FormData(document.forms[0]);
+
+            let url: string = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
+
+            let query: URLSearchParams = new URLSearchParams(<any>formData);
+
+            url += "?aktiveruser=" + aktiveruser;
+
+            url = url + "&" + query.toString();
+
+            let antwort: Response = await fetch(url);
+
+            let ausgabe: string = await antwort.text();
+
+            console.log(ausgabe);
+
+            location.href = "meine_rezepte.html";
+        }
+    }
 }
+
+
+
+
+
+
+
 /*let inputtitel: HTMLInputElement = document.createElement("input");
 let inputarbeitszeit: HTMLInputElement = document.createElement("input");
 let inputzutat1: HTMLInputElement = document.createElement("input");

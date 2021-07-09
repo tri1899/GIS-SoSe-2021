@@ -90,7 +90,7 @@ var Endabgabe;
         for (let i = 0; i < meinerezept.length; i++) {
             if (meinerezept[i].titel == _rezept.titel) {
                 let gefunden = meinerezept[i];
-                meinedatenbank.updateOne(gefunden, _rezept, { upsert: true });
+                meinedatenbank.replaceOne(gefunden, _rezept, { upsert: true });
                 let antwort = "update";
                 return antwort;
             }
