@@ -55,8 +55,8 @@ export namespace Endabgabe {
 
             else if (url.pathname == "/rezepterstellen") {
                 let rezept: Rezept = JSON.parse(jsonstring);
-                let aktiveruser: MeineRezepte = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await Rezepterstellen(mongoUrl, rezept, aktiveruser);
+                let aktiveruser: MeineRezepte = JSON.parse(jsonstring)
+                let antwortdatenbank: string = await Rezepterstellen(mongoUrl, rezept);
                 _response.write(antwortdatenbank);
             }
 
@@ -139,7 +139,7 @@ export namespace Endabgabe {
     }
 
     // Rezept erstellen
-    async function Rezepterstellen(_url: string, _rezept: Rezept, _aktiveruser: MeineRezepte): Promise<string> {
+    async function Rezepterstellen(_url: string, _rezept: Rezept): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
@@ -147,9 +147,6 @@ export namespace Endabgabe {
         if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat1 && _rezept.zubereitungsanweisung != "") {
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         meinedatenbank.insertOne(_rezept);
-
-        let meinedatenbank2: Mongo.Collection = mongoClient.db("User").collection("MeineRezepte");
-        meinedatenbank2.insertOne(_aktiveruser);
         let antwort: string = "Rezept wurde angelegt";
         return antwort;
         }
