@@ -3,10 +3,9 @@ var Endabgabe;
 (function (Endabgabe) {
     //login
     if (document.querySelector("title").getAttribute("id") == "login") {
-        let login = document.getElementById("login");
-        login.addEventListener("click", Login);
         let rueckgabelogin = document.getElementById("serverantwortlogin");
-        let loginentleeren = document.getElementById("Login");
+        let login = document.getElementById("loginbutton");
+        login.addEventListener("click", Login);
         let zurregis = document.getElementById("weiterleitung");
         zurregis.addEventListener("click", Weiterleitung);
         async function Login() {
@@ -18,11 +17,9 @@ var Endabgabe;
             let ausgabe = await antwort.text();
             if (ausgabe == "User wurde nicht gefunden.") {
                 rueckgabelogin.innerHTML = ausgabe;
-                loginentleeren.reset();
             }
             else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
                 rueckgabelogin.innerHTML = ausgabe;
-                loginentleeren.reset();
             }
             else {
                 localStorage.setItem("aktiveruser", ausgabe);
@@ -36,10 +33,10 @@ var Endabgabe;
     }
     //registrierung
     if (document.querySelector("title").getAttribute("id") == "registrierung") {
-        let registrierung = document.getElementById("registrierung");
+        let registrierung = document.getElementById("buttonregistrierung");
         registrierung.addEventListener("click", Registrierung);
         let rueckgabe = document.getElementById("serverantwortregis"); //anheften an die Seite
-        let loginregis = document.getElementById("Registration");
+        let loginregis = document.getElementById("registration");
         let zurregis = document.getElementById("weiterleitung");
         zurregis.addEventListener("click", Weiterleitung);
         async function Registrierung() {

@@ -3,10 +3,11 @@ namespace Endabgabe {
     //login
     if (document.querySelector("title").getAttribute("id") == "login") {
 
-        let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("login");
-        login.addEventListener("click", Login);
         let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortlogin");
-        let loginentleeren: HTMLFormElement = <HTMLFormElement>document.getElementById("Login");
+
+        let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginbutton");
+        login.addEventListener("click", Login);
+        
         let zurregis: HTMLButtonElement = <HTMLButtonElement>document.getElementById("weiterleitung");
         zurregis.addEventListener("click", Weiterleitung);
 
@@ -25,10 +26,9 @@ namespace Endabgabe {
 
             if (ausgabe == "User wurde nicht gefunden.") {
                 rueckgabelogin.innerHTML = ausgabe;
-                loginentleeren.reset();
+                
             } else if (ausgabe == "Füllen Sie bitte alle Felder aus!") {
                 rueckgabelogin.innerHTML = ausgabe;
-                loginentleeren.reset();
             } else {
                 localStorage.setItem("aktiveruser", ausgabe);
                 console.log(ausgabe);
@@ -37,7 +37,7 @@ namespace Endabgabe {
         }
 
         function Weiterleitung(): void {
-            location.href = "registrierung.html";
+            location.href = "registrierung.html";  
         }
     }
 
@@ -45,10 +45,10 @@ namespace Endabgabe {
 
     if (document.querySelector("title").getAttribute("id") == "registrierung") {
 
-        let registrierung: HTMLButtonElement = <HTMLButtonElement>document.getElementById("registrierung");
+        let registrierung: HTMLButtonElement = <HTMLButtonElement>document.getElementById("buttonregistrierung");
         registrierung.addEventListener("click", Registrierung);
         let rueckgabe: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortregis"); //anheften an die Seite
-        let loginregis: HTMLFormElement = <HTMLFormElement>document.getElementById("Registration");
+        let loginregis: HTMLFormElement = <HTMLFormElement>document.getElementById("registration");
         let zurregis: HTMLButtonElement = <HTMLButtonElement>document.getElementById("weiterleitung");
         zurregis.addEventListener("click", Weiterleitung);
 

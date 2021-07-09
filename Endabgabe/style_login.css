@@ -55,7 +55,7 @@ label {
     font-weight: bold;
 }
 
-#serverantwortlogin {
+#serverantwortlogin , #serverantwortregis {
     color: red;
 	font-size: 20px;
 	text-decoration: none;
