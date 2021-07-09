@@ -91,15 +91,16 @@ export namespace Endabgabe {
                 _response.write(antwortdatenbank);
             }
 
-            else if (url.pathname == "/rezeptupdaten") {
+            /*else if (url.pathname == "/rezeptupdaten") {
                 let update: MeineRezepte = JSON.parse(jsonstring);
                 let antwortdatenbank: string = await Rezeptupdate(mongoUrl, update);
                 _response.write(antwortdatenbank);
-            }
+            }*/
         }
         _response.end();
     }
 
+/*
     async function Rezeptupdate(_url: string, _rezept: MeineRezepte): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
@@ -125,7 +126,7 @@ export namespace Endabgabe {
         }
         let antowrt: string = "nicht gefunden";
         return antowrt;
-    }
+    }*/
 
     async function Datenbankloeschen(_url: string, _loeschenausfav: MeineRezepte): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };

@@ -311,8 +311,6 @@ namespace Endabgabe {
 
                 async function Loeschen(): Promise<void> {
 
-                    console.log("loeschen");
-
                     let url: string = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
                     url += "?aktiveruser=" + meineRezepte[i].aktiveruser + "&titel=" + meineRezepte[i].titel + "&arbeitszeit=" + meineRezepte[i].arbeitszeit + "&zutat1=" + meineRezepte[i].zutat1 + "&zutat2=" + meineRezepte[i].zutat2 + "&zutat3=" + meineRezepte[i].zutat3 + "&zutat4=" + meineRezepte[i].zutat4 + "&zutat5=" + meineRezepte[i].zutat5 + "&zutat6=" + meineRezepte[i].zutat6 + "&zutat7=" + meineRezepte[i].zutat7 + "&zutat8=" + meineRezepte[i].zutat8 + "&zutat9=" + meineRezepte[i].zutat9 + "&zutat10=" + meineRezepte[i].zutat10 + "&zubereitungsanweisung=" + meineRezepte[i].zubereitungsanweisung;
                     let antwort: Response = await fetch(url);
@@ -323,7 +321,7 @@ namespace Endabgabe {
                 }
 
                 async function Updaten(): Promise<void> {
-                    /*localStorage.setItem("titel", meineRezepte[i].titel);
+                    localStorage.setItem("titel", meineRezepte[i].titel);
                     localStorage.setItem("arbeitszeit", meineRezepte[i].arbeitszeit);
                     localStorage.setItem("zutat1", meineRezepte[i].zutat1);
                     localStorage.setItem("zutat2", meineRezepte[i].zutat2);
@@ -335,8 +333,8 @@ namespace Endabgabe {
                     localStorage.setItem("zutat8", meineRezepte[i].zutat8);
                     localStorage.setItem("zutat9", meineRezepte[i].zutat9);
                     localStorage.setItem("zutat10", meineRezepte[i].zutat10);
-                    localStorage.setItem("zubereitungsanweisung", meineRezepte[i].zubereitungsanweisung);*/
-                    window.open("updaten.html");
+                    localStorage.setItem("zubereitungsanweisung", meineRezepte[i].zubereitungsanweisung);
+                    location.href = "meine_rezepte.html";
                 }
             }
         };
@@ -344,15 +342,16 @@ namespace Endabgabe {
 
     if (document.querySelector("title").getAttribute("id") == "updaten") {
 
-        let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
-        buttonspeichern.addEventListener("click", Ersetzen);
+        let buttonupdate: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
+        buttonupdate.addEventListener("click", Erstellen);
+        buttonupdate.addEventListener("click", Rausloeschen);
 
-        async function Ersetzen(): Promise<void> {
+        async function Erstellen(): Promise<void> {
             let aktiveruser: string = localStorage.getItem("aktiveruser");
 
             let formData: FormData = new FormData(document.forms[0]);
 
-            let url: string = "https://tri1899gissose2021.herokuapp.com/rezeptupdaten";
+            let url: string = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
 
             let query: URLSearchParams = new URLSearchParams(<any>formData);
 
@@ -367,6 +366,18 @@ namespace Endabgabe {
             console.log(ausgabe);
 
             location.href = "meine_rezepte.html";
+        }
+
+        async function Rausloeschen(): Promise<void> {
+
+            let url: string = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
+            url += "?aktiveruser=" + localStorage.getItem("aktiveruser") + "&titel=" + localStorage.getItem("titel") + "&arbeitszeit=" + localStorage.getItem("arbeitszeit") + "&zutat1=" + localStorage.getItem("zutat1") + "&zutat2=" + localStorage.getItem("zutat2") + "&zutat3=" + localStorage.getItem("zutat3") + "&zutat4=" + localStorage.getItem("zutat4") + "&zutat5=" + localStorage.getItem("zutat5") + "&zutat6=" + localStorage.getItem("zutat6") + "&zutat7=" + localStorage.getItem("zutat7") + "&zutat8=" + localStorage.getItem("zutat8") + "&zutat9=" + localStorage.getItem("zutat9") + "&zutat10=" + localStorage.getItem("zutat10") + "&zubereitungsanweisung=" + localStorage.getItem("zubereitungsanweisung");
+            let antwort: Response = await fetch(url);
+
+            let ausgabe: string = await antwort.text();
+            console.log(ausgabe);
+
+
         }
     }
 }

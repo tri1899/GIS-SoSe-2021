@@ -218,7 +218,6 @@ var Endabgabe;
                 divmeinerezepte.appendChild(updaten);
                 updaten.addEventListener("click", Updaten);
                 async function Loeschen() {
-                    console.log("loeschen");
                     let url = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
                     url += "?aktiveruser=" + meineRezepte[i].aktiveruser + "&titel=" + meineRezepte[i].titel + "&arbeitszeit=" + meineRezepte[i].arbeitszeit + "&zutat1=" + meineRezepte[i].zutat1 + "&zutat2=" + meineRezepte[i].zutat2 + "&zutat3=" + meineRezepte[i].zutat3 + "&zutat4=" + meineRezepte[i].zutat4 + "&zutat5=" + meineRezepte[i].zutat5 + "&zutat6=" + meineRezepte[i].zutat6 + "&zutat7=" + meineRezepte[i].zutat7 + "&zutat8=" + meineRezepte[i].zutat8 + "&zutat9=" + meineRezepte[i].zutat9 + "&zutat10=" + meineRezepte[i].zutat10 + "&zubereitungsanweisung=" + meineRezepte[i].zubereitungsanweisung;
                     let antwort = await fetch(url);
@@ -227,7 +226,7 @@ var Endabgabe;
                     window.location.reload();
                 }
                 async function Updaten() {
-                    /*localStorage.setItem("titel", meineRezepte[i].titel);
+                    localStorage.setItem("titel", meineRezepte[i].titel);
                     localStorage.setItem("arbeitszeit", meineRezepte[i].arbeitszeit);
                     localStorage.setItem("zutat1", meineRezepte[i].zutat1);
                     localStorage.setItem("zutat2", meineRezepte[i].zutat2);
@@ -239,19 +238,20 @@ var Endabgabe;
                     localStorage.setItem("zutat8", meineRezepte[i].zutat8);
                     localStorage.setItem("zutat9", meineRezepte[i].zutat9);
                     localStorage.setItem("zutat10", meineRezepte[i].zutat10);
-                    localStorage.setItem("zubereitungsanweisung", meineRezepte[i].zubereitungsanweisung);*/
-                    window.open("updaten.html");
+                    localStorage.setItem("zubereitungsanweisung", meineRezepte[i].zubereitungsanweisung);
+                    location.href = "meine_rezepte.html";
                 }
             }
         };
     }
     if (document.querySelector("title").getAttribute("id") == "updaten") {
-        let buttonspeichern = document.getElementById("update");
-        buttonspeichern.addEventListener("click", Ersetzen);
-        async function Ersetzen() {
+        let buttonupdate = document.getElementById("update");
+        buttonupdate.addEventListener("click", Erstellen);
+        buttonupdate.addEventListener("click", Rausloeschen);
+        async function Erstellen() {
             let aktiveruser = localStorage.getItem("aktiveruser");
             let formData = new FormData(document.forms[0]);
-            let url = "https://tri1899gissose2021.herokuapp.com/rezeptupdaten";
+            let url = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
             let query = new URLSearchParams(formData);
             url += "?aktiveruser=" + aktiveruser;
             url = url + "&" + query.toString();
@@ -259,6 +259,13 @@ var Endabgabe;
             let ausgabe = await antwort.text();
             console.log(ausgabe);
             location.href = "meine_rezepte.html";
+        }
+        async function Rausloeschen() {
+            let url = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
+            url += "?aktiveruser=" + localStorage.getItem("aktiveruser") + "&titel=" + localStorage.getItem("titel") + "&arbeitszeit=" + localStorage.getItem("arbeitszeit") + "&zutat1=" + localStorage.getItem("zutat1") + "&zutat2=" + localStorage.getItem("zutat2") + "&zutat3=" + localStorage.getItem("zutat3") + "&zutat4=" + localStorage.getItem("zutat4") + "&zutat5=" + localStorage.getItem("zutat5") + "&zutat6=" + localStorage.getItem("zutat6") + "&zutat7=" + localStorage.getItem("zutat7") + "&zutat8=" + localStorage.getItem("zutat8") + "&zutat9=" + localStorage.getItem("zutat9") + "&zutat10=" + localStorage.getItem("zutat10") + "&zubereitungsanweisung=" + localStorage.getItem("zubereitungsanweisung");
+            let antwort = await fetch(url);
+            let ausgabe = await antwort.text();
+            console.log(ausgabe);
         }
     }
 })(Endabgabe || (Endabgabe = {}));
