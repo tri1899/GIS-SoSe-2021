@@ -1,21 +1,5 @@
 namespace Endabgabe {
 
-    interface Rezeptdaten {
-        titel: string;
-        arbeitszeit: string;
-        zutat1: string;
-        zutat2: string;
-        zutat3: string;
-        zutat4: string;
-        zutat5: string;
-        zutat6: string;
-        zutat7: string;
-        zutat8: string;
-        zutat9: string;
-        zutat10: string;
-        zubereitungsanweisung: string;
-    }
-
     interface MeineRezepte {
         aktiveruser: string;
         titel: string;
@@ -44,7 +28,7 @@ namespace Endabgabe {
 
             let ausgabe: string = await antwort.text();
 
-            let rezeptenliste: Rezeptdaten[] = JSON.parse(ausgabe);
+            let rezeptenliste: MeineRezepte[] = JSON.parse(ausgabe);
 
             for (let i: number = 0; i < rezeptenliste.length; i++) {
 
@@ -219,42 +203,21 @@ namespace Endabgabe {
         };
     }
 
-
-
     if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
 
         let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("rezepterstellen");
         buttonspeichern.addEventListener("click", Rezepterstellen);
-        buttonspeichern.addEventListener("click,", InmeineListe);
-
+        
         async function Rezepterstellen(): Promise<void> {
+            let aktiveruser: string = localStorage.getItem("aktiveruser");
 
             let formData: FormData = new FormData(document.forms[0]);
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
 
-
             let query: URLSearchParams = new URLSearchParams(<any>formData);
-
-            url = url + "?" + query.toString();
-
-            let antwort: Response = await fetch(url);
-
-            let ausgabe: string = await antwort.text();
-
-            behaelter.innerHTML = ausgabe;
-        }
-
-        async function InmeineListe(): Promise<void> {
-            let aktiveruser: string = localStorage.getItem("aktiveruser");
-
-            let formData: FormData = new FormData(document.forms[0]);
-
-            let url: string = "https://tri1899gissose2021.herokuapp.com/inlisteuser";
 
             url += "?aktiveruser=" + aktiveruser;
-
-            let query: URLSearchParams = new URLSearchParams(<any>formData);
 
             url = url + "?" + query.toString();
 

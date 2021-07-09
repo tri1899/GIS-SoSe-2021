@@ -49,12 +49,12 @@ export namespace Endabgabe {
             }
 
             else if (url.pathname == "/datenauslesen") {
-                let userliste: Rezept[] = await Rezepteauslesen(mongoUrl);
+                let userliste: MeineRezepte[] = await Rezepteauslesen(mongoUrl);
                 _response.write(JSON.stringify(userliste));
             }
 
             else if (url.pathname == "/rezepterstellen") {
-                let rezept: Rezept = JSON.parse(jsonstring);
+                let rezept: MeineRezepte = JSON.parse(jsonstring);
                 let antwortdatenbank: string = await Rezepterstellen(mongoUrl, rezept);
                 _response.write(antwortdatenbank);
             }
@@ -146,7 +146,7 @@ export namespace Endabgabe {
         return antwort;
     }
 
-    async function Favorisieren(_url: string, _rezeptfav: Rezept): Promise<string> {
+    async function Favorisieren(_url: string, _rezeptfav: MeineRezepte): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
@@ -158,7 +158,7 @@ export namespace Endabgabe {
     }
 
     // Rezept erstellen
-    async function Rezepterstellen(_url: string, _rezept: Rezept): Promise<string> {
+    async function Rezepterstellen(_url: string, _rezept: MeineRezepte): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
@@ -174,7 +174,7 @@ export namespace Endabgabe {
     }
 
     // Rezepteauslesen
-    async function Rezepteauslesen(_url: string): Promise<Rezept[]> {
+    async function Rezepteauslesen(_url: string): Promise<MeineRezepte[]> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
@@ -182,7 +182,7 @@ export namespace Endabgabe {
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         let cursor: Mongo.Cursor = meinedatenbank.find();
-        let antwort: Rezept[] = await cursor.toArray();
+        let antwort: MeineRezepte[] = await cursor.toArray();
         return antwort;
 
     }
@@ -266,22 +266,6 @@ export namespace Endabgabe {
     interface User {
         nutzername: string;
         passwort: string;
-    }
-
-    interface Rezept {
-        titel: string;
-        arbeitszeit: string;
-        zutat1: string;
-        zutat2: string;
-        zutat3: string;
-        zutat4: string;
-        zutat5: string;
-        zutat6: string;
-        zutat7: string;
-        zutat8: string;
-        zutat9: string;
-        zutat10: string;
-        zubereitungsanweisung: string;
     }
 
     interface MeineRezepte {
