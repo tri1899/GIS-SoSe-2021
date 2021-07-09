@@ -216,7 +216,9 @@ namespace Endabgabe {
 
             let query: URLSearchParams = new URLSearchParams(<any>formData);
 
-            url = url + "?" + query.toString() + "aktiveruser=" + aktiveruser;
+            url += "?aktiveruser=" + aktiveruser;
+
+            url = url + "&" + query.toString();
 
             let antwort: Response = await fetch(url);
 
