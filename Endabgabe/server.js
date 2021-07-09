@@ -70,8 +70,35 @@ var Endabgabe;
                 let antwortdatenbank = await Datenbankloeschen(mongoUrl, loeschenausfav);
                 _response.write(antwortdatenbank);
             }
+            else if (url.pathname == "/rezeptupdaten") {
+                let update = JSON.parse(jsonstring);
+                let antwortdatenbank = await Rezeptupdate(mongoUrl, update);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
+    }
+    async function Rezeptupdate(_url, _rezept) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        let cursor = meinedatenbank.find();
+        let gefundesnesRezept = await cursor.toArray();
+        let rezept = JSON.stringify(gefundesnesRezept);
+        let meinerezept = JSON.parse(rezept);
+        for (let i = 0; i < meinerezept.length; i++) {
+            if (meinerezept[i].titel == _rezept.titel) {
+                let gefunden = meinerezept[i];
+                meinedatenbank.updateOne(gefunden, _rezept, { upsert: true });
+                let antwort = "update";
+                return antwort;
+            }
+            let antowrt = "nicht gefunden";
+            return antowrt;
+        }
+        let antowrt = "nicht gefunden";
+        return antowrt;
     }
     async function Datenbankloeschen(_url, _loeschenausfav) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };

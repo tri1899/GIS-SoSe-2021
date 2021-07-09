@@ -213,6 +213,10 @@ var Endabgabe;
                 loeschen.innerHTML = "löschen";
                 divmeinerezepte.appendChild(loeschen);
                 loeschen.addEventListener("click", Loeschen);
+                let updaten = document.createElement("button");
+                updaten.innerHTML = "updaten";
+                divmeinerezepte.appendChild(updaten);
+                updaten.addEventListener("click", Updaten);
                 async function Loeschen() {
                     console.log("loeschen");
                     let url = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
@@ -222,8 +226,51 @@ var Endabgabe;
                     console.log(ausgabe);
                     window.location.reload();
                 }
+                async function Updaten() {
+                    location.href = "updaten.html";
+                    let buttonspeichern = document.getElementById("update");
+                    buttonspeichern.addEventListener("click", Updatelosschicken);
+                    async function Updatelosschicken() {
+                        let aktiveruser = localStorage.getItem("aktiveruser");
+                        let formData = new FormData(document.forms[0]);
+                        let url = "https://tri1899gissose2021.herokuapp.com/rezeptupdaten";
+                        let query = new URLSearchParams(formData);
+                        url += "?aktiveruser=" + aktiveruser;
+                        url = url + "&" + query.toString();
+                        let antwort = await fetch(url);
+                        let ausgabe = await antwort.text();
+                        console.log(ausgabe);
+                        location.href = "meine_rezepte.html";
+                    }
+                }
             }
         };
     }
 })(Endabgabe || (Endabgabe = {}));
+/*let inputtitel: HTMLInputElement = document.createElement("input");
+let inputarbeitszeit: HTMLInputElement = document.createElement("input");
+let inputzutat1: HTMLInputElement = document.createElement("input");
+let inputzutat2: HTMLInputElement = document.createElement("input");
+let inputzutat3: HTMLInputElement = document.createElement("input");
+let inputzutat4: HTMLInputElement = document.createElement("input");
+let inputzutat5: HTMLInputElement = document.createElement("input");
+let inputzutat6: HTMLInputElement = document.createElement("input");
+let inputzutat7: HTMLInputElement = document.createElement("input");
+let inputzutat8: HTMLInputElement = document.createElement("input");
+let inputzutat9: HTMLInputElement = document.createElement("input");
+let inputzutat10: HTMLInputElement = document.createElement("input");
+let inputzubereitungsanweisung: HTMLInputElement = document.createElement("input");
+divupdaten.appendChild(inputtitel);
+divupdaten.appendChild(inputarbeitszeit);
+divupdaten.appendChild(inputzutat1);
+divupdaten.appendChild(inputzutat2);
+divupdaten.appendChild(inputzutat3);
+divupdaten.appendChild(inputzutat4);
+divupdaten.appendChild(inputzutat5);
+divupdaten.appendChild(inputzutat6);
+divupdaten.appendChild(inputzutat7);
+divupdaten.appendChild(inputzutat8);
+divupdaten.appendChild(inputzutat9);
+divupdaten.appendChild(inputzutat10);
+divupdaten.appendChild(inputzubereitungsanweisung);*/
 //# sourceMappingURL=script_rezepte.js.map

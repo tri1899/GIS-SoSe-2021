@@ -49,9 +49,9 @@ namespace Endabgabe {
                 let panweisung: HTMLParagraphElement = document.createElement("p");
 
                 ptitel.innerHTML = rezeptenliste[i].titel;
-                
+
                 parbeitszeit.innerHTML = rezeptenliste[i].arbeitszeit;
-                
+
                 pzutat1.innerHTML = rezeptenliste[i].zutat1;
                 pzutat2.innerHTML = rezeptenliste[i].zutat2;
                 pzutat3.innerHTML = rezeptenliste[i].zutat3;
@@ -62,9 +62,9 @@ namespace Endabgabe {
                 pzutat8.innerHTML = rezeptenliste[i].zutat8;
                 pzutat9.innerHTML = rezeptenliste[i].zutat9;
                 pzutat10.innerHTML = rezeptenliste[i].zutat10;
-                
+
                 panweisung.innerHTML = rezeptenliste[i].zubereitungsanweisung;
-                
+
                 divallerezepte.appendChild(ptitel);
                 divallerezepte.appendChild(parbeitszeit);
                 divallerezepte.appendChild(pzutat1);
@@ -96,18 +96,18 @@ namespace Endabgabe {
                     let aktiveruser: string = localStorage.getItem("aktiveruser");
 
                     console.log("favorisieren");
-                    
+
 
                     let url: string = "https://tri1899gissose2021.herokuapp.com/favorisieren";
                     url += "?aktiveruser=" + aktiveruser + "&titel=" + rezeptenliste[i].titel + "&arbeitszeit=" + rezeptenliste[i].arbeitszeit + "&zutat1=" + rezeptenliste[i].zutat1 + "&zutat2=" + rezeptenliste[i].zutat2 + "&zutat3=" + rezeptenliste[i].zutat3 + "&zutat4=" + rezeptenliste[i].zutat4 + "&zutat5=" + rezeptenliste[i].zutat5 + "&zutat6=" + rezeptenliste[i].zutat6 + "&zutat7=" + rezeptenliste[i].zutat7 + "&zutat8=" + rezeptenliste[i].zutat8 + "&zutat9=" + rezeptenliste[i].zutat9 + "&zutat10=" + rezeptenliste[i].zutat10 + "&zubereitungsanweisung=" + rezeptenliste[i].zubereitungsanweisung;
 
 
 
-                    let antwort: Response = await fetch (url);
+                    let antwort: Response = await fetch(url);
 
                     let ausgabe: string = await antwort.text();
                     console.log(ausgabe);
-                    
+
                 }
             }
         };
@@ -147,9 +147,9 @@ namespace Endabgabe {
                 let panweisung: HTMLParagraphElement = document.createElement("p");
 
                 ptitel.innerHTML = favliste[i].titel;
-                
+
                 parbeitszeit.innerHTML = favliste[i].arbeitszeit;
-                
+
                 pzutat1.innerHTML = favliste[i].zutat1;
                 pzutat2.innerHTML = favliste[i].zutat2;
                 pzutat3.innerHTML = favliste[i].zutat3;
@@ -187,13 +187,13 @@ namespace Endabgabe {
                 divallefavs.appendChild(loeschen);
                 loeschen.addEventListener("click", Loeschen);
 
-                async function Loeschen (): Promise<void> {
-                    
+                async function Loeschen(): Promise<void> {
+
                     console.log("loeschen");
-                    
+
                     let url: string = "https://tri1899gissose2021.herokuapp.com/loeschen";
-                    url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" +  favliste[i].arbeitszeit + "&zutat1=" + favliste[i].zutat1 + "&zutat2=" + favliste[i].zutat2 + "&zutat3=" + favliste[i].zutat3 + "&zutat4=" + favliste[i].zutat4 + "&zutat5=" + favliste[i].zutat5 + "&zutat6=" + favliste[i].zutat6 + "&zutat7=" + favliste[i].zutat7 + "&zutat8=" + favliste[i].zutat8 + "&zutat9=" + favliste[i].zutat9 + "&zutat10=" + favliste[i].zutat10 + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
-                    let antwort: Response = await fetch (url);
+                    url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat1=" + favliste[i].zutat1 + "&zutat2=" + favliste[i].zutat2 + "&zutat3=" + favliste[i].zutat3 + "&zutat4=" + favliste[i].zutat4 + "&zutat5=" + favliste[i].zutat5 + "&zutat6=" + favliste[i].zutat6 + "&zutat7=" + favliste[i].zutat7 + "&zutat8=" + favliste[i].zutat8 + "&zutat9=" + favliste[i].zutat9 + "&zutat10=" + favliste[i].zutat10 + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
+                    let antwort: Response = await fetch(url);
 
                     let ausgabe: string = await antwort.text();
                     console.log(ausgabe);
@@ -227,10 +227,10 @@ namespace Endabgabe {
             let ausgabe: string = await antwort.text();
 
             console.log(ausgabe);
-            
+
             window.location.reload();
         }
-        
+
         window.onload = async function datenAnzeigen(): Promise<void> {
             let aktiveruser: string = localStorage.getItem("aktiveruser");
 
@@ -263,9 +263,9 @@ namespace Endabgabe {
                 let panweisung: HTMLParagraphElement = document.createElement("p");
 
                 ptitel.innerHTML = meineRezepte[i].titel;
-                
+
                 parbeitszeit.innerHTML = meineRezepte[i].arbeitszeit;
-                
+
                 pzutat1.innerHTML = meineRezepte[i].zutat1;
                 pzutat2.innerHTML = meineRezepte[i].zutat2;
                 pzutat3.innerHTML = meineRezepte[i].zutat3;
@@ -300,24 +300,84 @@ namespace Endabgabe {
 
                 let loeschen: HTMLButtonElement = document.createElement("button");
                 loeschen.innerHTML = "löschen";
-
                 divmeinerezepte.appendChild(loeschen);
                 loeschen.addEventListener("click", Loeschen);
 
-                async function Loeschen (): Promise<void> {
-                    
+                let updaten: HTMLButtonElement = document.createElement("button");
+                updaten.innerHTML = "updaten";
+                divmeinerezepte.appendChild(updaten);
+                updaten.addEventListener("click", Updaten);
+
+
+                async function Loeschen(): Promise<void> {
+
                     console.log("loeschen");
-                    
+
                     let url: string = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
-                    url += "?aktiveruser=" + meineRezepte[i].aktiveruser + "&titel=" + meineRezepte[i].titel + "&arbeitszeit=" +  meineRezepte[i].arbeitszeit + "&zutat1=" + meineRezepte[i].zutat1 + "&zutat2=" + meineRezepte[i].zutat2 + "&zutat3=" + meineRezepte[i].zutat3 + "&zutat4=" + meineRezepte[i].zutat4 + "&zutat5=" + meineRezepte[i].zutat5 + "&zutat6=" + meineRezepte[i].zutat6 + "&zutat7=" + meineRezepte[i].zutat7 + "&zutat8=" + meineRezepte[i].zutat8 + "&zutat9=" + meineRezepte[i].zutat9 + "&zutat10=" + meineRezepte[i].zutat10 + "&zubereitungsanweisung=" + meineRezepte[i].zubereitungsanweisung;
-                    let antwort: Response = await fetch (url);
+                    url += "?aktiveruser=" + meineRezepte[i].aktiveruser + "&titel=" + meineRezepte[i].titel + "&arbeitszeit=" + meineRezepte[i].arbeitszeit + "&zutat1=" + meineRezepte[i].zutat1 + "&zutat2=" + meineRezepte[i].zutat2 + "&zutat3=" + meineRezepte[i].zutat3 + "&zutat4=" + meineRezepte[i].zutat4 + "&zutat5=" + meineRezepte[i].zutat5 + "&zutat6=" + meineRezepte[i].zutat6 + "&zutat7=" + meineRezepte[i].zutat7 + "&zutat8=" + meineRezepte[i].zutat8 + "&zutat9=" + meineRezepte[i].zutat9 + "&zutat10=" + meineRezepte[i].zutat10 + "&zubereitungsanweisung=" + meineRezepte[i].zubereitungsanweisung;
+                    let antwort: Response = await fetch(url);
 
                     let ausgabe: string = await antwort.text();
                     console.log(ausgabe);
                     window.location.reload();
                 }
+
+                async function Updaten(): Promise<void> {
+                    location.href = "updaten.html";
+
+                    let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
+                    buttonspeichern.addEventListener("click", Updatelosschicken);
+
+                    async function Updatelosschicken(): Promise<void> {
+
+                    let aktiveruser: string = localStorage.getItem("aktiveruser");
+
+                    let formData: FormData = new FormData(document.forms[0]);
+
+                    let url: string = "https://tri1899gissose2021.herokuapp.com/rezeptupdaten";
+
+                    let query: URLSearchParams = new URLSearchParams(<any>formData);
+
+                    url += "?aktiveruser=" + aktiveruser;
+
+                    url = url + "&" + query.toString();
+
+                    let antwort: Response = await fetch(url);
+
+                    let ausgabe: string = await antwort.text();
+
+                    console.log(ausgabe);
+
+                    location.href = "meine_rezepte.html";
+                    }
+                }
             }
         };
     }
 }
-
+/*let inputtitel: HTMLInputElement = document.createElement("input");
+let inputarbeitszeit: HTMLInputElement = document.createElement("input");
+let inputzutat1: HTMLInputElement = document.createElement("input");
+let inputzutat2: HTMLInputElement = document.createElement("input");
+let inputzutat3: HTMLInputElement = document.createElement("input");
+let inputzutat4: HTMLInputElement = document.createElement("input");
+let inputzutat5: HTMLInputElement = document.createElement("input");
+let inputzutat6: HTMLInputElement = document.createElement("input");
+let inputzutat7: HTMLInputElement = document.createElement("input");
+let inputzutat8: HTMLInputElement = document.createElement("input");
+let inputzutat9: HTMLInputElement = document.createElement("input");
+let inputzutat10: HTMLInputElement = document.createElement("input");
+let inputzubereitungsanweisung: HTMLInputElement = document.createElement("input");
+divupdaten.appendChild(inputtitel);
+divupdaten.appendChild(inputarbeitszeit);
+divupdaten.appendChild(inputzutat1);
+divupdaten.appendChild(inputzutat2);
+divupdaten.appendChild(inputzutat3);
+divupdaten.appendChild(inputzutat4);
+divupdaten.appendChild(inputzutat5);
+divupdaten.appendChild(inputzutat6);
+divupdaten.appendChild(inputzutat7);
+divupdaten.appendChild(inputzutat8);
+divupdaten.appendChild(inputzutat9);
+divupdaten.appendChild(inputzutat10);
+divupdaten.appendChild(inputzubereitungsanweisung);*/

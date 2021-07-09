@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="meinerezepte">Meine Rezepte</title>
+    <title id="updaten">Meine Rezepte/Updaten</title>
     <link rel="stylesheet" href="style.css">
     <script src="script_rezepte.js" defer></script>
 </head>
@@ -27,10 +27,10 @@
 
     <form id="Rezept">
         <label for="titel">Titel:</label> <br>
-        <input type="text" name="titel" id="titel" class="inputmittig" placeholder="Titel" ><br>
+        <input type="text" name="titel" id="titel" class="inputmittig"><br>
 
         <label for="arbeitszeit">Arbeitszeit:</label> <br>
-        <input type="text" name="arbeitszeit" id="arbeitszeit" class="inputmittig" placeholder="z.B 10min" ><br>
+        <input type="text" name="arbeitszeit" id="arbeitszeit" class="inputmittig" ><br>
 
         <label for="zutat1">Zutat 1:</label>
         <input type="text" name="zutat1" id="zutat1" class="inputmittig"><br>
@@ -64,28 +64,12 @@
 
 
         <label for="zubereitungsanweisung">Zubereitungsanweisung:</label>
-        <textarea id="zubereitungsanweisung" class="inputmittig" name="zubereitungsanweisung" placeholder="Deine Zubereitungsanweisung:" style="height:200px"></textarea>
+        <textarea id="zubereitungsanweisung" class="inputmittig" name="zubereitungsanweisung" style="height:200px"></textarea>
     </form>
     <br>
     
-    <button type="button" id="rezepterstellen">erstellen</button>
+    <button type="button" id="update">update</button>
     <br>
-
-
-
-    <div id="behaelter">
-
-
-    </div>
-
-    <div id="listemeinerezepte">
-        
-    </div>
-
-    <div id="updaten">
-        
-    </div>
-
 </body>
 
 </html>
