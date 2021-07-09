@@ -55,33 +55,55 @@ export namespace Endabgabe {
 
             else if (url.pathname == "/rezepterstellen") {
                 let rezept: Rezept = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await Rezepterstellen(mongoUrl, rezept);
+                let aktiveruser: MeineRezepte = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await Rezepterstellen(mongoUrl, rezept, aktiveruser);
                 _response.write(antwortdatenbank);
             }
 
             else if (url.pathname == "/favorisieren") {
-                let rezeptfav: Userfavorisieren = JSON.parse(jsonstring);
+                let rezeptfav: MeineRezepte = JSON.parse(jsonstring);
                 let antwortdatenbank: string = await Favorisieren(mongoUrl, rezeptfav);
                 _response.write(antwortdatenbank);
             }
 
             else if (url.pathname == "/favsauslesen") {
-                let favsauslesen: Userfavorisieren = JSON.parse(jsonstring);
-                let favsliste: Userfavorisieren[] = await Favsauslesen(mongoUrl, favsauslesen);
+                let favsauslesen: MeineRezepte = JSON.parse(jsonstring);
+                let favsliste: MeineRezepte[] = await Favsauslesen(mongoUrl, favsauslesen);
                 _response.write(JSON.stringify(favsliste));
 
             }
 
             else if (url.pathname == "/loeschen") {
-                let loeschenausfav: Userfavorisieren = JSON.parse(jsonstring);
+                let loeschenausfav: MeineRezepte = JSON.parse(jsonstring);
                 let antwortdatenbank: string = await FavsLoeschen(mongoUrl, loeschenausfav);
                 _response.write(antwortdatenbank);
+            }
+
+            else if (url.pathname == "/anzeigenmeineRezepte") {
+                let meinerezepte: MeineRezepte = JSON.parse(jsonstring);
+                let meinerezpteliste: MeineRezepte[] = await Meinerezepteauslesen(mongoUrl, meinerezepte);
+                _response.write(JSON.stringify(meinerezpteliste));
+                
             }
         }
         _response.end();
     }
 
-    async function FavsLoeschen (_url: string, _loeschenausfav: Userfavorisieren): Promise<string> {
+    async function Meinerezepteauslesen (_url: string, _aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("MeineRezepte");
+        let aktivernutzer: string = _aktiveruser.aktiveruser;
+
+        let cursor: Mongo.Cursor = meinedatenbank.find({aktiveruser: aktivernutzer});
+        let antwort: MeineRezepte[] = await cursor.toArray();
+        return antwort;
+        
+    }
+
+    async function FavsLoeschen (_url: string, _loeschenausfav: MeineRezepte): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
@@ -92,7 +114,7 @@ export namespace Endabgabe {
         return antwort;
     }
 
-    async function Favsauslesen (_url: string, _aktiveruser: Userfavorisieren): Promise<Userfavorisieren[]> {
+    async function Favsauslesen (_url: string, _aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
@@ -101,7 +123,7 @@ export namespace Endabgabe {
         let aktivernutzer: string = _aktiveruser.aktiveruser;
 
         let cursor: Mongo.Cursor = meinedatenbank.find({aktiveruser: aktivernutzer});
-        let antwort: Userfavorisieren[] = await cursor.toArray();
+        let antwort: MeineRezepte[] = await cursor.toArray();
         return antwort;   
     }
 
@@ -117,16 +139,17 @@ export namespace Endabgabe {
     }
 
     // Rezept erstellen
-    async function Rezepterstellen(_url: string, _rezept: Rezept): Promise<string> {
+    async function Rezepterstellen(_url: string, _rezept: Rezept, _aktiveruser: MeineRezepte): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
         if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat1 && _rezept.zubereitungsanweisung != "") {
-        
-        
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         meinedatenbank.insertOne(_rezept);
+
+        let meinedatenbank2: Mongo.Collection = mongoClient.db("User").collection("MeineRezepte");
+        meinedatenbank2.insertOne(_aktiveruser);
         let antwort: string = "Rezept wurde angelegt";
         return antwort;
         }
@@ -247,7 +270,7 @@ export namespace Endabgabe {
         zubereitungsanweisung: string;
     }
 
-    interface Userfavorisieren {
+    interface MeineRezepte {
         aktiveruser: string;
         titel: string;
         arbeitszeit: string;

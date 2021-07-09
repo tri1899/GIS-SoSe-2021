@@ -16,7 +16,7 @@ namespace Endabgabe {
         zubereitungsanweisung: string;
     }
 
-    interface Favliste {
+    interface MeineRezepte {
         aktiveruser: string;
         titel: string;
         arbeitszeit: string;
@@ -122,6 +122,8 @@ namespace Endabgabe {
                     let antwort: Response = await fetch (url);
 
                     let ausgabe: string = await antwort.text();
+                    console.log(ausgabe);
+                    
                 }
             }
         };
@@ -140,7 +142,7 @@ namespace Endabgabe {
 
             let ausgabe: string = await antwort.text();
 
-            let favliste: Favliste[] = JSON.parse(ausgabe);
+            let favliste: MeineRezepte[] = JSON.parse(ausgabe);
 
             for (let i: number = 0; i < favliste.length; i++) {
                 let divallefavs: HTMLDivElement = document.createElement("div");
@@ -210,6 +212,7 @@ namespace Endabgabe {
                     let antwort: Response = await fetch (url);
 
                     let ausgabe: string = await antwort.text();
+                    console.log(ausgabe);
                     window.location.reload();
                 }
             }
@@ -224,9 +227,13 @@ namespace Endabgabe {
         buttonspeichern.addEventListener("click", Rezepterstellen);
 
         async function Rezepterstellen(): Promise<void> {
+            let aktiveruser: string = localStorage.getItem("aktiveruser");
+            
             let formData: FormData = new FormData(document.forms[0]);
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
+
+            url += "?aktiveruser=" + aktiveruser;
 
             let query: URLSearchParams = new URLSearchParams(<any>formData);
 
@@ -239,6 +246,75 @@ namespace Endabgabe {
             behaelter.innerHTML = ausgabe;
 
         }
+
+        window.onload = async function datenAnzeigen(): Promise<void> {
+            let aktiveruser: string = localStorage.getItem("aktiveruser");
+
+            let url: string = "https://tri1899gissose2021.herokuapp.com/anzeigenmeineRezepte";
+
+            url += "?aktiveruser=" + aktiveruser;
+
+            let antwort: Response = await fetch(url);
+
+            let ausgabe: string = await antwort.text();
+
+            let meineRezepte: MeineRezepte[] = JSON.parse(ausgabe);
+
+            for (let i: number = 0; i < meineRezepte.length; i++) {
+                let divmeinerezepte: HTMLDivElement = document.createElement("div");
+
+                let ptitel: HTMLParagraphElement = document.createElement("p");
+                let parbeitszeit: HTMLParagraphElement = document.createElement("p");
+                let pzutat1: HTMLParagraphElement = document.createElement("p");
+                let pzutat2: HTMLParagraphElement = document.createElement("p");
+                let pzutat3: HTMLParagraphElement = document.createElement("p");
+                let pzutat4: HTMLParagraphElement = document.createElement("p");
+                let pzutat5: HTMLParagraphElement = document.createElement("p");
+                let pzutat6: HTMLParagraphElement = document.createElement("p");
+                let pzutat7: HTMLParagraphElement = document.createElement("p");
+                let pzutat8: HTMLParagraphElement = document.createElement("p");
+                let pzutat9: HTMLParagraphElement = document.createElement("p");
+                let pzutat10: HTMLParagraphElement = document.createElement("p");
+
+                let panweisung: HTMLParagraphElement = document.createElement("p");
+
+                ptitel.innerHTML = meineRezepte[i].titel;
+                
+                parbeitszeit.innerHTML = meineRezepte[i].arbeitszeit;
+                
+                pzutat1.innerHTML = meineRezepte[i].zutat1;
+                pzutat2.innerHTML = meineRezepte[i].zutat2;
+                pzutat3.innerHTML = meineRezepte[i].zutat3;
+                pzutat4.innerHTML = meineRezepte[i].zutat4;
+                pzutat5.innerHTML = meineRezepte[i].zutat5;
+                pzutat6.innerHTML = meineRezepte[i].zutat6;
+                pzutat7.innerHTML = meineRezepte[i].zutat7;
+                pzutat8.innerHTML = meineRezepte[i].zutat8;
+                pzutat9.innerHTML = meineRezepte[i].zutat9;
+                pzutat10.innerHTML = meineRezepte[i].zutat10;
+
+                panweisung.innerHTML = meineRezepte[i].zubereitungsanweisung;
+
+                divmeinerezepte.appendChild(ptitel);
+                divmeinerezepte.appendChild(parbeitszeit);
+                divmeinerezepte.appendChild(pzutat1);
+                divmeinerezepte.appendChild(pzutat2);
+                divmeinerezepte.appendChild(pzutat3);
+                divmeinerezepte.appendChild(pzutat4);
+                divmeinerezepte.appendChild(pzutat5);
+                divmeinerezepte.appendChild(pzutat6);
+                divmeinerezepte.appendChild(pzutat7);
+                divmeinerezepte.appendChild(pzutat8);
+                divmeinerezepte.appendChild(pzutat9);
+                divmeinerezepte.appendChild(pzutat10);
+                divmeinerezepte.appendChild(panweisung);
+                divmeinerezepte.classList.add("diveinzelnrezept");
+                behaelter.appendChild(divmeinerezepte);
+                behaelter.classList.add("rezepte");
+                let br: HTMLBRElement = document.createElement("br");
+                behaelter.appendChild(br);
+            }
+        };
     }
 }
 

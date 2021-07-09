@@ -42,7 +42,8 @@ var Endabgabe;
             }
             else if (url.pathname == "/rezepterstellen") {
                 let rezept = JSON.parse(jsonstring);
-                let antwortdatenbank = await Rezepterstellen(mongoUrl, rezept);
+                let aktiveruser = JSON.parse(jsonstring);
+                let antwortdatenbank = await Rezepterstellen(mongoUrl, rezept, aktiveruser);
                 _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/favorisieren") {
@@ -60,8 +61,23 @@ var Endabgabe;
                 let antwortdatenbank = await FavsLoeschen(mongoUrl, loeschenausfav);
                 _response.write(antwortdatenbank);
             }
+            else if (url.pathname == "/anzeigenmeineRezepte") {
+                let meinerezepte = JSON.parse(jsonstring);
+                let meinerezpteliste = await Meinerezepteauslesen(mongoUrl, meinerezepte);
+                _response.write(JSON.stringify(meinerezpteliste));
+            }
         }
         _response.end();
+    }
+    async function Meinerezepteauslesen(_url, _aktiveruser) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("User").collection("MeineRezepte");
+        let aktivernutzer = _aktiveruser.aktiveruser;
+        let cursor = meinedatenbank.find({ aktiveruser: aktivernutzer });
+        let antwort = await cursor.toArray();
+        return antwort;
     }
     async function FavsLoeschen(_url, _loeschenausfav) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
@@ -92,13 +108,15 @@ var Endabgabe;
         return antwort;
     }
     // Rezept erstellen
-    async function Rezepterstellen(_url, _rezept) {
+    async function Rezepterstellen(_url, _rezept, _aktiveruser) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat1 && _rezept.zubereitungsanweisung != "") {
             let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
             meinedatenbank.insertOne(_rezept);
+            let meinedatenbank2 = mongoClient.db("User").collection("MeineRezepte");
+            meinedatenbank2.insertOne(_aktiveruser);
             let antwort = "Rezept wurde angelegt";
             return antwort;
         }
