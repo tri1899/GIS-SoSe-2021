@@ -42,8 +42,12 @@ var Endabgabe;
             }
             else if (url.pathname == "/rezepterstellen") {
                 let rezept = JSON.parse(jsonstring);
-                let aktiveruser = JSON.parse(jsonstring);
                 let antwortdatenbank = await Rezepterstellen(mongoUrl, rezept);
+                _response.write(antwortdatenbank);
+            }
+            else if (url.pathname == "/inlisteuser") {
+                let userliste = JSON.parse(jsonstring);
+                let antwortdatenbank = await InmeineListe(mongoUrl, userliste);
                 _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/favorisieren") {
@@ -68,6 +72,19 @@ var Endabgabe;
             }
         }
         _response.end();
+    }
+    async function InmeineListe(_url, _userliste) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        if (_userliste.titel && _userliste.arbeitszeit && _userliste.zutat1 && _userliste.zubereitungsanweisung != "") {
+            let meinedatenbank = mongoClient.db("User").collection("MeineRezepte");
+            meinedatenbank.insertOne(_userliste);
+            let antwort = "Rezept wurde angelegt";
+            return antwort;
+        }
+        let antwort = "Füllen Sie bitte alle Felder aus!";
+        return antwort;
     }
     async function Meinerezepteauslesen(_url, _aktiveruser) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };

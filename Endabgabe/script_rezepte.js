@@ -143,10 +143,20 @@ var Endabgabe;
     if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
         let buttonspeichern = document.getElementById("rezepterstellen");
         buttonspeichern.addEventListener("click", Rezepterstellen);
+        buttonspeichern.addEventListener("click,", InmeineListe);
         async function Rezepterstellen() {
-            let aktiveruser = localStorage.getItem("aktiveruser");
             let formData = new FormData(document.forms[0]);
             let url = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
+            let query = new URLSearchParams(formData);
+            url = url + "?" + query.toString();
+            let antwort = await fetch(url);
+            let ausgabe = await antwort.text();
+            behaelter.innerHTML = ausgabe;
+        }
+        async function InmeineListe() {
+            let aktiveruser = localStorage.getItem("aktiveruser");
+            let formData = new FormData(document.forms[0]);
+            let url = "https://tri1899gissose2021.herokuapp.com/inlisteuser";
             url += "?aktiveruser=" + aktiveruser;
             let query = new URLSearchParams(formData);
             url = url + "?" + query.toString();
@@ -155,9 +165,9 @@ var Endabgabe;
             behaelter.innerHTML = ausgabe;
         }
         window.onload = async function datenAnzeigen() {
-            let aktiveruser = localStorage.getItem("aktiveruser");
+            //let aktiveruser: string = localStorage.getItem("aktiveruser");
             let url = "https://tri1899gissose2021.herokuapp.com/anzeigenmeineRezepte";
-            url += "?aktiveruser=" + aktiveruser;
+            //url += "?aktiveruser=" + aktiveruser;
             let antwort = await fetch(url);
             let ausgabe = await antwort.text();
             let meineRezepte = JSON.parse(ausgabe);

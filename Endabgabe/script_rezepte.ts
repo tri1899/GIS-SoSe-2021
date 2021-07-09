@@ -225,13 +225,32 @@ namespace Endabgabe {
 
         let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("rezepterstellen");
         buttonspeichern.addEventListener("click", Rezepterstellen);
+        buttonspeichern.addEventListener("click,", InmeineListe);
 
         async function Rezepterstellen(): Promise<void> {
-            let aktiveruser: string = localStorage.getItem("aktiveruser");
-            
+
             let formData: FormData = new FormData(document.forms[0]);
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
+
+
+            let query: URLSearchParams = new URLSearchParams(<any>formData);
+
+            url = url + "?" + query.toString();
+
+            let antwort: Response = await fetch(url);
+
+            let ausgabe: string = await antwort.text();
+
+            behaelter.innerHTML = ausgabe;
+        }
+
+        async function InmeineListe(): Promise<void> {
+            let aktiveruser: string = localStorage.getItem("aktiveruser");
+
+            let formData: FormData = new FormData(document.forms[0]);
+
+            let url: string = "https://tri1899gissose2021.herokuapp.com/inlisteuser";
 
             url += "?aktiveruser=" + aktiveruser;
 
@@ -244,15 +263,14 @@ namespace Endabgabe {
             let ausgabe: string = await antwort.text();
 
             behaelter.innerHTML = ausgabe;
-
         }
-
+        
         window.onload = async function datenAnzeigen(): Promise<void> {
-            let aktiveruser: string = localStorage.getItem("aktiveruser");
+            //let aktiveruser: string = localStorage.getItem("aktiveruser");
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/anzeigenmeineRezepte";
 
-            url += "?aktiveruser=" + aktiveruser;
+            //url += "?aktiveruser=" + aktiveruser;
 
             let antwort: Response = await fetch(url);
 
