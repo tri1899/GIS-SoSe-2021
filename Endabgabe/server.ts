@@ -100,34 +100,6 @@ export namespace Endabgabe {
         _response.end();
     }
 
-/*
-    async function Rezeptupdate(_url: string, _rezept: MeineRezepte): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
-
-
-        let cursor: Mongo.Cursor = meinedatenbank.find();
-        let gefundesnesRezept: MeineRezepte[] = await cursor.toArray();
-        let rezept: string = JSON.stringify(gefundesnesRezept);
-        let meinerezept: MeineRezepte[] = JSON.parse(rezept);
-
-        for (let i: number = 0; i < meinerezept.length; i++) {
-            if (meinerezept[i].titel == _rezept.titel) {
-            let gefunden: MeineRezepte = meinerezept[i];
-            meinedatenbank.replaceOne(gefunden, _rezept, { upsert: true });
-            let antwort: string = "update";
-            return antwort;
-            }
-            let antowrt: string = "nicht gefunden";
-            return antowrt;
-        }
-        let antowrt: string = "nicht gefunden";
-        return antowrt;
-    }*/
-
     async function Datenbankloeschen(_url: string, _loeschenausfav: MeineRezepte): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
@@ -314,3 +286,31 @@ export namespace Endabgabe {
         zubereitungsanweisung: string;
     }
 }
+
+/*
+    async function Rezeptupdate(_url: string, _rezept: MeineRezepte): Promise<string> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+
+
+        let cursor: Mongo.Cursor = meinedatenbank.find();
+        let gefundesnesRezept: MeineRezepte[] = await cursor.toArray();
+        let rezept: string = JSON.stringify(gefundesnesRezept);
+        let meinerezept: MeineRezepte[] = JSON.parse(rezept);
+
+        for (let i: number = 0; i < meinerezept.length; i++) {
+            if (meinerezept[i].titel == _rezept.titel) {
+            let gefunden: MeineRezepte = meinerezept[i];
+            meinedatenbank.replaceOne(gefunden, _rezept, { upsert: true });
+            let antwort: string = "update";
+            return antwort;
+            }
+            let antowrt: string = "nicht gefunden";
+            return antowrt;
+        }
+        let antowrt: string = "nicht gefunden";
+        return antowrt;
+    }*/

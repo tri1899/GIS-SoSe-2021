@@ -321,20 +321,7 @@ namespace Endabgabe {
                 }
 
                 async function Updaten(): Promise<void> {
-                    localStorage.setItem("titel", meineRezepte[i].titel);
-                    localStorage.setItem("arbeitszeit", meineRezepte[i].arbeitszeit);
-                    localStorage.setItem("zutat1", meineRezepte[i].zutat1);
-                    localStorage.setItem("zutat2", meineRezepte[i].zutat2);
-                    localStorage.setItem("zutat3", meineRezepte[i].zutat3);
-                    localStorage.setItem("zutat4", meineRezepte[i].zutat4);
-                    localStorage.setItem("zutat5", meineRezepte[i].zutat5);
-                    localStorage.setItem("zutat6", meineRezepte[i].zutat6);
-                    localStorage.setItem("zutat7", meineRezepte[i].zutat7);
-                    localStorage.setItem("zutat8", meineRezepte[i].zutat8);
-                    localStorage.setItem("zutat9", meineRezepte[i].zutat9);
-                    localStorage.setItem("zutat10", meineRezepte[i].zutat10);
-                    localStorage.setItem("zubereitungsanweisung", meineRezepte[i].zubereitungsanweisung);
-                    location.href = "meine_rezepte.html";
+                    location.href = "updaten.html";
                 }
             }
         };
@@ -344,7 +331,6 @@ namespace Endabgabe {
 
         let buttonupdate: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
         buttonupdate.addEventListener("click", Erstellen);
-        buttonupdate.addEventListener("click", Rausloeschen);
 
         async function Erstellen(): Promise<void> {
             let aktiveruser: string = localStorage.getItem("aktiveruser");
@@ -367,50 +353,6 @@ namespace Endabgabe {
 
             location.href = "meine_rezepte.html";
         }
-
-        async function Rausloeschen(): Promise<void> {
-
-            let url: string = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
-            url += "?aktiveruser=" + localStorage.getItem("aktiveruser") + "&titel=" + localStorage.getItem("titel") + "&arbeitszeit=" + localStorage.getItem("arbeitszeit") + "&zutat1=" + localStorage.getItem("zutat1") + "&zutat2=" + localStorage.getItem("zutat2") + "&zutat3=" + localStorage.getItem("zutat3") + "&zutat4=" + localStorage.getItem("zutat4") + "&zutat5=" + localStorage.getItem("zutat5") + "&zutat6=" + localStorage.getItem("zutat6") + "&zutat7=" + localStorage.getItem("zutat7") + "&zutat8=" + localStorage.getItem("zutat8") + "&zutat9=" + localStorage.getItem("zutat9") + "&zutat10=" + localStorage.getItem("zutat10") + "&zubereitungsanweisung=" + localStorage.getItem("zubereitungsanweisung");
-            let antwort: Response = await fetch(url);
-
-            let ausgabe: string = await antwort.text();
-            console.log(ausgabe);
-
-
-        }
     }
 }
 
-
-
-
-
-
-
-/*let inputtitel: HTMLInputElement = document.createElement("input");
-let inputarbeitszeit: HTMLInputElement = document.createElement("input");
-let inputzutat1: HTMLInputElement = document.createElement("input");
-let inputzutat2: HTMLInputElement = document.createElement("input");
-let inputzutat3: HTMLInputElement = document.createElement("input");
-let inputzutat4: HTMLInputElement = document.createElement("input");
-let inputzutat5: HTMLInputElement = document.createElement("input");
-let inputzutat6: HTMLInputElement = document.createElement("input");
-let inputzutat7: HTMLInputElement = document.createElement("input");
-let inputzutat8: HTMLInputElement = document.createElement("input");
-let inputzutat9: HTMLInputElement = document.createElement("input");
-let inputzutat10: HTMLInputElement = document.createElement("input");
-let inputzubereitungsanweisung: HTMLInputElement = document.createElement("input");
-divupdaten.appendChild(inputtitel);
-divupdaten.appendChild(inputarbeitszeit);
-divupdaten.appendChild(inputzutat1);
-divupdaten.appendChild(inputzutat2);
-divupdaten.appendChild(inputzutat3);
-divupdaten.appendChild(inputzutat4);
-divupdaten.appendChild(inputzutat5);
-divupdaten.appendChild(inputzutat6);
-divupdaten.appendChild(inputzutat7);
-divupdaten.appendChild(inputzutat8);
-divupdaten.appendChild(inputzutat9);
-divupdaten.appendChild(inputzutat10);
-divupdaten.appendChild(inputzubereitungsanweisung);*/

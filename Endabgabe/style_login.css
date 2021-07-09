@@ -1,0 +1,89 @@
+body {
+    background: #f6f5f7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+}
+
+button {
+	border-radius: 20px;
+	border: 1px solid orange;
+	background-color: orange;
+	color: #FFFFFF;
+	font-size: 17px;
+	font-weight: bold;
+	padding: 15px 55px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 20px 200px;
+	height: 100%;
+	text-align: center;
+}
+
+input {
+	background-color: #eee;
+    border-color: orange;
+	padding: 15px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+h2 {
+    color: #333;
+	font-size: 26px;
+	text-decoration: none;
+	margin: 15px 0;
+}
+
+label {
+    color: #333;
+	font-size: 18px;
+	text-decoration: none;
+	margin: 15px 0;
+    font-weight: bold;
+}
+
+#serverantwortlogin {
+    color: red;
+	font-size: 20px;
+	text-decoration: none;
+	margin: 15px 0;
+
+}
+
+#farbeorange  {
+    margin: 50px auto;
+    width: 1024px;
+
+    background-color: orange;
+    text-align: center;
+}
+
+#nutzername , #passwort{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#weiterleitung {
+
+    border-radius: 20px;
+	border: 1px solid orange;
+	background-color: gray;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 10px 30px;
+
+}
