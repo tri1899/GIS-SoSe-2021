@@ -204,6 +204,8 @@ namespace Endabgabe {
     }
 
     if (document.querySelector("title").getAttribute("id") == "meinerezepte") {
+        let listemeinerezepte: HTMLDivElement = <HTMLDivElement>document.getElementById("listemeinerezepte");
+
 
         let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("rezepterstellen");
         buttonspeichern.addEventListener("click", Rezepterstellen);
@@ -224,15 +226,17 @@ namespace Endabgabe {
 
             let ausgabe: string = await antwort.text();
 
-            behaelter.innerHTML = ausgabe;
+            console.log(ausgabe);
+            
+            window.location.reload();
         }
         
         window.onload = async function datenAnzeigen(): Promise<void> {
-            //let aktiveruser: string = localStorage.getItem("aktiveruser");
+            let aktiveruser: string = localStorage.getItem("aktiveruser");
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/anzeigenmeineRezepte";
 
-            //url += "?aktiveruser=" + aktiveruser;
+            url += "?aktiveruser=" + aktiveruser;
 
             let antwort: Response = await fetch(url);
 
@@ -289,10 +293,29 @@ namespace Endabgabe {
                 divmeinerezepte.appendChild(pzutat10);
                 divmeinerezepte.appendChild(panweisung);
                 divmeinerezepte.classList.add("diveinzelnrezept");
-                behaelter.appendChild(divmeinerezepte);
-                behaelter.classList.add("rezepte");
+                listemeinerezepte.appendChild(divmeinerezepte);
+                listemeinerezepte.classList.add("rezepte");
                 let br: HTMLBRElement = document.createElement("br");
-                behaelter.appendChild(br);
+                listemeinerezepte.appendChild(br);
+
+                let loeschen: HTMLButtonElement = document.createElement("button");
+                loeschen.innerHTML = "löschen";
+
+                divmeinerezepte.appendChild(loeschen);
+                loeschen.addEventListener("click", Loeschen);
+
+                async function Loeschen (): Promise<void> {
+                    
+                    console.log("loeschen");
+                    
+                    let url: string = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
+                    url += "?aktiveruser=" + meineRezepte[i].aktiveruser + "&titel=" + meineRezepte[i].titel + "&arbeitszeit=" +  meineRezepte[i].arbeitszeit + "&zutat1=" + meineRezepte[i].zutat1 + "&zutat2=" + meineRezepte[i].zutat2 + "&zutat3=" + meineRezepte[i].zutat3 + "&zutat4=" + meineRezepte[i].zutat4 + "&zutat5=" + meineRezepte[i].zutat5 + "&zutat6=" + meineRezepte[i].zutat6 + "&zutat7=" + meineRezepte[i].zutat7 + "&zutat8=" + meineRezepte[i].zutat8 + "&zutat9=" + meineRezepte[i].zutat9 + "&zutat10=" + meineRezepte[i].zutat10 + "&zubereitungsanweisung=" + meineRezepte[i].zubereitungsanweisung;
+                    let antwort: Response = await fetch (url);
+
+                    let ausgabe: string = await antwort.text();
+                    console.log(ausgabe);
+                    window.location.reload();
+                }
             }
         };
     }

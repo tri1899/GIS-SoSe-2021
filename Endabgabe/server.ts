@@ -84,9 +84,28 @@ export namespace Endabgabe {
                 _response.write(JSON.stringify(meinerezpteliste));
 
             }
+
+            else if (url.pathname == "/loeschenausdatenbank") {
+                let loeschenausfav: MeineRezepte = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await Datenbankloeschen(mongoUrl, loeschenausfav);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
     }
+
+    async function Datenbankloeschen(_url: string, _loeschenausfav: MeineRezepte): Promise<string> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        meinedatenbank.deleteOne(_loeschenausfav);
+        let antwort: string = "gelöscht!";
+        return antwort;
+    }
+
+    
 
     async function Meinerezepteauslesen(_url: string, _aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };

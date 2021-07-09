@@ -65,8 +65,22 @@ var Endabgabe;
                 let meinerezpteliste = await Meinerezepteauslesen(mongoUrl, meinerezepte);
                 _response.write(JSON.stringify(meinerezpteliste));
             }
+            else if (url.pathname == "/loeschenausdatenbank") {
+                let loeschenausfav = JSON.parse(jsonstring);
+                let antwortdatenbank = await Datenbankloeschen(mongoUrl, loeschenausfav);
+                _response.write(antwortdatenbank);
+            }
         }
         _response.end();
+    }
+    async function Datenbankloeschen(_url, _loeschenausfav) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true };
+        let mongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        meinedatenbank.deleteOne(_loeschenausfav);
+        let antwort = "gelöscht!";
+        return antwort;
     }
     async function Meinerezepteauslesen(_url, _aktiveruser) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
