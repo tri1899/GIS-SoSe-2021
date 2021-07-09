@@ -207,7 +207,6 @@ namespace Endabgabe {
 
         let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("rezepterstellen");
         buttonspeichern.addEventListener("click", Rezepterstellen);
-        
         async function Rezepterstellen(): Promise<void> {
             let aktiveruser: string = localStorage.getItem("aktiveruser");
 
@@ -217,9 +216,7 @@ namespace Endabgabe {
 
             let query: URLSearchParams = new URLSearchParams(<any>formData);
 
-            url += "?aktiveruser=" + aktiveruser;
-
-            url = url + "?" + query.toString();
+            url = url + "?" + query.toString() + "aktiveruser=" + aktiveruser;
 
             let antwort: Response = await fetch(url);
 

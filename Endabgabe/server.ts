@@ -59,12 +59,6 @@ export namespace Endabgabe {
                 _response.write(antwortdatenbank);
             }
 
-            else if (url.pathname == "/inlisteuser") {
-                let userliste: MeineRezepte = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await InmeineListe(mongoUrl, userliste);
-                _response.write(antwortdatenbank);
-            }
-
             else if (url.pathname == "/favorisieren") {
                 let rezeptfav: MeineRezepte = JSON.parse(jsonstring);
                 let antwortdatenbank: string = await Favorisieren(mongoUrl, rezeptfav);
@@ -93,27 +87,13 @@ export namespace Endabgabe {
         }
         _response.end();
     }
-    async function InmeineListe(_url: string, _userliste: MeineRezepte): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
-
-        if (_userliste.titel && _userliste.arbeitszeit && _userliste.zutat1 && _userliste.zubereitungsanweisung != "") {
-            let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("MeineRezepte");
-            meinedatenbank.insertOne(_userliste);
-            let antwort: string = "Rezept wurde angelegt";
-            return antwort;
-        }
-        let antwort: string = "Füllen Sie bitte alle Felder aus!";
-        return antwort;
-    }
 
     async function Meinerezepteauslesen(_url: string, _aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("MeineRezepte");
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         let aktivernutzer: string = _aktiveruser.aktiveruser;
 
         let cursor: Mongo.Cursor = meinedatenbank.find({ aktiveruser: aktivernutzer });
@@ -163,13 +143,9 @@ export namespace Endabgabe {
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        if (_rezept.titel && _rezept.arbeitszeit && _rezept.zutat1 && _rezept.zubereitungsanweisung != "") {
-            let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
-            meinedatenbank.insertOne(_rezept);
-            let antwort: string = "Rezept wurde angelegt";
-            return antwort;
-        }
-        let antwort: string = "Füllen Sie bitte alle Felder aus!";
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
+        meinedatenbank.insertOne(_rezept);
+        let antwort: string = "Rezept wurde angelegt";
         return antwort;
     }
 
