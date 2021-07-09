@@ -323,8 +323,20 @@ namespace Endabgabe {
                 }
 
                 async function Updaten(): Promise<void> {
+                    /*localStorage.setItem("titel", meineRezepte[i].titel);
+                    localStorage.setItem("arbeitszeit", meineRezepte[i].arbeitszeit);
+                    localStorage.setItem("zutat1", meineRezepte[i].zutat1);
+                    localStorage.setItem("zutat2", meineRezepte[i].zutat2);
+                    localStorage.setItem("zutat3", meineRezepte[i].zutat3);
+                    localStorage.setItem("zutat4", meineRezepte[i].zutat4);
+                    localStorage.setItem("zutat5", meineRezepte[i].zutat5);
+                    localStorage.setItem("zutat6", meineRezepte[i].zutat6);
+                    localStorage.setItem("zutat7", meineRezepte[i].zutat7);
+                    localStorage.setItem("zutat8", meineRezepte[i].zutat8);
+                    localStorage.setItem("zutat9", meineRezepte[i].zutat9);
+                    localStorage.setItem("zutat10", meineRezepte[i].zutat10);
+                    localStorage.setItem("zubereitungsanweisung", meineRezepte[i].zubereitungsanweisung);*/
                     window.open("updaten.html");
-                    console.log("HALLO");
                 }
             }
         };
@@ -333,14 +345,14 @@ namespace Endabgabe {
     if (document.querySelector("title").getAttribute("id") == "updaten") {
 
         let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
-        buttonspeichern.addEventListener("click", Updatelosschicken);
+        buttonspeichern.addEventListener("click", Ersetzen);
 
-        async function Updatelosschicken(): Promise<void> {
+        async function Ersetzen(): Promise<void> {
             let aktiveruser: string = localStorage.getItem("aktiveruser");
 
             let formData: FormData = new FormData(document.forms[0]);
 
-            let url: string = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
+            let url: string = "https://tri1899gissose2021.herokuapp.com/rezeptupdaten";
 
             let query: URLSearchParams = new URLSearchParams(<any>formData);
 
