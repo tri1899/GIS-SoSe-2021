@@ -90,12 +90,6 @@ export namespace Endabgabe {
                 let antwortdatenbank: string = await Datenbankloeschen(mongoUrl, loeschenausfav);
                 _response.write(antwortdatenbank);
             }
-
-            /*else if (url.pathname == "/rezeptupdaten") {
-                let update: MeineRezepte = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await Rezeptupdate(mongoUrl, update);
-                _response.write(antwortdatenbank);
-            }*/
         }
         _response.end();
     }
