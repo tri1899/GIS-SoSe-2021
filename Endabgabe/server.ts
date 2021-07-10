@@ -6,8 +6,7 @@ import * as Mongo from "mongodb";
 
 export namespace Endabgabe {
 
-    //let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-    let mongoUrl: string = "mongodb+srv://Testuser:passwort@gis-sose.tg637.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 
     //1. Server starten
@@ -20,7 +19,7 @@ export namespace Endabgabe {
 
     function Serverstarten(_port: number | string): void {
         let server: Http.Server = Http.createServer();
-        console.log("Starting Server.Hi");
+        console.log("Starting Server.");
         server.listen(_port);
         server.addListener("request", handleRequest);
     }
