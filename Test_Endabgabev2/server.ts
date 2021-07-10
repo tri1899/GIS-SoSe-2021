@@ -6,10 +6,8 @@ import * as Mongo from "mongodb";
 
 export namespace Endabgabe {
 
-    let mongoUrl: string = "mongodb+srv://Testuser:passwort@gis-sose.tg637.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
     
-
-
     //1. Server starten
     let port: number = Number(process.env.PORT);
     if (!port)

@@ -6,7 +6,8 @@ const Url = require("url");
 const Mongo = require("mongodb");
 var Endabgabe;
 (function (Endabgabe) {
-    let mongoUrl = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    //let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    let mongoUrl = "mongodb+srv://Testuser:passwort@gis-sose.tg637.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
     //1. Server starten
     let port = Number(process.env.PORT);
     if (!port)
@@ -14,7 +15,7 @@ var Endabgabe;
     Serverstarten(port);
     function Serverstarten(_port) {
         let server = Http.createServer();
-        console.log("Starting Server.");
+        console.log("Starting Server.Hi");
         server.listen(_port);
         server.addListener("request", handleRequest);
     }
