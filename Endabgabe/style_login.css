@@ -42,6 +42,11 @@ input {
 	width: 100%;
 }
 
+h5:first-child {
+	color: gray;
+}
+
+
 h2 {
     color: #333;
 	font-size: 26px;
@@ -88,6 +93,15 @@ label {
 	font-weight: bold;
 	padding: 10px 30px;
 
+}
+
+div h3 {
+	font-size: 26px;
+	color: gray;
+}
+
+span > h5 {
+	color: gray;
 }
 
 @media (max-width: 1024px) {

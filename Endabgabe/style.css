@@ -68,6 +68,9 @@ form {
 	padding: 20px 250px;
 	height: 100%;
 	text-align: center;
+    border: 5px solid;
+    border-color: orange;
+    
 }
 
 input[type=text],textarea {
