@@ -6,27 +6,30 @@ import * as Mongo from "mongodb";
 
 export namespace Endabgabe {
 
-    let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"; // zum verbinden, auf die Datenbank
 
 
     //1. Server starten
-    let port: number = Number(process.env.PORT);
-    if (!port)
+    let port: number = Number(process.env.PORT); // Server wird gestartet --> Port angelegt.
+    if (!port)                                   // vgl. Code von Praktikumsaufgabe P 3.1
         port = 8100;
 
     Serverstarten(port);
 
 
-    function Serverstarten(_port: number | string): void {
+    function Serverstarten(_port: number | string): void { //vgl. Code von Praktikumsaufgabe P 3.1 --> Server wird gestartet
         let server: Http.Server = Http.createServer();
         console.log("Starting Server.");
         server.listen(_port);
         server.addListener("request", handleRequest);
     }
 
+    let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // mit der Datenbank connected.
+    let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(mongoUrl, options); // Code vgl. Praktikum, Grundlagen DB und Datenbank und Server
+
 
     //2. handle Request
-    async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+    async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> { //vgl. Code von Praktikumsaufgabe P 3.1
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
 
@@ -35,8 +38,8 @@ export namespace Endabgabe {
             let jsonstring: string = JSON.stringify(url.query); //Zum Feedback geben
             console.log(jsonstring);
 
-            if (url.pathname == "/regestrieren") {
-                let user: User = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln
+            if (url.pathname == "/regestrieren") { // auswertung
+                let user: User = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln --> damit ich weiter arbeiten kann
                 let antwortdatenbank: string = await Registrierung(mongoUrl, user);
                 _response.write(antwortdatenbank); //an Client schicken
             }
@@ -49,8 +52,8 @@ export namespace Endabgabe {
             }
 
             else if (url.pathname == "/datenauslesen") {
-                let userliste: MeineRezepte[] = await Rezepteauslesen(mongoUrl);
-                _response.write(JSON.stringify(userliste));
+                let userliste: MeineRezepte[] = await Rezepteauslesen(mongoUrl); //Der await Operator wird genutzt, um auf einen Promise zu warten.
+                _response.write(JSON.stringify(userliste)); // Array wird in ein JSON- String konvertiert
             }
 
             else if (url.pathname == "/rezepterstellen") {
@@ -91,25 +94,22 @@ export namespace Endabgabe {
                 _response.write(antwortdatenbank);
             }
         }
-        _response.end();
+        _response.end(); // Antowrt ist fertig und wird losgeschickt
     }
 
     async function Datenbankloeschen(_url: string, _loeschenausfav: MeineRezepte): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
-        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
-        meinedatenbank.deleteOne(_loeschenausfav);
+        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte"); // auf meine Database und Collection zugreifen.
+        meinedatenbank.deleteOne(_loeschenausfav); 
         let antwort: string = "gelöscht!";
-        return antwort;
+        return antwort; //Antowrt geben
     }
 
 
 
     async function Meinerezepteauslesen(_url: string, _aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
@@ -121,9 +121,10 @@ export namespace Endabgabe {
 
     }
 
+    //Favoriten löschen
+
     async function FavsLoeschen(_url: string, _loeschenausfav: MeineRezepte): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
@@ -132,9 +133,10 @@ export namespace Endabgabe {
         return antwort;
     }
 
+    // Favoriten auslesen
+
     async function Favsauslesen(_url: string, _aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
@@ -145,9 +147,10 @@ export namespace Endabgabe {
         return antwort;
     }
 
+    // Favorisieren
+
     async function Favorisieren(_url: string, _rezeptfav: MeineRezepte): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
@@ -158,8 +161,7 @@ export namespace Endabgabe {
 
     // Rezept erstellen
     async function Rezepterstellen(_url: string, _rezept: MeineRezepte): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+
         await mongoClient.connect();
 
         let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
@@ -170,8 +172,7 @@ export namespace Endabgabe {
 
     // Rezepteauslesen
     async function Rezepteauslesen(_url: string): Promise<MeineRezepte[]> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+
         await mongoClient.connect();
 
 
@@ -184,8 +185,7 @@ export namespace Endabgabe {
 
     // Daten in die Datenbank schreiben
     async function Registrierung(_url: string, _user: User): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+
         await mongoClient.connect();
 
         if (_user.nutzername && _user.passwort != "") {
@@ -211,8 +211,6 @@ export namespace Endabgabe {
     }
 
     async function Login(_url: string, _user: User): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
 
         if (_user.nutzername && _user.passwort != "") {
