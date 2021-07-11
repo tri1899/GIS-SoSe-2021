@@ -30,59 +30,59 @@ var Endabgabe;
             console.log(jsonstring);
             if (url.pathname == "/regestrieren") { // auswertung
                 let user = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln --> damit ich weiter arbeiten kann
-                let antwortdatenbank = await Registrierung(mongoUrl, user);
+                let antwortdatenbank = await Registrierung(user);
                 _response.write(antwortdatenbank); //an Client schicken
             }
             else if (url.pathname == "/login") {
                 let user = JSON.parse(jsonstring);
-                let antwortdatenbank = await Login(mongoUrl, user);
+                let antwortdatenbank = await Login(user);
                 _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/datenauslesen") {
-                let userliste = await Rezepteauslesen(mongoUrl); //Der await Operator wird genutzt, um auf einen Promise zu warten.
+                let userliste = await Rezepteauslesen(); //Der await Operator wird genutzt, um auf einen Promise zu warten.
                 _response.write(JSON.stringify(userliste)); // Array wird in ein JSON- String konvertiert
             }
             else if (url.pathname == "/rezepterstellen") {
                 let rezept = JSON.parse(jsonstring);
-                let antwortdatenbank = await Rezepterstellen(mongoUrl, rezept);
+                let antwortdatenbank = await Rezepterstellen(rezept);
                 _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/favorisieren") {
                 let rezeptfav = JSON.parse(jsonstring);
-                let antwortdatenbank = await Favorisieren(mongoUrl, rezeptfav);
+                let antwortdatenbank = await Favorisieren(rezeptfav);
                 _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/favsauslesen") {
                 let favsauslesen = JSON.parse(jsonstring);
-                let favsliste = await Favsauslesen(mongoUrl, favsauslesen);
+                let favsliste = await Favsauslesen(favsauslesen);
                 _response.write(JSON.stringify(favsliste));
             }
             else if (url.pathname == "/loeschen") {
                 let loeschenausfav = JSON.parse(jsonstring);
-                let antwortdatenbank = await FavsLoeschen(mongoUrl, loeschenausfav);
+                let antwortdatenbank = await FavsLoeschen(loeschenausfav);
                 _response.write(antwortdatenbank);
             }
             else if (url.pathname == "/anzeigenmeineRezepte") {
                 let meinerezepte = JSON.parse(jsonstring);
-                let meinerezpteliste = await Meinerezepteauslesen(mongoUrl, meinerezepte);
+                let meinerezpteliste = await Meinerezepteauslesen(meinerezepte);
                 _response.write(JSON.stringify(meinerezpteliste));
             }
             else if (url.pathname == "/loeschenausdatenbank") {
                 let loeschenausfav = JSON.parse(jsonstring);
-                let antwortdatenbank = await Datenbankloeschen(mongoUrl, loeschenausfav);
+                let antwortdatenbank = await Datenbankloeschen(loeschenausfav);
                 _response.write(antwortdatenbank);
             }
         }
         _response.end(); // Antowrt ist fertig und wird losgeschickt
     }
-    async function Datenbankloeschen(_url, _loeschenausfav) {
+    async function Datenbankloeschen(_loeschenausfav) {
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte"); // auf meine Database und Collection zugreifen.
         meinedatenbank.deleteOne(_loeschenausfav);
         let antwort = "gelöscht!";
         return antwort; //Antowrt geben
     }
-    async function Meinerezepteauslesen(_url, _aktiveruser) {
+    async function Meinerezepteauslesen(_aktiveruser) {
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
         let aktivernutzer = _aktiveruser.aktiveruser;
@@ -91,7 +91,7 @@ var Endabgabe;
         return antwort;
     }
     //Favoriten löschen
-    async function FavsLoeschen(_url, _loeschenausfav) {
+    async function FavsLoeschen(_loeschenausfav) {
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
         meinedatenbank.deleteOne(_loeschenausfav);
@@ -99,7 +99,7 @@ var Endabgabe;
         return antwort;
     }
     // Favoriten auslesen
-    async function Favsauslesen(_url, _aktiveruser) {
+    async function Favsauslesen(_aktiveruser) {
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
         let aktivernutzer = _aktiveruser.aktiveruser;
@@ -108,7 +108,7 @@ var Endabgabe;
         return antwort;
     }
     // Favorisieren
-    async function Favorisieren(_url, _rezeptfav) {
+    async function Favorisieren(_rezeptfav) {
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
         meinedatenbank.insertOne(_rezeptfav);
@@ -116,7 +116,7 @@ var Endabgabe;
         return antwort;
     }
     // Rezept erstellen
-    async function Rezepterstellen(_url, _rezept) {
+    async function Rezepterstellen(_rezept) {
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
         meinedatenbank.insertOne(_rezept);
@@ -124,7 +124,7 @@ var Endabgabe;
         return antwort;
     }
     // Rezepteauslesen
-    async function Rezepteauslesen(_url) {
+    async function Rezepteauslesen() {
         await mongoClient.connect();
         let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
         let cursor = meinedatenbank.find();
@@ -132,7 +132,7 @@ var Endabgabe;
         return antwort;
     }
     // Daten in die Datenbank schreiben
-    async function Registrierung(_url, _user) {
+    async function Registrierung(_user) {
         await mongoClient.connect();
         if (_user.nutzername && _user.passwort != "") {
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
@@ -149,7 +149,7 @@ var Endabgabe;
         let antwort = "Füllen Sie bitte alle Felder aus!";
         return antwort;
     }
-    async function Login(_url, _user) {
+    async function Login(_user) {
         await mongoClient.connect();
         if (_user.nutzername && _user.passwort != "") {
             let meinedatenbank = mongoClient.db("User").collection("Userlist");
@@ -187,31 +187,4 @@ var Endabgabe;
         return antwort;
     }
 })(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
-/*
-    async function Rezeptupdate(_url: string, _rezept: MeineRezepte): Promise<string> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
-
-
-        let cursor: Mongo.Cursor = meinedatenbank.find();
-        let gefundesnesRezept: MeineRezepte[] = await cursor.toArray();
-        let rezept: string = JSON.stringify(gefundesnesRezept);
-        let meinerezept: MeineRezepte[] = JSON.parse(rezept);
-
-        for (let i: number = 0; i < meinerezept.length; i++) {
-            if (meinerezept[i].titel == _rezept.titel) {
-            let gefunden: MeineRezepte = meinerezept[i];
-            meinedatenbank.replaceOne(gefunden, _rezept, { upsert: true });
-            let antwort: string = "update";
-            return antwort;
-            }
-            let antowrt: string = "nicht gefunden";
-            return antowrt;
-        }
-        let antowrt: string = "nicht gefunden";
-        return antowrt;
-    }*/
 //# sourceMappingURL=server.js.map
