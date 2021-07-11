@@ -1,6 +1,6 @@
 namespace Endabgabe {
 
-    interface MeineRezepte {
+    interface MeineRezept {
         aktiveruser: string;
         titel: string;
         arbeitszeit: string;
@@ -32,7 +32,7 @@ namespace Endabgabe {
 
                 let ausgabe: string = await antwort.text();
 
-                let rezeptenliste: MeineRezepte[] = JSON.parse(ausgabe);
+                let rezeptenliste: MeineRezept[] = JSON.parse(ausgabe);
 
                 for (let i: number = 0; i < rezeptenliste.length; i++) {
 
@@ -109,10 +109,10 @@ namespace Endabgabe {
                     let favbutton: HTMLButtonElement = document.createElement("button");
                     favbutton.innerHTML = "favorisieren";
                     divallerezepte.appendChild(favbutton);
-                    favbutton.addEventListener("click", Favorisieren);
+                    favbutton.addEventListener("click", favorisieren);
 
 
-                    async function Favorisieren(): Promise<void> {
+                    async function favorisieren(): Promise<void> {
 
                         let aktiveruser: string = localStorage.getItem("aktiveruser");
 
@@ -155,7 +155,7 @@ namespace Endabgabe {
 
                 let ausgabe: string = await antwort.text();
 
-                let favliste: MeineRezepte[] = JSON.parse(ausgabe);
+                let favliste: MeineRezept[] = JSON.parse(ausgabe);
 
                 for (let i: number = 0; i < favliste.length; i++) {
                     let divallefavs: HTMLDivElement = document.createElement("div");
@@ -226,12 +226,12 @@ namespace Endabgabe {
                     let br: HTMLBRElement = document.createElement("br");
                     behaelter.appendChild(br);
 
-                    let loeschen: HTMLButtonElement = document.createElement("button");
-                    loeschen.innerHTML = "löschen";
-                    divallefavs.appendChild(loeschen);
-                    loeschen.addEventListener("click", Loeschen);
+                    let loeschenbutton: HTMLButtonElement = document.createElement("button");
+                    loeschenbutton.innerHTML = "löschen";
+                    divallefavs.appendChild(loeschenbutton);
+                    loeschenbutton.addEventListener("click", loeschen);
 
-                    async function Loeschen(): Promise<void> {
+                    async function loeschen(): Promise<void> {
                         let url: string = "https://tri1899gissose2021.herokuapp.com/loeschen";
                         url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat1=" + favliste[i].zutat1 + "&zutat2=" + favliste[i].zutat2 + "&zutat3=" + favliste[i].zutat3 + "&zutat4=" + favliste[i].zutat4 + "&zutat5=" + favliste[i].zutat5 + "&zutat6=" + favliste[i].zutat6 + "&zutat7=" + favliste[i].zutat7 + "&zutat8=" + favliste[i].zutat8 + "&zutat9=" + favliste[i].zutat9 + "&zutat10=" + favliste[i].zutat10 + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
                         let antwort: Response = await fetch(url);
@@ -256,8 +256,8 @@ namespace Endabgabe {
 
 
             let buttonspeichern: HTMLButtonElement = <HTMLButtonElement>document.getElementById("rezepterstellen");
-            buttonspeichern.addEventListener("click", Rezepterstellen);
-            async function Rezepterstellen(): Promise<void> {
+            buttonspeichern.addEventListener("click", rezepterstellen);
+            async function rezepterstellen(): Promise<void> {
                 let aktiveruser: string = localStorage.getItem("aktiveruser");
 
                 let formData: FormData = new FormData(document.forms[0]);
@@ -290,7 +290,7 @@ namespace Endabgabe {
 
                 let ausgabe: string = await antwort.text();
 
-                let meineRezepte: MeineRezepte[] = JSON.parse(ausgabe);
+                let meineRezepte: MeineRezept[] = JSON.parse(ausgabe);
 
                 for (let i: number = 0; i < meineRezepte.length; i++) {
                     let divmeinerezepte: HTMLDivElement = document.createElement("div");
@@ -362,20 +362,20 @@ namespace Endabgabe {
                     let br: HTMLBRElement = document.createElement("br");
                     listemeinerezepte.appendChild(br);
 
-                    let loeschen: HTMLButtonElement = document.createElement("button");
-                    loeschen.innerHTML = "löschen";
-                    divmeinerezepte.appendChild(loeschen);
+                    let loeschenbutton: HTMLButtonElement = document.createElement("button");
+                    loeschenbutton.innerHTML = "löschen";
+                    divmeinerezepte.appendChild(loeschenbutton);
                     divmeinerezepte.appendChild(br);
-                    loeschen.addEventListener("click", Loeschen);
+                    loeschenbutton.addEventListener("click", loeschen);
 
 
-                    let updaten: HTMLButtonElement = document.createElement("button");
-                    updaten.innerHTML = "updaten";
-                    divmeinerezepte.appendChild(updaten);
-                    updaten.addEventListener("click", Updaten);
+                    let updatenbutton: HTMLButtonElement = document.createElement("button");
+                    updatenbutton.innerHTML = "updaten";
+                    divmeinerezepte.appendChild(updatenbutton);
+                    updatenbutton.addEventListener("click", updaten);
 
 
-                    async function Loeschen(): Promise<void> {
+                    async function loeschen(): Promise<void> {
 
                         let url: string = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
                         url += "?aktiveruser=" + meineRezepte[i].aktiveruser + "&titel=" + meineRezepte[i].titel + "&arbeitszeit=" + meineRezepte[i].arbeitszeit + "&zutat1=" + meineRezepte[i].zutat1 + "&zutat2=" + meineRezepte[i].zutat2 + "&zutat3=" + meineRezepte[i].zutat3 + "&zutat4=" + meineRezepte[i].zutat4 + "&zutat5=" + meineRezepte[i].zutat5 + "&zutat6=" + meineRezepte[i].zutat6 + "&zutat7=" + meineRezepte[i].zutat7 + "&zutat8=" + meineRezepte[i].zutat8 + "&zutat9=" + meineRezepte[i].zutat9 + "&zutat10=" + meineRezepte[i].zutat10 + "&zubereitungsanweisung=" + meineRezepte[i].zubereitungsanweisung;
@@ -386,7 +386,7 @@ namespace Endabgabe {
                         window.location.reload();
                     }
 
-                    async function Updaten(): Promise<void> {
+                    async function updaten(): Promise<void> {
                         sessionStorage.setItem("zutitel", meineRezepte[i].titel);
                         sessionStorage.setItem("zuzeit", meineRezepte[i].arbeitszeit);
                         sessionStorage.setItem("zutat1", meineRezepte[i].zutat1);
@@ -412,12 +412,12 @@ namespace Endabgabe {
     if (document.querySelector("title").getAttribute("id") == "updaten") { //Code vgl Kapitel 3 Server und Daten
         if (user != null) {
             let loeschenbuttonn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
-            loeschenbuttonn.addEventListener("click", Loeschen);
+            loeschenbuttonn.addEventListener("click", loeschen);
 
             let buttonupdate: HTMLButtonElement = <HTMLButtonElement>document.getElementById("update");
-            buttonupdate.addEventListener("click", Erstellen);
+            buttonupdate.addEventListener("click", erstellen);
 
-            async function Erstellen(): Promise<void> {
+            async function erstellen(): Promise<void> {
                 let aktiveruser: string = localStorage.getItem("aktiveruser");
 
                 let formData: FormData = new FormData(document.forms[0]);
@@ -439,7 +439,7 @@ namespace Endabgabe {
                 location.href = "meine_rezepte.html";
             }
 
-            async function Loeschen(): Promise<void> {
+            async function loeschen(): Promise<void> {
                 let aktiveruser: string = localStorage.getItem("aktiveruser");
                 let url: string = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
                 url += "?aktiveruser=" + aktiveruser + "&titel=" + sessionStorage.getItem("zutitel") + "&arbeitszeit=" + sessionStorage.getItem("zuzeit") + "&zutat1=" + sessionStorage.getItem("zutat1") + "&zutat2=" + sessionStorage.getItem("zutat2") + "&zutat3=" + sessionStorage.getItem("zutat3") + "&zutat4=" + sessionStorage.getItem("zutat4") + "&zutat5=" + sessionStorage.getItem("zutat5") + "&zutat6=" + sessionStorage.getItem("zutat6") + "&zutat7=" + sessionStorage.getItem("zutat7") + "&zutat8=" + sessionStorage.getItem("zutat8") + "&zutat9=" + sessionStorage.getItem("zutat9") + "&zutat10=" + sessionStorage.getItem("zutat10") + "&zubereitungsanweisung=" + sessionStorage.getItem("zubereitungsanweisung");

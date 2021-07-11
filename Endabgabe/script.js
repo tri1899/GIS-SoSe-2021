@@ -4,11 +4,11 @@ var Endabgabe;
     //login
     if (document.querySelector("title").getAttribute("id") == "login") {
         let rueckgabelogin = document.getElementById("serverantwortlogin");
-        let login = document.getElementById("loginbutton");
-        login.addEventListener("click", Login);
+        let loginbutton = document.getElementById("loginbutton");
+        loginbutton.addEventListener("click", login);
         let zurregis = document.getElementById("weiterleitung");
-        zurregis.addEventListener("click", Weiterleitung);
-        async function Login() {
+        zurregis.addEventListener("click", weiterleitung);
+        async function login() {
             let formData = new FormData(document.forms[0]);
             let url = "https://tri1899gissose2021.herokuapp.com/login";
             let query = new URLSearchParams(formData);
@@ -27,19 +27,19 @@ var Endabgabe;
                 location.href = "alle_rezepte.html";
             }
         }
-        function Weiterleitung() {
+        function weiterleitung() {
             location.href = "registrierung.html";
         }
     }
     //registrierung
     if (document.querySelector("title").getAttribute("id") == "registrierung") {
-        let registrierung = document.getElementById("buttonregistrierung");
-        registrierung.addEventListener("click", Registrierung);
+        let registrierungbutton = document.getElementById("buttonregistrierung");
+        registrierungbutton.addEventListener("click", registrierung);
         let rueckgabe = document.getElementById("serverantwortregis"); //anheften an die Seite
         let loginregis = document.getElementById("registration");
         let zurregis = document.getElementById("weiterleitung");
-        zurregis.addEventListener("click", Weiterleitung);
-        async function Registrierung() {
+        zurregis.addEventListener("click", weiterleitung);
+        async function registrierung() {
             let formData = new FormData(document.forms[0]);
             let url = "https://tri1899gissose2021.herokuapp.com/regestrieren";
             let query = new URLSearchParams(formData);
@@ -60,7 +60,7 @@ var Endabgabe;
                 location.href = "alle_rezepte.html";
             }
         }
-        function Weiterleitung() {
+        function weiterleitung() {
             location.href = "login.html";
         }
     }

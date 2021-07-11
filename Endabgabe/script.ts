@@ -5,13 +5,13 @@ namespace Endabgabe {
 
         let rueckgabelogin: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortlogin");
 
-        let login: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginbutton");
-        login.addEventListener("click", Login);
+        let loginbutton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginbutton");
+        loginbutton.addEventListener("click", login);
         
         let zurregis: HTMLButtonElement = <HTMLButtonElement>document.getElementById("weiterleitung");
-        zurregis.addEventListener("click", Weiterleitung);
+        zurregis.addEventListener("click", weiterleitung);
 
-        async function Login(): Promise<void> {
+        async function login(): Promise<void> {
             let formData: FormData = new FormData(document.forms[0]);
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/login";
@@ -36,7 +36,7 @@ namespace Endabgabe {
             }
         }
 
-        function Weiterleitung(): void {
+        function weiterleitung(): void {
             location.href = "registrierung.html";  
         }
     }
@@ -45,14 +45,14 @@ namespace Endabgabe {
 
     if (document.querySelector("title").getAttribute("id") == "registrierung") {
 
-        let registrierung: HTMLButtonElement = <HTMLButtonElement>document.getElementById("buttonregistrierung");
-        registrierung.addEventListener("click", Registrierung);
+        let registrierungbutton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("buttonregistrierung");
+        registrierungbutton.addEventListener("click", registrierung);
         let rueckgabe: HTMLDivElement = <HTMLDivElement>document.getElementById("serverantwortregis"); //anheften an die Seite
         let loginregis: HTMLFormElement = <HTMLFormElement>document.getElementById("registration");
         let zurregis: HTMLButtonElement = <HTMLButtonElement>document.getElementById("weiterleitung");
-        zurregis.addEventListener("click", Weiterleitung);
+        zurregis.addEventListener("click", weiterleitung);
 
-        async function Registrierung(): Promise<void> {
+        async function registrierung(): Promise<void> {
             let formData: FormData = new FormData(document.forms[0]);
 
             let url: string = "https://tri1899gissose2021.herokuapp.com/regestrieren";
@@ -79,7 +79,7 @@ namespace Endabgabe {
             }
         }
 
-        function Weiterleitung(): void {
+        function weiterleitung(): void {
             location.href = "login.html";
         }
     }

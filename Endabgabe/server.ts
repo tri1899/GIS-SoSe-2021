@@ -17,18 +17,18 @@ export namespace Endabgabe {
     if (!port)                                   // vgl. Code von Praktikumsaufgabe P 3.1
         port = 8100;
 
-    Serverstarten(port);
-    Datenbankconnect(mongoUrl);
+    serverstarten(port);
+    datenbankverbinden(mongoUrl);
 
 
-    function Serverstarten(_port: number | string): void { //vgl. Code von Praktikumsaufgabe P 3.1 --> Server wird gestartet
+    function serverstarten(_port: number | string): void { //vgl. Code von Praktikumsaufgabe P 3.1 --> Server wird gestartet
         let server: Http.Server = Http.createServer();
-        console.log("Starting Server.");
+        console.log("Starting Server.Yes!");
         server.listen(_port);
         server.addListener("request", handleRequest);
     }
 
-    async function Datenbankconnect(_url: string): Promise<void> {
+    async function datenbankverbinden(_url: string): Promise<void> {
 
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // mit der Datenbank connected.
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options); // Code vgl. Praktikum, Grundlagen DB und Datenbank und Server
@@ -52,64 +52,64 @@ export namespace Endabgabe {
 
             if (url.pathname == "/regestrieren") { // auswertung
                 let user: User = JSON.parse(jsonstring); //Wieder in ein JSON Objekt umwandeln --> damit ich weiter arbeiten kann
-                let antwortdatenbank: string = await Registrierung(user);
+                let antwortdatenbank: string = await registrierung(user);
                 _response.write(antwortdatenbank); //an Client schicken
             }
 
             else if (url.pathname == "/login") {
                 let user: User = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await Login(user);
+                let antwortdatenbank: string = await login(user);
                 _response.write(antwortdatenbank);
 
             }
 
             else if (url.pathname == "/datenauslesen") {
-                let userliste: MeineRezepte[] = await Rezepteauslesen(); //Der await Operator wird genutzt, um auf einen Promise zu warten.
+                let userliste: MeineRezept[] = await rezepteauslesen(); //Der await Operator wird genutzt, um auf einen Promise zu warten.
                 _response.write(JSON.stringify(userliste)); // Array wird in ein JSON- String konvertiert
             }
 
             else if (url.pathname == "/rezepterstellen") {
-                let rezept: MeineRezepte = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await Rezepterstellen(rezept);
+                let rezept: MeineRezept = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await rezepterstellen(rezept);
                 _response.write(antwortdatenbank);
             }
 
             else if (url.pathname == "/favorisieren") {
-                let rezeptfav: MeineRezepte = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await Favorisieren(rezeptfav);
+                let rezeptfav: MeineRezept = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await favorisieren(rezeptfav);
                 _response.write(antwortdatenbank);
             }
 
             else if (url.pathname == "/favsauslesen") {
-                let favsauslesen: MeineRezepte = JSON.parse(jsonstring);
-                let favsliste: MeineRezepte[] = await Favsauslesen(favsauslesen);
+                let favsauslesenlassen: MeineRezept = JSON.parse(jsonstring);
+                let favsliste: MeineRezept[] = await favsauslesen(favsauslesenlassen);
                 _response.write(JSON.stringify(favsliste));
 
             }
 
             else if (url.pathname == "/loeschen") {
-                let loeschenausfav: MeineRezepte = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await FavsLoeschen(loeschenausfav);
+                let loeschenausfav: MeineRezept = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await favsLoeschen(loeschenausfav);
                 _response.write(antwortdatenbank);
             }
 
             else if (url.pathname == "/anzeigenmeineRezepte") {
-                let meinerezepte: MeineRezepte = JSON.parse(jsonstring);
-                let meinerezpteliste: MeineRezepte[] = await Meinerezepteauslesen(meinerezepte);
+                let meinerezepte: MeineRezept = JSON.parse(jsonstring);
+                let meinerezpteliste: MeineRezept[] = await meinerezepteauslesen(meinerezepte);
                 _response.write(JSON.stringify(meinerezpteliste));
 
             }
 
             else if (url.pathname == "/loeschenausdatenbank") {
-                let loeschenausfav: MeineRezepte = JSON.parse(jsonstring);
-                let antwortdatenbank: string = await Datenbankloeschen(loeschenausfav);
+                let loeschenausfav: MeineRezept = JSON.parse(jsonstring);
+                let antwortdatenbank: string = await datenbankloeschen(loeschenausfav);
                 _response.write(antwortdatenbank);
             }
         }
         _response.end(); // Antowrt ist fertig und wird losgeschickt
     }
 
-    async function Datenbankloeschen(_loeschenausfav: MeineRezepte): Promise<string> {
+    async function datenbankloeschen(_loeschenausfav: MeineRezept): Promise<string> {
   
         rezepte.deleteOne(_loeschenausfav);
         let antwort: string = "gelöscht!";
@@ -118,18 +118,18 @@ export namespace Endabgabe {
 
 
 
-    async function Meinerezepteauslesen(_aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
+    async function meinerezepteauslesen(_aktiveruser: MeineRezept): Promise<MeineRezept[]> {
 
         let aktivernutzer: string = _aktiveruser.aktiveruser;
         let cursor: Mongo.Cursor = rezepte.find({ aktiveruser: aktivernutzer });
-        let antwort: MeineRezepte[] = await cursor.toArray();
+        let antwort: MeineRezept[] = await cursor.toArray();
         return antwort;
 
     }
 
     //Favoriten löschen
 
-    async function FavsLoeschen(_loeschenausfav: MeineRezepte): Promise<string> {
+    async function favsLoeschen(_loeschenausfav: MeineRezept): Promise<string> {
 
         fav.deleteOne(_loeschenausfav);
         let antwort: string = "gelöscht!";
@@ -138,18 +138,18 @@ export namespace Endabgabe {
 
     // Favoriten auslesen
 
-    async function Favsauslesen(_aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
+    async function favsauslesen(_aktiveruser: MeineRezept): Promise<MeineRezept[]> {
 
         let aktivernutzer: string = _aktiveruser.aktiveruser;
 
         let cursor: Mongo.Cursor = fav.find({ aktiveruser: aktivernutzer });
-        let antwort: MeineRezepte[] = await cursor.toArray();
+        let antwort: MeineRezept[] = await cursor.toArray();
         return antwort;
     }
 
     // Favorisieren
 
-    async function Favorisieren(_rezeptfav: MeineRezepte): Promise<string> {
+    async function favorisieren(_rezeptfav: MeineRezept): Promise<string> {
 
         fav.insertOne(_rezeptfav);
         let antwort: string = "hinzugefügt!";
@@ -157,7 +157,7 @@ export namespace Endabgabe {
     }
 
     // Rezept erstellen
-    async function Rezepterstellen(_rezept: MeineRezepte): Promise<string> {
+    async function rezepterstellen(_rezept: MeineRezept): Promise<string> {
 
         rezepte.insertOne(_rezept);
         let antwort: string = "Rezept wurde angelegt";
@@ -165,23 +165,23 @@ export namespace Endabgabe {
     }
 
     // Rezepteauslesen
-    async function Rezepteauslesen(): Promise<MeineRezepte[]> {
+    async function rezepteauslesen(): Promise<MeineRezept[]> {
 
         let cursor: Mongo.Cursor = rezepte.find();
-        let antwort: MeineRezepte[] = await cursor.toArray();
+        let antwort: MeineRezept[] = await cursor.toArray();
         return antwort;
 
     }
 
     // Daten in die Datenbank schreiben
-    async function Registrierung(_user: User): Promise<string> {
+    async function registrierung(_user: User): Promise<string> {
 
         if (_user.nutzername && _user.passwort != "") {
 
             let cursor: Mongo.Cursor = user.find();
             let alleuser: User[] = await cursor.toArray();
 
-            let ueberpruefen: string = await UeberpruefenUserDatenbanknurName(alleuser, _user);
+            let ueberpruefen: string = await ueberpruefenUserDatenbanknurName(alleuser, _user);
 
             if (ueberpruefen == "User wurde gefunden") {
                 let antwort: string = "Der Name existiert schon!";
@@ -196,14 +196,14 @@ export namespace Endabgabe {
 
     }
 
-    async function Login(_user: User): Promise<string> {
+    async function login(_user: User): Promise<string> {
 
         if (_user.nutzername && _user.passwort != "") {
 
             let cursor: Mongo.Cursor = user.find();
             let alleuser: User[] = await cursor.toArray();
 
-            let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);
+            let ueberpruefen: string = await ueberpruefenUserDatenbank(alleuser, _user);
 
             if (ueberpruefen == "User wurde nicht gefunden.") {
                 return ueberpruefen;
@@ -216,7 +216,7 @@ export namespace Endabgabe {
 
     }
 
-    async function UeberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> { // Für Login
+    async function ueberpruefenUserDatenbank(_userarray: User[], _user: User): Promise<string> { // Für Login
         for (let i: number = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername && _userarray[i].passwort == _user.passwort) {
                 let antwort: string = _user.nutzername;
@@ -227,7 +227,7 @@ export namespace Endabgabe {
         return antwort;
     }
 
-    async function UeberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> { // Für Registrierung
+    async function ueberpruefenUserDatenbanknurName(_userarray: User[], _user: User): Promise<string> { // Für Registrierung
         for (let i: number = 0; i < _userarray.length; i++) {
             if (_userarray[i].nutzername == _user.nutzername) {
                 let antwort: string = "User wurde gefunden";
@@ -244,7 +244,7 @@ export namespace Endabgabe {
         passwort: string;
     }
 
-    interface MeineRezepte {
+    interface MeineRezept {
         aktiveruser: string;
         titel: string;
         arbeitszeit: string;

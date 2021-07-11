@@ -78,8 +78,8 @@ var Endabgabe;
                     let favbutton = document.createElement("button");
                     favbutton.innerHTML = "favorisieren";
                     divallerezepte.appendChild(favbutton);
-                    favbutton.addEventListener("click", Favorisieren);
-                    async function Favorisieren() {
+                    favbutton.addEventListener("click", favorisieren);
+                    async function favorisieren() {
                         let aktiveruser = localStorage.getItem("aktiveruser");
                         console.log("favorisieren");
                         let url = "https://tri1899gissose2021.herokuapp.com/favorisieren";
@@ -166,11 +166,11 @@ var Endabgabe;
                     zubereitungsanweisung.classList.add("ueberschrift");
                     let br = document.createElement("br");
                     behaelter.appendChild(br);
-                    let loeschen = document.createElement("button");
-                    loeschen.innerHTML = "löschen";
-                    divallefavs.appendChild(loeschen);
-                    loeschen.addEventListener("click", Loeschen);
-                    async function Loeschen() {
+                    let loeschenbutton = document.createElement("button");
+                    loeschenbutton.innerHTML = "löschen";
+                    divallefavs.appendChild(loeschenbutton);
+                    loeschenbutton.addEventListener("click", loeschen);
+                    async function loeschen() {
                         let url = "https://tri1899gissose2021.herokuapp.com/loeschen";
                         url += "?aktiveruser=" + favliste[i].aktiveruser + "&titel=" + favliste[i].titel + "&arbeitszeit=" + favliste[i].arbeitszeit + "&zutat1=" + favliste[i].zutat1 + "&zutat2=" + favliste[i].zutat2 + "&zutat3=" + favliste[i].zutat3 + "&zutat4=" + favliste[i].zutat4 + "&zutat5=" + favliste[i].zutat5 + "&zutat6=" + favliste[i].zutat6 + "&zutat7=" + favliste[i].zutat7 + "&zutat8=" + favliste[i].zutat8 + "&zutat9=" + favliste[i].zutat9 + "&zutat10=" + favliste[i].zutat10 + "&zubereitungsanweisung=" + favliste[i].zubereitungsanweisung;
                         let antwort = await fetch(url);
@@ -189,8 +189,8 @@ var Endabgabe;
         if (user != null) {
             let listemeinerezepte = document.getElementById("listemeinerezepte");
             let buttonspeichern = document.getElementById("rezepterstellen");
-            buttonspeichern.addEventListener("click", Rezepterstellen);
-            async function Rezepterstellen() {
+            buttonspeichern.addEventListener("click", rezepterstellen);
+            async function rezepterstellen() {
                 let aktiveruser = localStorage.getItem("aktiveruser");
                 let formData = new FormData(document.forms[0]);
                 let url = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
@@ -271,16 +271,16 @@ var Endabgabe;
                     listemeinerezepte.classList.add("rezepte");
                     let br = document.createElement("br");
                     listemeinerezepte.appendChild(br);
-                    let loeschen = document.createElement("button");
-                    loeschen.innerHTML = "löschen";
-                    divmeinerezepte.appendChild(loeschen);
+                    let loeschenbutton = document.createElement("button");
+                    loeschenbutton.innerHTML = "löschen";
+                    divmeinerezepte.appendChild(loeschenbutton);
                     divmeinerezepte.appendChild(br);
-                    loeschen.addEventListener("click", Loeschen);
-                    let updaten = document.createElement("button");
-                    updaten.innerHTML = "updaten";
-                    divmeinerezepte.appendChild(updaten);
-                    updaten.addEventListener("click", Updaten);
-                    async function Loeschen() {
+                    loeschenbutton.addEventListener("click", loeschen);
+                    let updatenbutton = document.createElement("button");
+                    updatenbutton.innerHTML = "updaten";
+                    divmeinerezepte.appendChild(updatenbutton);
+                    updatenbutton.addEventListener("click", updaten);
+                    async function loeschen() {
                         let url = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
                         url += "?aktiveruser=" + meineRezepte[i].aktiveruser + "&titel=" + meineRezepte[i].titel + "&arbeitszeit=" + meineRezepte[i].arbeitszeit + "&zutat1=" + meineRezepte[i].zutat1 + "&zutat2=" + meineRezepte[i].zutat2 + "&zutat3=" + meineRezepte[i].zutat3 + "&zutat4=" + meineRezepte[i].zutat4 + "&zutat5=" + meineRezepte[i].zutat5 + "&zutat6=" + meineRezepte[i].zutat6 + "&zutat7=" + meineRezepte[i].zutat7 + "&zutat8=" + meineRezepte[i].zutat8 + "&zutat9=" + meineRezepte[i].zutat9 + "&zutat10=" + meineRezepte[i].zutat10 + "&zubereitungsanweisung=" + meineRezepte[i].zubereitungsanweisung;
                         let antwort = await fetch(url);
@@ -288,7 +288,7 @@ var Endabgabe;
                         console.log(ausgabe);
                         window.location.reload();
                     }
-                    async function Updaten() {
+                    async function updaten() {
                         sessionStorage.setItem("zutitel", meineRezepte[i].titel);
                         sessionStorage.setItem("zuzeit", meineRezepte[i].arbeitszeit);
                         sessionStorage.setItem("zutat1", meineRezepte[i].zutat1);
@@ -314,10 +314,10 @@ var Endabgabe;
     if (document.querySelector("title").getAttribute("id") == "updaten") { //Code vgl Kapitel 3 Server und Daten
         if (user != null) {
             let loeschenbuttonn = document.getElementById("update");
-            loeschenbuttonn.addEventListener("click", Loeschen);
+            loeschenbuttonn.addEventListener("click", loeschen);
             let buttonupdate = document.getElementById("update");
-            buttonupdate.addEventListener("click", Erstellen);
-            async function Erstellen() {
+            buttonupdate.addEventListener("click", erstellen);
+            async function erstellen() {
                 let aktiveruser = localStorage.getItem("aktiveruser");
                 let formData = new FormData(document.forms[0]);
                 let url = "https://tri1899gissose2021.herokuapp.com/rezepterstellen";
@@ -329,7 +329,7 @@ var Endabgabe;
                 console.log(ausgabe);
                 location.href = "meine_rezepte.html";
             }
-            async function Loeschen() {
+            async function loeschen() {
                 let aktiveruser = localStorage.getItem("aktiveruser");
                 let url = "https://tri1899gissose2021.herokuapp.com/loeschenausdatenbank";
                 url += "?aktiveruser=" + aktiveruser + "&titel=" + sessionStorage.getItem("zutitel") + "&arbeitszeit=" + sessionStorage.getItem("zuzeit") + "&zutat1=" + sessionStorage.getItem("zutat1") + "&zutat2=" + sessionStorage.getItem("zutat2") + "&zutat3=" + sessionStorage.getItem("zutat3") + "&zutat4=" + sessionStorage.getItem("zutat4") + "&zutat5=" + sessionStorage.getItem("zutat5") + "&zutat6=" + sessionStorage.getItem("zutat6") + "&zutat7=" + sessionStorage.getItem("zutat7") + "&zutat8=" + sessionStorage.getItem("zutat8") + "&zutat9=" + sessionStorage.getItem("zutat9") + "&zutat10=" + sessionStorage.getItem("zutat10") + "&zubereitungsanweisung=" + sessionStorage.getItem("zubereitungsanweisung");
