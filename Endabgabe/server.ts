@@ -5,6 +5,9 @@ import * as Mongo from "mongodb";
 
 
 export namespace Endabgabe {
+    let user: Mongo.Collection;
+    let fav: Mongo.Collection;
+    let rezepte: Mongo.Collection;
 
     let mongoUrl: string = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"; // zum verbinden, auf die Datenbank
 
@@ -15,6 +18,7 @@ export namespace Endabgabe {
         port = 8100;
 
     Serverstarten(port);
+    Datenbankconnect(mongoUrl);
 
 
     function Serverstarten(_port: number | string): void { //vgl. Code von Praktikumsaufgabe P 3.1 --> Server wird gestartet
@@ -24,9 +28,17 @@ export namespace Endabgabe {
         server.addListener("request", handleRequest);
     }
 
-    let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // mit der Datenbank connected.
-    let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(mongoUrl, options); // Code vgl. Praktikum, Grundlagen DB und Datenbank und Server
+    async function Datenbankconnect(_url: string): Promise<void> {
 
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // mit der Datenbank connected.
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options); // Code vgl. Praktikum, Grundlagen DB und Datenbank und Server
+        await mongoClient.connect();
+
+        user = mongoClient.db("User").collection("Userlist");
+        fav = mongoClient.db("User").collection("Favoritenliste");
+        rezepte = mongoClient.db("Rezeptenliste").collection("Rezepte");
+
+    }
 
     //2. handle Request
     async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> { //vgl. Code von Praktikumsaufgabe P 3.1
@@ -98,10 +110,8 @@ export namespace Endabgabe {
     }
 
     async function Datenbankloeschen(_loeschenausfav: MeineRezepte): Promise<string> {
-        await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte"); // auf meine Database und Collection zugreifen.
-        meinedatenbank.deleteOne(_loeschenausfav); 
+  
+        rezepte.deleteOne(_loeschenausfav);
         let antwort: string = "gelöscht!";
         return antwort; //Antowrt geben
     }
@@ -110,12 +120,8 @@ export namespace Endabgabe {
 
     async function Meinerezepteauslesen(_aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
 
-        await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
         let aktivernutzer: string = _aktiveruser.aktiveruser;
-
-        let cursor: Mongo.Cursor = meinedatenbank.find({ aktiveruser: aktivernutzer });
+        let cursor: Mongo.Cursor = rezepte.find({ aktiveruser: aktivernutzer });
         let antwort: MeineRezepte[] = await cursor.toArray();
         return antwort;
 
@@ -125,10 +131,7 @@ export namespace Endabgabe {
 
     async function FavsLoeschen(_loeschenausfav: MeineRezepte): Promise<string> {
 
-        await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
-        meinedatenbank.deleteOne(_loeschenausfav);
+        fav.deleteOne(_loeschenausfav);
         let antwort: string = "gelöscht!";
         return antwort;
     }
@@ -137,12 +140,9 @@ export namespace Endabgabe {
 
     async function Favsauslesen(_aktiveruser: MeineRezepte): Promise<MeineRezepte[]> {
 
-        await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
         let aktivernutzer: string = _aktiveruser.aktiveruser;
 
-        let cursor: Mongo.Cursor = meinedatenbank.find({ aktiveruser: aktivernutzer });
+        let cursor: Mongo.Cursor = fav.find({ aktiveruser: aktivernutzer });
         let antwort: MeineRezepte[] = await cursor.toArray();
         return antwort;
     }
@@ -151,10 +151,7 @@ export namespace Endabgabe {
 
     async function Favorisieren(_rezeptfav: MeineRezepte): Promise<string> {
 
-        await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Favoritenliste");
-        meinedatenbank.insertOne(_rezeptfav);
+        fav.insertOne(_rezeptfav);
         let antwort: string = "hinzugefügt!";
         return antwort;
     }
@@ -162,10 +159,7 @@ export namespace Endabgabe {
     // Rezept erstellen
     async function Rezepterstellen(_rezept: MeineRezepte): Promise<string> {
 
-        await mongoClient.connect();
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
-        meinedatenbank.insertOne(_rezept);
+        rezepte.insertOne(_rezept);
         let antwort: string = "Rezept wurde angelegt";
         return antwort;
     }
@@ -173,11 +167,7 @@ export namespace Endabgabe {
     // Rezepteauslesen
     async function Rezepteauslesen(): Promise<MeineRezepte[]> {
 
-        await mongoClient.connect();
-
-
-        let meinedatenbank: Mongo.Collection = mongoClient.db("Rezeptenliste").collection("Rezepte");
-        let cursor: Mongo.Cursor = meinedatenbank.find();
+        let cursor: Mongo.Cursor = rezepte.find();
         let antwort: MeineRezepte[] = await cursor.toArray();
         return antwort;
 
@@ -186,13 +176,9 @@ export namespace Endabgabe {
     // Daten in die Datenbank schreiben
     async function Registrierung(_user: User): Promise<string> {
 
-        await mongoClient.connect();
-
         if (_user.nutzername && _user.passwort != "") {
 
-            let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-
-            let cursor: Mongo.Cursor = meinedatenbank.find();
+            let cursor: Mongo.Cursor = user.find();
             let alleuser: User[] = await cursor.toArray();
 
             let ueberpruefen: string = await UeberpruefenUserDatenbanknurName(alleuser, _user);
@@ -201,7 +187,7 @@ export namespace Endabgabe {
                 let antwort: string = "Der Name existiert schon!";
                 return antwort;
             }
-            meinedatenbank.insertOne(_user);
+            user.insertOne(_user);
             return ueberpruefen;
         }
         let antwort: string = "Füllen Sie bitte alle Felder aus!";
@@ -212,13 +198,9 @@ export namespace Endabgabe {
 
     async function Login(_user: User): Promise<string> {
 
-        await mongoClient.connect();
-
         if (_user.nutzername && _user.passwort != "") {
 
-            let meinedatenbank: Mongo.Collection = mongoClient.db("User").collection("Userlist");
-
-            let cursor: Mongo.Cursor = meinedatenbank.find();
+            let cursor: Mongo.Cursor = user.find();
             let alleuser: User[] = await cursor.toArray();
 
             let ueberpruefen: string = await UeberpruefenUserDatenbank(alleuser, _user);

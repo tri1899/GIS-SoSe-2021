@@ -6,20 +6,30 @@ const Url = require("url");
 const Mongo = require("mongodb");
 var Endabgabe;
 (function (Endabgabe) {
+    let user;
+    let fav;
+    let rezepte;
     let mongoUrl = "mongodb+srv://Testuser:passwort@clustertristan.gdas8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"; // zum verbinden, auf die Datenbank
     //1. Server starten
     let port = Number(process.env.PORT); // Server wird gestartet --> Port angelegt.
     if (!port) // vgl. Code von Praktikumsaufgabe P 3.1
         port = 8100;
     Serverstarten(port);
+    Datenbankconnect(mongoUrl);
     function Serverstarten(_port) {
         let server = Http.createServer();
         console.log("Starting Server.");
         server.listen(_port);
         server.addListener("request", handleRequest);
     }
-    let options = { useNewUrlParser: true, useUnifiedTopology: true }; // mit der Datenbank connected.
-    let mongoClient = new Mongo.MongoClient(mongoUrl, options); // Code vgl. Praktikum, Grundlagen DB und Datenbank und Server
+    async function Datenbankconnect(_url) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true }; // mit der Datenbank connected.
+        let mongoClient = new Mongo.MongoClient(_url, options); // Code vgl. Praktikum, Grundlagen DB und Datenbank und Server
+        await mongoClient.connect();
+        user = mongoClient.db("User").collection("Userlist");
+        fav = mongoClient.db("User").collection("Favoritenliste");
+        rezepte = mongoClient.db("Rezeptenliste").collection("Rezepte");
+    }
     //2. handle Request
     async function handleRequest(_request, _response) {
         _response.setHeader("content-type", "text/html; charset=utf-8");
@@ -76,84 +86,66 @@ var Endabgabe;
         _response.end(); // Antowrt ist fertig und wird losgeschickt
     }
     async function Datenbankloeschen(_loeschenausfav) {
-        await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte"); // auf meine Database und Collection zugreifen.
-        meinedatenbank.deleteOne(_loeschenausfav);
+        rezepte.deleteOne(_loeschenausfav);
         let antwort = "gelöscht!";
         return antwort; //Antowrt geben
     }
     async function Meinerezepteauslesen(_aktiveruser) {
-        await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
         let aktivernutzer = _aktiveruser.aktiveruser;
-        let cursor = meinedatenbank.find({ aktiveruser: aktivernutzer });
+        let cursor = rezepte.find({ aktiveruser: aktivernutzer });
         let antwort = await cursor.toArray();
         return antwort;
     }
     //Favoriten löschen
     async function FavsLoeschen(_loeschenausfav) {
-        await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
-        meinedatenbank.deleteOne(_loeschenausfav);
+        fav.deleteOne(_loeschenausfav);
         let antwort = "gelöscht!";
         return antwort;
     }
     // Favoriten auslesen
     async function Favsauslesen(_aktiveruser) {
-        await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
         let aktivernutzer = _aktiveruser.aktiveruser;
-        let cursor = meinedatenbank.find({ aktiveruser: aktivernutzer });
+        let cursor = fav.find({ aktiveruser: aktivernutzer });
         let antwort = await cursor.toArray();
         return antwort;
     }
     // Favorisieren
     async function Favorisieren(_rezeptfav) {
-        await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("User").collection("Favoritenliste");
-        meinedatenbank.insertOne(_rezeptfav);
+        fav.insertOne(_rezeptfav);
         let antwort = "hinzugefügt!";
         return antwort;
     }
     // Rezept erstellen
     async function Rezepterstellen(_rezept) {
-        await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
-        meinedatenbank.insertOne(_rezept);
+        rezepte.insertOne(_rezept);
         let antwort = "Rezept wurde angelegt";
         return antwort;
     }
     // Rezepteauslesen
     async function Rezepteauslesen() {
-        await mongoClient.connect();
-        let meinedatenbank = mongoClient.db("Rezeptenliste").collection("Rezepte");
-        let cursor = meinedatenbank.find();
+        let cursor = rezepte.find();
         let antwort = await cursor.toArray();
         return antwort;
     }
     // Daten in die Datenbank schreiben
     async function Registrierung(_user) {
-        await mongoClient.connect();
         if (_user.nutzername && _user.passwort != "") {
-            let meinedatenbank = mongoClient.db("User").collection("Userlist");
-            let cursor = meinedatenbank.find();
+            let cursor = user.find();
             let alleuser = await cursor.toArray();
             let ueberpruefen = await UeberpruefenUserDatenbanknurName(alleuser, _user);
             if (ueberpruefen == "User wurde gefunden") {
                 let antwort = "Der Name existiert schon!";
                 return antwort;
             }
-            meinedatenbank.insertOne(_user);
+            user.insertOne(_user);
             return ueberpruefen;
         }
         let antwort = "Füllen Sie bitte alle Felder aus!";
         return antwort;
     }
     async function Login(_user) {
-        await mongoClient.connect();
         if (_user.nutzername && _user.passwort != "") {
-            let meinedatenbank = mongoClient.db("User").collection("Userlist");
-            let cursor = meinedatenbank.find();
+            let cursor = user.find();
             let alleuser = await cursor.toArray();
             let ueberpruefen = await UeberpruefenUserDatenbank(alleuser, _user);
             if (ueberpruefen == "User wurde nicht gefunden.") {
