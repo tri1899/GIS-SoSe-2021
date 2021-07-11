@@ -145,8 +145,35 @@ label {
 
 @media (max-width: 600px) {
 
+	button {
+		border-radius: 5px;
+		font-size: 12px;
+		padding: 15px 30px;
+	}
 
+	input {
+		padding: 10px 8px;
+	}
 
+	h2 {
+		font-size: 20px;
+		margin: 10px 0;
+	}
 
+	label {
+		font-size: 16px;
+		margin: 8px 0;
+	}
 
+	#serverantwortlogin , #serverantwortregis {
+
+		font-size: 12px;
+		margin: 15px 0;
+	
+	}
+
+	#farbeorange  {
+		width: 100%;
+	}
+    
 }
