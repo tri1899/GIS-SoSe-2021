@@ -5,8 +5,14 @@ body {
 }
 
 .navigation {
+    border-bottom: 1px solid black;
     display: flex;
     padding: 1%;
+    align-items: stretch;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
     
 }
 
@@ -15,6 +21,7 @@ body {
     font-weight: bold;
     font-size: medium;
     padding: 0.5%;
+    margin-left: -25%;
 }
 
 #zweitens {
@@ -43,9 +50,7 @@ body {
 
 #bildschokolade {
      padding: 1%;
-    transform: rotate(-3.2deg);
 }
-
 
 .parani {
     color: white;
@@ -92,6 +97,8 @@ body {
     float: center;
     margin-top: -18%;
     margin-right: -30%;
+    font-size: x-large;
+    font-weight: bold;
      
 }
 
@@ -99,11 +106,13 @@ body {
     float: center;
     margin-top: -13%;
     margin-right: 30%;
+    font-size: x-large;
+    font-weight: bold;
 
 }
 
 #vierteseite {
-    margin-top: 35%;
+    margin-top: 30%;
 }
 
 #milkaaufrecht {
@@ -177,7 +186,6 @@ body {
 }
 
 #milkanoisette {
-
     transform: rotate(-90deg);
 }
 
