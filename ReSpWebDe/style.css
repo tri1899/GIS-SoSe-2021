@@ -1,0 +1,236 @@
+body {
+    margin: 0 auto;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.navigation {
+    display: flex;
+    padding: 1%;
+    
+}
+
+#erstens {
+    flex-grow: 0.85;
+    font-weight: bold;
+    font-size: medium;
+    padding: 0.5%;
+}
+
+#zweitens {
+    display: flex;
+    justify-content: center;
+    padding: 0.5%;
+}
+
+#drittens {
+    display: flex;
+    justify-content: center;
+	border-radius: 20px;
+	border: 1px solid #2929F9;
+	background-color: #2929F9;
+	color: #FFFFFF;
+	font-size: medium;
+	font-weight: bold;
+    padding: 0.5% 1%;
+
+}
+
+#unterueberschrift {
+    font-size: x-large;
+    line-height: 50%;
+}
+
+#bildschokolade {
+     padding: 1%;
+    transform: rotate(-3.2deg);
+}
+
+
+.parani {
+    color: white;
+    font-size: 300%;
+    font-family: "Calibri", "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 10%;
+    
+}
+
+#dasmachtmilkaausdiv {
+    background-color: #000088;
+    padding: 20%;
+}
+
+.kaufbutton {
+	border-radius: 20px;
+	border: 1px solid #2929F9;
+	background-color: #2929F9;
+	color: #FFFFFF;
+	font-size: 17px;
+	font-weight: bold;
+	padding: 10px 35px;
+
+}
+
+.ueberschrift {
+    margin-top: 5%;
+    margin-right: 25% ;
+}
+
+#bildergroeße {
+    transform: rotate(-90deg);
+    padding: 12%;
+
+}
+
+#milkaklein {
+    margin-top: -10% ;
+    margin-right: 12.4%;
+    
+}
+
+#textunterschriftklein {
+    float: center;
+    margin-top: -18%;
+    margin-right: -30%;
+     
+}
+
+#textunterschriftgroß {
+    float: center;
+    margin-top: -13%;
+    margin-right: 30%;
+
+}
+
+#vierteseite {
+    margin-top: 35%;
+}
+
+#milkaaufrecht {
+    margin-bottom: -4%;
+    margin-right: 15%;
+}
+
+#milkaaufrechttext {
+    margin-top: -25%;
+    margin-right: -33%;
+    font-size: xx-large;
+    font-weight: bold;
+    line-height: 90%;
+
+}
+
+#milkakuh {
+    margin-top: 8%;
+    margin-right: -32%;
+}
+
+#milkakuhtext {
+    margin-top: -25%;
+    margin-right: 18%;
+    line-height: 50%;
+    font-size: larger;
+}
+
+#alpenkuh {
+    margin-top: 6%;
+    margin-right: 22%;
+}
+
+#alpenkuhtextueberschrift {
+    margin-top: -17%;
+    margin-right: -32%;
+}
+
+#alpenkuhtext {
+    margin-right: -32%;
+    margin-top: 2%;
+    line-height: 50%;
+    font-size: larger;
+}
+
+#kakaobohne {
+    margin-top: 6%;
+    margin-right: -33%;
+}
+
+#kakaobohnetextueberschrift {
+    margin-right: 25%;
+    margin-top: -15%;
+}
+
+#kakaobohnetext {
+    margin-right: 25%;
+    margin-top: 2%;
+    line-height: 50%;
+    font-size: larger;
+}
+
+#fuenfteseiteueberschrift {
+    padding: 8%;
+}
+
+#auswahlmoeglichkeiten {
+    display: flex;
+    justify-content: space-around;
+    margin-top: -2%;
+}
+
+#milkanoisette {
+
+    transform: rotate(-90deg);
+}
+
+#milkaerdbeer {
+
+    transform: rotate(-90deg);
+}
+
+#milkahaselnuess {
+    transform: rotate(-90deg);    
+}
+
+#beschreibungprodukte {
+    padding: 2%;
+    display: flex;
+    justify-content: space-around;
+    font-size: larger;
+
+
+}
+
+.kaufbuttonklein {
+    border-radius: 20px;
+    border: 1px solid #2929F9;
+    background-color: #2929F9;
+    color: #FFFFFF;
+    font-size: medium;
+    font-weight: bold;
+    padding: 3% 5%;
+}
+
+.weitereinfos {
+    color: blue;
+}
+
+
+
+
+@media (max-width: 1024px) {
+
+
+
+}
+
+@media (max-width: 600px) {
+
+}
+
+
+
+
+
+
+
+
+
