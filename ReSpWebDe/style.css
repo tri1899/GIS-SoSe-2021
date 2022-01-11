@@ -1,4 +1,4 @@
-body {
+body, html {
     margin: 0 auto;
     text-align: center;
     overflow-x: hidden;
@@ -259,6 +259,7 @@ body {
 @media (max-width: 1024px) {
 
     body {
+
         width: 100%;
     }
 
