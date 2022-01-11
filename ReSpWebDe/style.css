@@ -2,6 +2,7 @@ body {
     margin: 0 auto;
     text-align: center;
     overflow-x: hidden;
+    font-family: "Calibri", "Helvetica Neue", Helvetica, sans-serif;
 }
 
 .navigation {
@@ -43,20 +44,24 @@ body {
 
 }
 
+#ueberschriftmilkaklassiker {
+    font-weight: bold;
+    font-size: xxx-large;
+}
+
 #unterueberschrift {
     font-size: x-large;
     line-height: 50%;
 }
 
 #bildschokolade {
-     padding: 1%;
+     margin-top: -2%;
 }
 
 .parani {
     color: white;
     font-size: 300%;
-    font-family: "Calibri", "Helvetica Neue", Helvetica, sans-serif;
-    line-height: 10%;
+
     
 }
 
@@ -221,10 +226,113 @@ body {
     color: blue;
 }
 
+@media (max-width: 1600px) {
 
+    #textunterschriftklein {
+        margin-right: -38%;
+        margin-top: -18%;
+        font-size: larger;
+   }
+
+   #textunterschriftgroß {
+       margin-right: 38%;
+       margin-top: -15%;
+       font-size: larger;
+   }
+
+   img[src="Bilder/milka.jpg"] {
+    width: 45%;
+   }
+
+   #milkaaufrechttext {
+
+    font-size: larger;
+
+   }
+
+
+
+
+}
 
 
 @media (max-width: 1024px) {
+
+    body {
+        width: 100%;
+    }
+
+    .navigation { 
+        padding: 2%;
+        margin-bottom: 10%;
+    }
+    #erstens {
+        font-size: 18px;
+        flex-grow: 0.9;   
+    }
+
+    #zweitens {
+        font-size: 15px;
+        margin-right: 2%;
+    }
+
+    #drittens {
+        font-size: 15px;
+        padding: 0.5% 1.5%;
+    }
+
+    #ueberschriftmilkaklassiker {
+        font-weight: bold;
+        font-size: xx-large;
+    }
+
+    .kaufbutton {
+        margin-top: 5%;
+
+    }
+
+    img[src="Bilder/1199913540-Milka-Alpenmilch-Schokolade--100g-Tafel_1.jpg"] {
+        width: 80%;
+        margin-bottom: 12%;
+   }
+
+   .parani {
+        font-size: xxx-large;
+   }
+
+   #dritteseite {
+    margin-top: 15%;
+} 
+   
+   #textunterschriftklein {
+        margin-right: -60%;
+        margin-top: -25%;
+        font-size: 18px;
+   }
+
+   #textunterschriftgroß {
+        margin-top: -25%;
+        margin-right: 60%;
+        font-size: 18px;
+   }
+
+   #milkaklein {
+    margin-top: -10% ;
+    margin-right: 12%;
+    }
+
+    img[src="Bilder/milka.jpg"] {
+        width: 65%;
+    }
+
+    #vierteseite {
+        margin-top: 55%;
+    } 
+
+
+
+
+
 
 
 
