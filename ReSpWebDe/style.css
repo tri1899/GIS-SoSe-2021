@@ -9,10 +9,11 @@ body, html {
     border-bottom: 1px solid black;
     display: flex;
     padding: 1%;
-    align-items: stretch;
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 1;
+    left: 0;
+    right: 0;
+    z-index: 50;
     background-color: white;
     
 }
@@ -229,13 +230,13 @@ body, html {
 @media (max-width: 1600px) {
 
     #textunterschriftklein {
-        margin-right: -38%;
+        margin-right: -40%;
         margin-top: -18%;
         font-size: larger;
    }
 
    #textunterschriftgroß {
-       margin-right: 38%;
+       margin-right: 40%;
        margin-top: -15%;
        font-size: larger;
    }
@@ -328,7 +329,89 @@ body, html {
 
     #vierteseite {
         margin-top: 55%;
-    } 
+    }
+
+    #milkaaufrechttext {
+        margin-top: -25%;
+        margin-bottom: 10%;
+        margin-right: -40%;
+        font-size: large ;
+    }
+
+    #milkaaufrecht {
+        margin-bottom: -35%;
+        margin-right: 35%;
+    }
+
+    img[src="Bilder/Bild_11.png"] {
+        width: 50%;
+    }
+
+    img[src="Bilder/Milkakuh.jpg"] {
+        width: 38%;
+        margin-right: -5%;
+
+    }
+
+    #milkakuhtext {
+        font-size: large;
+        margin-top: -70%;
+        margin-left: -10%;
+        line-height: 30%;
+    }
+
+    img[src="Bilder/alpenkuh.webp"] {
+        width: 60%;
+        margin-right: 28%;
+
+    }
+
+    #alpenkuhtextueberschrift {
+        font-size: 16px;
+        margin-top: -42%;
+        margin-left: 60%;
+    }
+
+    .positionieren {
+        text-align: left;
+        margin: 0 auto;
+        width: 30em;
+
+    }
+
+    #alpenkuhtext {
+        margin-left: 60%;
+        margin-top: -1%;
+        line-height: 30%;
+        font-size: large;
+    }
+
+    img[src="Bilder/Bild_10.png"] {
+        margin-right: -5%;
+        margin-top: -2%;
+        width: 35%;
+
+    }
+
+    #kakaobohnetextueberschrift {
+        font-size: 16px;
+        margin-top: -51%;
+        margin-left: -21%;
+
+    }
+
+    #kakaobohnetext {
+        margin-left: -21%;
+        margin-top: -1%;
+        line-height: 30%;
+        font-size: large;
+    }
+
+
+
+
+
+
 
 
 
